@@ -1,0 +1,13 @@
+setup.py
+gurt_site/__init__.py
+gurt_site/items.py
+gurt_site/middlewares.py
+gurt_site/pipelines.py
+gurt_site/settings.py
+gurt_site/spiders/__init__.py
+gurt_site/spiders/gurt.py
+project.egg-info/PKG-INFO
+project.egg-info/SOURCES.txt
+project.egg-info/dependency_links.txt
+project.egg-info/entry_points.txt
+project.egg-info/top_level.txt
