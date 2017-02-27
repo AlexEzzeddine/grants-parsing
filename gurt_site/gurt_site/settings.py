@@ -11,6 +11,13 @@
 
 BOT_NAME = 'gurt_site'
 
+ITEM_PIPELINES = {'gurt_site.pipelines.MongoDBPipeline':0, }
+
+MONGODB_SERVER = "ec2-54-237-130-222.compute-1.amazonaws.com"
+MONGODB_PORT = 27017
+MONGODB_DB = "alex"
+MONGODB_COLLECTION = "grants"
+
 SPIDER_MODULES = ['gurt_site.spiders']
 NEWSPIDER_MODULE = 'gurt_site.spiders'
 
