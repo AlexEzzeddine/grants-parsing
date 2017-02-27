@@ -20,4 +20,5 @@ wheels/
 *.manifest
 *.spec
 
+.idea/
 .scrapy
