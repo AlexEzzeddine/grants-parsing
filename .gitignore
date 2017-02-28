@@ -22,3 +22,7 @@ wheels/
 
 .idea/
 .scrapy
+
+.idea
+node_modules/
+dist/
