@@ -12,7 +12,6 @@
     "gulp": "^3.9.1",
     "gulp-autoprefixer": "^3.1.1",
     "gulp-livereload": "^3.8.1",
-    "gulp-ruby-sass": "^2.1.1",
-    "tiny-lr": "^1.0.3"
+    "gulp-sass": "^3.1.0"
   }
 }
