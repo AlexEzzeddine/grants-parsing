@@ -2,8 +2,6 @@
 .ui-jqgrid {
     position: relative;
     border: 1px solid #ddd; /*default*/
-    -webkit-border-radius: 3px;
-    -moz-border-radius: 3px;
     border-radius: 3px;
 }
 

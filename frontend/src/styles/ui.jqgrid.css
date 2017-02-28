@@ -1,8 +1,6 @@
 /*Grid*/
 .ui-jqgrid {
     position: relative;
-    -moz-box-sizing: content-box;
-    -webkit-box-sizing: content-box;
     box-sizing: content-box;
 }
 
@@ -915,8 +913,6 @@
     position: absolute;
     padding: 2px 5px;
     z-index: 99999;
-    -webkit-box-shadow: 7px 7px 5px 0px rgba(50, 50, 50, 0.75);
-    -moz-box-shadow: 7px 7px 5px 0px rgba(50, 50, 50, 0.75);
     box-shadow: 7px 7px 5px 0px rgba(50, 50, 50, 0.75);
 }
 
