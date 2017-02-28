@@ -7,7 +7,7 @@
 
 from scrapy.item import Item, Field
 
-class GurtItem(Item):
+class GrantItem(Item):
     # define the fields for your item here like:
     # name = scrapy.Field()
     title = Field()

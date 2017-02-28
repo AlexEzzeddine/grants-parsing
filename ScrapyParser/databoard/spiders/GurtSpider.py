@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 import scrapy
-from databoard.items import GurtItem
+from databoard.items import GrantItem
 
 
 class GurtSpider(scrapy.Spider):
