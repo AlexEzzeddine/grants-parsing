@@ -16,6 +16,13 @@ gulp.task('styles', function () {
         .pipe(notify({message: 'Styles task complete'}));
 });
 
+gulp.task('sass', function () {
+    return sass('src/styles/*.scss', {
+            style: 'compressed',
+        })
+        .pipe(gulp.dest('dist/styles'));
+});
+
 // Scripts
 gulp.task('scripts', function () {
     return gulp.src('src/scripts/**/*.js')
