@@ -14,14 +14,3 @@ class GurtItem(Item):
     url = Field()
     text = Field()
     itemType = Field()
-
-
-class GrantItem(GurtItem):
-	def __init__(self):
-		GurtItem.__init__(self)
-		self["itemType"] = "Grant"
-
-class ConferenceItem(GurtItem):
-	def __init__(self):
-		GurtItem.__init__(self)
-		self["itemType"] = "Conference"

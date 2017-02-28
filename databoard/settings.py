@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Scrapy settings for gurt_site project
+# Scrapy settings for databoard project
 #
 # For simplicity, this file contains only settings considered important or
 # commonly used. You can find more settings consulting the documentation:
@@ -9,21 +9,18 @@
 #     http://scrapy.readthedocs.org/en/latest/topics/downloader-middleware.html
 #     http://scrapy.readthedocs.org/en/latest/topics/spider-middleware.html
 
-BOT_NAME = 'gurt_site'
+BOT_NAME = 'databoard'
 
-ITEM_PIPELINES = {'gurt_site.pipelines.MongoDBPipeline':0, }
+SPIDER_MODULES = ['databoard.spiders']
+NEWSPIDER_MODULE = 'databoard.spiders'
 
 MONGODB_SERVER = "ec2-54-237-130-222.compute-1.amazonaws.com"
 MONGODB_PORT = 27017
 MONGODB_DB = "alex"
 MONGODB_COLLECTION = "grants"
 
-SPIDER_MODULES = ['gurt_site.spiders']
-NEWSPIDER_MODULE = 'gurt_site.spiders'
-
-
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
-#USER_AGENT = 'gurt_site (+http://www.yourdomain.com)'
+#USER_AGENT = 'databoard (+http://www.yourdomain.com)'
 
 # Obey robots.txt rules
 ROBOTSTXT_OBEY = True
@@ -54,13 +51,13 @@ CONCURRENT_REQUESTS = 100
 # Enable or disable spider middlewares
 # See http://scrapy.readthedocs.org/en/latest/topics/spider-middleware.html
 #SPIDER_MIDDLEWARES = {
-#    'gurt_site.middlewares.GurtSiteSpiderMiddleware': 543,
+#    'databoard.middlewares.DataboardSpiderMiddleware': 543,
 #}
 
 # Enable or disable downloader middlewares
 # See http://scrapy.readthedocs.org/en/latest/topics/downloader-middleware.html
 #DOWNLOADER_MIDDLEWARES = {
-#    'gurt_site.middlewares.MyCustomDownloaderMiddleware': 543,
+#    'databoard.middlewares.MyCustomDownloaderMiddleware': 543,
 #}
 
 # Enable or disable extensions
@@ -71,9 +68,9 @@ CONCURRENT_REQUESTS = 100
 
 # Configure item pipelines
 # See http://scrapy.readthedocs.org/en/latest/topics/item-pipeline.html
-#ITEM_PIPELINES = {
-#    'gurt_site.pipelines.GurtSitePipeline': 300,
-#}
+ITEM_PIPELINES = {
+    'databoard.pipelines.MongoDBPipeline': 0,
+}
 
 # Enable and configure the AutoThrottle extension (disabled by default)
 # See http://doc.scrapy.org/en/latest/topics/autothrottle.html
