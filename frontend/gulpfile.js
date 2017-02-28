@@ -8,7 +8,7 @@ var gulp = require('gulp'),
 // Styles
 gulp.task('styles', function () {
     return gulp.src('src/styles/main.scss')
-        .pipe(sass({style: 'expanded',}))
+        .pipe(sass({style: 'expanded'}))
         .pipe(autoprefixer('last 2 version', 'safari 5', 'ie 8', 'ie 9', 'opera 12.1', 'ios 6', 'android 4'))
         .pipe(gulp.dest('dist/styles'))
         .pipe(livereload(server))
@@ -33,14 +33,9 @@ gulp.task('images', function () {
         .pipe(notify({message: 'Images task complete'}));
 });
 
-// Clean
-gulp.task('clean', function () {
-    return gulp.src(['dist/styles', 'dist/scripts', 'dist/images'], {read: false})
-        .pipe(clean());
-});
 
 // Default task
-gulp.task('default', ['clean'], function () {
+gulp.task('default', function () {
     gulp.run('styles', 'scripts', 'images');
 });
 
