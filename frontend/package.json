@@ -17,6 +17,7 @@
     "gulp-htmlmin": "^3.0.0",
     "gulp-jsmin": "^0.1.5",
     "gulp-livereload": "^3.8.1",
+    "gulp-rename": "^1.2.2",
     "gulp-sass": "^3.1.0"
   }
 }
