@@ -14,3 +14,4 @@ class GrantItem(Item):
     url = Field()
     text = Field()
     itemType = Field()
+    contacts = Field()

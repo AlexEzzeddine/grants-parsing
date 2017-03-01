@@ -26,6 +26,7 @@ class GurtSpider(scrapy.Spider):
         item=GrantItem()
         item['url']=response.url
         item['title']=response.css(".article h1:first-of-type::text").extract_first()
-        item['text']=''.join(response.css(".article_text p::text").extract())
+        item['text']=''.join(response.css(".article_text *::text").extract())
+        item['contacts']=""
         item['itemType']="Grant"
         yield item
