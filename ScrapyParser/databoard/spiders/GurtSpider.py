@@ -23,7 +23,7 @@ class GurtSpider(scrapy.Spider):
             yield scrapy.Request(next_page, callback=self.parse)
 
     def getDetails(self,response):
-        item=GurtItem()
+        item=GrantItem()
         item['url']=response.url
         item['title']=response.css(".news h2 *::text").extract_first()
         item['text']=''.join(response.css(".newstxt2 *::text").extract())

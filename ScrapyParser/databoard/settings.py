@@ -14,9 +14,12 @@ BOT_NAME = 'databoard'
 SPIDER_MODULES = ['databoard.spiders']
 NEWSPIDER_MODULE = 'databoard.spiders'
 
+CONN_STRING="mongodb://root:test12345@ec2-54-237-130-222.compute-1.amazonaws.com:27017"
 MONGODB_SERVER = "ec2-54-237-130-222.compute-1.amazonaws.com"
 MONGODB_PORT = 27017
-MONGODB_DB = "alex"
+MONGODB_USER="root"
+MONGODB_PASSWORD="test12345"
+MONGODB_DB = "databoard"
 MONGODB_COLLECTION = "grants"
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
