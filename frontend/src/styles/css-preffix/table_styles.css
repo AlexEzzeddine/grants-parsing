@@ -34,22 +34,22 @@ table, .title, .footer {
   .footer .first_page {
     width: 8px;
     height: 8px;
-    background-image: url("arrow_last_normal.png");
+      background-image: url("../img/arrow_last_normal.png");
     background-repeat: no-repeat;
     transform: rotate(180deg);
     margin-left: 30px; }
   .footer .first_page:hover {
-    background-image: url("arrow_last_active.png");
+      background-image: url("../img/arrow_last_active.png");
     cursor: pointer; }
   .footer .back {
     width: 8px;
     height: 8px;
-    background-image: url("arrow_next_normal.png");
+      background-image: url("../img/arrow_next_normal.png");
     background-repeat: no-repeat;
     transform: rotate(180deg);
     margin-left: 30px; }
   .footer .back:hover {
-    background-image: url("arrow_next_active.png");
+      background-image: url("../img/arrow_next_active.png");
     transform: rotate(180deg);
     cursor: pointer; }
   .footer .pages {
@@ -61,20 +61,20 @@ table, .title, .footer {
   .footer .next_page {
     width: 8px;
     height: 8px;
-    background-image: url("arrow_next_normal.png");
+      background-image: url("../img/arrow_next_normal.png");
     background-repeat: no-repeat;
     margin-left: 30px; }
   .footer .next_page:hover {
-    background-image: url("arrow_next_active.png");
+      background-image: url("../img/arrow_next_active.png");
     cursor: pointer; }
   .footer .last_page {
     width: 8px;
     height: 8px;
-    background-image: url("arrow_last_normal.png");
+      background-image: url("../img/arrow_last_normal.png");
     background-repeat: no-repeat;
     margin-left: 30px; }
   .footer .last_page:hover {
-    background-image: url("arrow_last_active.png");
+      background-image: url("../img/arrow_last_active.png");
     cursor: pointer; }
 
 .add_item {

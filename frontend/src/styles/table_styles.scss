@@ -40,25 +40,25 @@ table {
   .first_page {
     width: 8px;
     height: 8px;
-    background-image: url("arrow_last_normal.png");
+    background-image: url("../img/arrow_last_normal.png");
     background-repeat: no-repeat;
     transform: rotate(180deg);
     margin-left: 30px;
   }
   .first_page:hover {
-    background-image: url("arrow_last_active.png");
+    background-image: url("../img/arrow_last_active.png");
     cursor: pointer;
   }
   .back {
     width: 8px;
     height: 8px;
-    background-image: url("arrow_next_normal.png");
+    background-image: url("../img/arrow_next_normal.png");
     background-repeat: no-repeat;
     transform: rotate(180deg);
     margin-left: 30px;
   }
   .back:hover {
-    background-image: url("arrow_next_active.png");
+    background-image: url("../img/arrow_next_active.png");
     transform: rotate(180deg);
     cursor: pointer;
   }
@@ -74,23 +74,23 @@ table {
   .next_page {
     width: 8px;
     height: 8px;
-    background-image: url("arrow_next_normal.png");
+    background-image: url("../img/arrow_next_normal.png");
     background-repeat: no-repeat;
     margin-left: 30px;
   }
   .next_page:hover {
-    background-image: url("arrow_next_active.png");
+    background-image: url("../img/arrow_next_active.png");
     cursor: pointer;
   }
   .last_page {
     width: 8px;
     height: 8px;
-    background-image: url("arrow_last_normal.png");
+    background-image: url("../img/arrow_last_normal.png");
     background-repeat: no-repeat;
     margin-left: 30px;
   }
   .last_page:hover {
-    background-image: url("arrow_last_active.png");
+    background-image: url("../img/arrow_last_active.png");
     cursor: pointer;
 
   }
