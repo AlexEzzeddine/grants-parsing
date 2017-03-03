@@ -21,7 +21,15 @@ class MongoDBPipeline(object):
                 valid = False
                 raise DropItem("Missing {0}!".format(data))
         if valid:
-            self.collection.insert(dict(item))
-            log.msg("Question added to MongoDB database!",
-                    level=log.DEBUG, spider=spider)
+            document=self.collection.find_one({"url":item['url']},{"_id":0,"modified":0})
+            if not document:
+                spider.logger.info("Inserting new document")
+                item['modified']=False
+                self.collection.insert(dict(item))
+            elif document!=item:
+                spider.logger.info("Updating old document")
+                item['modified']=True
+                self.collection.update({"url":item['url']},dict(item))
+            else:
+                spider.logger.info("Found exact same document")
         return item
