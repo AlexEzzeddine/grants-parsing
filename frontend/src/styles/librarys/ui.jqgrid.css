@@ -9,8 +9,13 @@
     left: 0;
     top: 0;
     padding: 0;
-    font-size: 11px;
+    font-size: 14px;
     z-index: 100;
+}
+
+.ui-jqgrid-labels {
+    height: 40px;
+    background-color: #2d87c5;
 }
 
 .ui-jqgrid .ui-common-table {
@@ -18,6 +23,7 @@
     border-style: none;
     border-spacing: 0px;
     padding: 0;
+    height: 40px;
 }
 
 /* caption*/
@@ -25,7 +31,7 @@
     height: 19px;
     padding: .3em .2em .2em .3em;
     position: relative;
-    font-size: 12px;
+    font-size: 14px;
     border-left: 0 none;
     border-right: 0 none;
     border-top: 0 none;
@@ -72,6 +78,7 @@
 .ui-jqgrid .ui-jqgrid-hbox {
     float: left;
     padding-right: 20px;
+    height: 40px;
 }
 
 .ui-jqgrid .ui-jqgrid-htable {
@@ -356,7 +363,7 @@
     min-height: 28px;
     white-space: nowrap;
     overflow: hidden;
-    font-size: 11px;
+    font-size: 14px;
     z-index: 101
 }
 
@@ -406,8 +413,14 @@
     margin: 0;
     line-height: inherit;
     border: none;
-    padding: 3px 2px
+    padding: 3px 2px;
+    color: #2d87c5;
 }
+
+.first_jqGridPager {
+
+}
+
 
 .ui-jqgrid .ui-pg-selbox, .ui-jqgrid .ui-jqgrid-toppager .ui-pg-selbox {
     font-size: .9em;
@@ -565,7 +578,7 @@
     font-weight: bold;
     display: none;
     border-width: 2px !important;
-    font-size: 11px;
+    font-size: 14px;
 }
 
 .ui-jqgrid .jqgrid-overlay {
@@ -593,7 +606,7 @@
 
 /*Modal Window */
 .ui-jqdialog {
-    font-size: 11px !important;
+    font-size: 14px !important;
 }
 
 .ui-jqdialog {
@@ -601,7 +614,7 @@
     width: 300px;
     position: absolute;
     padding: .2em;
-    font-size: 11px;
+    font-size: 14px;
     overflow: visible;
 }
 
@@ -955,7 +968,7 @@ a.g-menu-item, a.soptclass, a.clearsearchclass {
 .ui-jqgrid .ui-jqgrid-view select,
 .ui-jqgrid .ui-jqgrid-view textarea,
 .ui-jqgrid .ui-jqgrid-view button {
-    font-size: 11px;
+    font-size: 14px;
 }
 
 .ui-jqgrid .ui-scroll-popup {
@@ -977,12 +990,52 @@ a.g-menu-item, a.soptclass, a.clearsearchclass {
     margin-right: 3px;
 }
 
+#jqgh_jqGrid_Date #jqgh_jqGrid_Type #jqgh_jqGrid_Source #jqgh_jqGrid_Title #jqgh_jqGrid_Prewiew #jqgh_jqGrid_Contacts {
+    height: 40px;
+}
+
+.ui-th-column .ui-th-ltr .ui-state-default {
+    height: 50px;
+}
+
+#first_jqGridPager {
+    background-image: url("https://www.aspirevc.com/ui/img/rollright.svg");
+    background-size: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    transform: rotate(180deg);
+}
+
+#prev_jqGridPager {
+    background-image: url("https://www.aspirevc.com/ui/img/rollright.svg");
+    background-size: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    transform: rotate(180deg);
+}
+
+#next_jqGridPager {
+    background-image: url("https://www.aspirevc.com/ui/img/rollright.svg");
+    background-size: 100%;
+    background-position: center;
+
+    background-repeat: no-repeat;
+}
+
+#last_jqGridPager {
+    background-image: url("https://www.aspirevc.com/ui/img/rollright.svg");
+    background-size: 100%;
+    background-position: center;
+
+    background-repeat: no-repeat;
+}
+
 /* Column menu */
 .ui-jqgrid .ui-jqgrid-htable .colmenu {
     position: absolute;
     right: 1px;
     height: 100%;
-    color: black;
+    color: #858585;
 }
 
 .ui-jqgrid .ui-jqgrid-htable .colmenu-rtl {
@@ -1017,11 +1070,13 @@ a.g-menu-item, a.soptclass, a.clearsearchclass {
     padding-right: 4px;
     padding-left: 4px;
     width: auto;
+    height: 40px;
 }
 
 .ui-menu-item .ui-common-table .menu_icon .ui-icon {
     display: inline-block;
     position: relative;
+    height: 40px;
 }
 
 td.menu_text {

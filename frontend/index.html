@@ -7,15 +7,16 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
     <script src="scripts/all-customs.js" type="text/javascript"></script>
     <script src="scripts/all-librarys.js" type="text/javascript"></script>
-    <script>$.jgrid.defaults.width = 680;</script>
+    <script>$.jgrid.defaults.width = 580;</script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
     <meta charset="UTF-8">
     <title>jQuery Grid Plugin – jqGrid</title></head>
 <body>
+<br>
+<br>
 <h1>jQuery Grid Plugin – jqGrid</h1>
-<h2>Sample text</h2>
-<h3>text</h3>
-<h4>sample</h4>
+<br>
+<br>
 
 
 <table id="jqGrid"></table>
@@ -29,14 +30,14 @@
             url: 'data.json',
             datatype: "json",
             colModel: [
-                {label: 'Date', name: 'Date', width: 75, sorttype: 'number'},
-                {label: 'Type', name: 'Type', width: 90},
-                {label: 'Source', name: 'Source', width: 80, formatter: 'link', editable: false},
-                {label: 'Title', name: 'Title', width: 80},
-                {label: 'Content prewiew', name: 'Prewiew', width: 180},
-                {label: 'Contacts', name: 'Contacts', width: 80},
+                {label: 'Date', name: 'Date', width: 120, sorttype: 'number'},
+                {label: 'Type', name: 'Type', width: 120},
+                {label: 'Source', name: 'Source', width: 150, formatter: 'link', editable: false},
+                {label: 'Title', name: 'Title', width: 120},
+                {label: 'Content prewiew', name: 'Prewiew', width: 400},
+                {label: 'Contacts', name: 'Contacts', width: 150},
                 {
-                    label: 'Actions', name: 'Actions', width: 80,
+                    label: 'Actions', name: 'Actions', width: 170,
                     editable: true,
                     edittype: "select",
                     editoptions: {
@@ -58,9 +59,9 @@
             ],
             onSelectRow: editRow, // the javascript function to call on row click. will ues to to put the row in edit mode
             viewrecords: true, // show the current page, data rang and total records on the toolbar
-            width: 880,
-            height: 200,
-            rowNum: 30,
+            width: 850,
+            height: 400,
+            rowNum: 7,
             loadonce: true, // this is just for the demo
             pager: "#jqGridPager"
         });
