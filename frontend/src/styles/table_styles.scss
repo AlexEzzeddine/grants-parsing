@@ -135,6 +135,7 @@ table {
     cursor: pointer;
     margin-top: 20px;
     margin-left: 20px;
+
   }
   .headline_prewiev .headline_contacts {
     min-width: 300px;
@@ -150,6 +151,9 @@ table {
   border: solid 1px #e6e6e6;
   td {
     padding-left: 20px;
+    i {
+      padding-right: 5px;
+    }
   }
 
   button {
@@ -163,6 +167,7 @@ table {
     display: inline-block;
     box-shadow: -1px 2px 3px rgba(163, 163, 163, 0.5);
     color: #794f4f;
+
   }
   button:hover {
     cursor: pointer;

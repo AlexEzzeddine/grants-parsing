@@ -119,6 +119,8 @@ table, .title, .footer {
   border: solid 1px #e6e6e6; }
   .items td {
     padding-left: 20px; }
+    .items td i {
+      padding-right: 5px; }
   .items button {
     background-color: #fafafa;
     padding-left: 15px;
