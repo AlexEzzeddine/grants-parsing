@@ -5,7 +5,12 @@
 }
 
 html {
+  width: 100%;
+  height: 100%;
   margin: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 table {
@@ -65,7 +70,7 @@ table {
 
   .pages {
     width: 200px;
-    margin-top: -20px;
+    margin-top: -4px;
     margin-left: 30px;
     margin-right: 30px;
     height: 50px;
@@ -143,6 +148,9 @@ table {
   background-color: white;
   color: #7e959b;
   border: solid 1px #e6e6e6;
+  td {
+    padding-left: 20px;
+  }
 
   button {
     background-color: #fafafa;
