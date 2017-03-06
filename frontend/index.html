@@ -9,76 +9,90 @@
     <script src="scripts/all-librarys.js" type="text/javascript"></script>
     <script>$.jgrid.defaults.width = 580;</script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="styles/table_styles.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
     <meta charset="UTF-8">
     <title>jQuery Grid Plugin – jqGrid</title></head>
 <body>
 <br>
 <br>
-<h1>jQuery Grid Plugin – jqGrid</h1>
-<br>
-<br>
 
+<div class="table_grid">
+    <table class="grid">
+        <tr class="add_item">
+            <td class="title" colspan="7">
+                <div class="add_record_button"> + ADD NEW RECORD</div>
+            </td>
+        </tr>
+        <tr class="headlines">
+            <td class="headline_date">Date</td>
+            <td class="headline_type">Type</td>
+            <td class="headline_source">Source</td>
+            <td class="headline_title">Title</td>
+            <td class="headline_prewiev">Content preview</td>
+            <td class="headline_contacts">Contacts</td>
+            <td class="headline_actions">Actions</td>
+        </tr>
+        <tr class="items">
+            <td>2017.01.23</td>
+            <td>Гранд</td>
+            <td>www.google.com</td>
+            <td>My title...</td>
+            <td>5n dbhdtghrxdg drg drgdtr gdr gdr grd g d</td>
+            <td></td>
+            <td class="actions_content">
+                <button><i class="fa fa-desktop" aria-hidden="true"></i>DISPLAY</button>
+                <button><i class="fa fa-ban" aria-hidden="true"></i>SKIP</button>
+                <button><i class="fa fa-exclamation-circle" aria-hidden="true"></i>IMPORTANT</button>
+                <button><i class="fa fa-check-circle-o" aria-hidden="true"></i>DONE</button>
+            </td>
+        </tr>
+        <tr class="items">
+            <td>2017.01.23</td>
+            <td>Гранд</td>
+            <td>www.google.com</td>
+            <td>My title...</td>
+            <td>5n dbhdtghrxdg drg drgdtr gdr gdr grd g d</td>
+            <td></td>
+            <td class="actions_content">
+                <button><i class="fa fa-desktop" aria-hidden="true"></i>DISPLAY</button>
+                <button><i class="fa fa-ban" aria-hidden="true"></i>SKIP</button>
+                <button><i class="fa fa-exclamation-circle" aria-hidden="true"></i>IMPORTANT</button>
+                <button><i class="fa fa-check-circle-o" aria-hidden="true"></i>DONE</button>
+            </td>
+        </tr>
+        <tr class="items">
+            <td>2017.01.23</td>
+            <td>Гранд</td>
+            <td>www.google.com</td>
+            <td>My title...</td>
+            <td>5n dbhdtghrxdg drg drgdtr gdr gdr grd g d</td>
+            <td></td>
+            <td class="actions_content">
+                <button><i class="fa fa-desktop" aria-hidden="true"></i>DISPLAY</button>
+                <button><i class="fa fa-ban" aria-hidden="true"></i>SKIP</button>
+                <button><i class="fa fa-exclamation-circle" aria-hidden="true"></i>IMPORTANT</button>
+                <button><i class="fa fa-check-circle-o" aria-hidden="true"></i>DONE</button>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="7" class="footer">
+                <div class="bottom_container">
+                    <div class="first_page"></div>
+                    <div class="back"></div>
 
-<table id="jqGrid"></table>
-<div id="jqGridPager"></div>
-<script type="text/javascript">
+                    <div class="pages">
+                        1 2 3 4 5 6 7 8 9
+                    </div>
 
+                    <div class="next_page"></div>
+                    <div class="last_page"></div>
+                </div>
 
-    $(document).ready(function () {
-
-        $("#jqGrid").jqGrid({
-            url: 'data.json',
-            datatype: "json",
-            colModel: [
-                {label: 'Date', name: 'Date', width: 120, sorttype: 'number'},
-                {label: 'Type', name: 'Type', width: 120},
-                {label: 'Source', name: 'Source', width: 150, formatter: 'link', editable: false},
-                {label: 'Title', name: 'Title', width: 120},
-                {label: 'Content prewiew', name: 'Prewiew', width: 400},
-                {label: 'Contacts', name: 'Contacts', width: 150},
-                {
-                    label: 'Actions', name: 'Actions', width: 170,
-                    editable: true,
-                    edittype: "select",
-                    editoptions: {
-                        dataUrl: "actions.txt",
-                        cacheUrlData: true,
-                        buildSelect: function (data) {
-                            var data = data.split(";"), i = 0, len = data.length, s = '<select>', d;
-                            while (i < len) {
-                                d = data[i].split(":");
-                                s += '<option>' + d[0] + '</option>';
-                                i++;
-                            }
-                            s += '</select>';
-                            return s;
-                        }
-                    }
-                }
-
-            ],
-            onSelectRow: editRow, // the javascript function to call on row click. will ues to to put the row in edit mode
-            viewrecords: true, // show the current page, data rang and total records on the toolbar
-            width: 850,
-            height: 400,
-            rowNum: 7,
-            loadonce: true, // this is just for the demo
-            pager: "#jqGridPager"
-        });
-
-        var lastSelection;
-
-        function editRow(id) {
-            if (id && id !== lastSelection) {
-                var grid = $("#jqGrid");
-                grid.jqGrid('restoreRow', lastSelection);
-                grid.jqGrid('editRow', id, {keys: true, focusField: 4});
-                lastSelection = id;
-            }
-        }
-    });
-
-</script>
+            </td>
+        </tr>
+    </table>
+</div>
 
 
 </body>
