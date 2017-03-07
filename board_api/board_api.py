@@ -2,6 +2,7 @@
 
 from flask import Flask
 from flask import jsonify
+from flask import request
 from mongoengine import *
 
 app = Flask(__name__)
@@ -24,7 +25,9 @@ def hello_world():
 
 @app.route('/all')
 def get_all():
-	return Grants.objects[:10].to_json().encode('utf-8')
+	page=int(request.args['page'])
+	pageSize=int(request.args['pageSize'])
+	return Grants.objects.skip((page - 1) * pageSize).limit(pageSize).to_json().encode('utf-8')
 
 if __name__ == '__main__':
     app.run()
