@@ -9,7 +9,7 @@ connect('databoard', host='ec2-54-237-130-222.compute-1.amazonaws.com', port=270
 
 
 class Grants(Document):
-    id = ObjectIdField(required=False)
+    _id = ObjectIdField(required=False)
     url = StringField(required=False)
     title = StringField(required=False)
     text = StringField(required=False)
@@ -27,11 +27,12 @@ def hello_world():
 def get_all():
     page=int(request.args.get('page'))
     pageSize=int(request.args.get('pageSize'))
-    return Grants.objects.skip((page - 1) * pageSize).limit(pageSize).to_json().encode('utf-8')
+    return jsonify({"Count":Grants.objects.count(),"Data":json.loads(Grants.objects.skip((page - 1) * pageSize).limit(pageSize).to_json())})
 
 # run the app.
 if __name__ == "__main__":
     # Setting debug to True enables debug output. This line should be
     # removed before deploying a production app.
+    application.config['JSON_AS_ASCII'] = False
     application.debug = True
     application.run()
