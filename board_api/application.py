@@ -23,10 +23,10 @@ def hello_world():
     return 'Hello 1!'
 
 
-@application.route('/all')
+@application.route('/grants')
 def get_all():
-    page=int(request.args['page'])
-    pageSize=int(request.args['pageSize'])
+    page=int(request.args.get('page'))
+    pageSize=int(request.args.get('pageSize'))
     return Grants.objects.skip((page - 1) * pageSize).limit(pageSize).to_json().encode('utf-8')
 
 # run the app.
