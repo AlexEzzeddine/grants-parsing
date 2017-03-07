@@ -11,6 +11,8 @@
 
 BOT_NAME = 'databoard'
 
+LOG_LEVEL="INFO"
+
 SPIDER_MODULES = ['databoard.spiders']
 NEWSPIDER_MODULE = 'databoard.spiders'
 
@@ -40,7 +42,7 @@ CONCURRENT_REQUESTS = 100
 #CONCURRENT_REQUESTS_PER_IP = 16
 
 # Disable cookies (enabled by default)
-#COOKIES_ENABLED = False
+COOKIES_ENABLED = False
 
 # Disable Telnet Console (enabled by default)
 #TELNETCONSOLE_ENABLED = False

@@ -15,3 +15,4 @@ class GrantItem(Item):
     text = Field()
     itemType = Field()
     contacts = Field()
+    modified = Field()
