@@ -1,7 +1,7 @@
 /**
  * jqGrid English Translation
  * Tony Tomov tony@trirand.com
- * http://trirand.com/blog/
+ * http://trirand.com/blog/ 
  * Dual licensed under the MIT and GPL licenses:
  * http://www.opensource.org/licenses/mit-license.php
  * http://www.gnu.org/licenses/gpl.html
