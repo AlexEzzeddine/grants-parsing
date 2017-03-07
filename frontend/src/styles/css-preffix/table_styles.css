@@ -17,7 +17,7 @@
 .table_grid table {
   margin: 20px;
   min-width: 640px;
-  border: 0;
+  width: 100%;
   border-collapse: collapse;
   border: solid 1px #e6e6e6;
   color: white; }
@@ -26,12 +26,16 @@
   height: 50px;
   background-color: #3f51b5;
   border-collapse: separate; }
+  .table_grid .add_item .button_container {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-direction: row;
+    flex-direction: row; }
   .table_grid .add_item .add_record_button {
     margin-left: 10px;
     margin-right: 10px;
-    padding: 6px 0 5px 15px;
+    padding: 6px 15px 5px 15px;
     height: 30px;
-    width: 170px;
     border-radius: 2px; }
   .table_grid .add_item .add_record_button:hover {
     background-color: #5c6dc4;
@@ -45,12 +49,16 @@
     border: solid 1px #e6e6e6;
     padding-left: 10px;
     padding-right: 10px;
-    min-width: 80px;
+    min-width: 100px;
     cursor: pointer;
     margin-top: 20px;
     margin-left: 20px; }
   .table_grid .headlines .headline_prewiev .headline_contacts {
     min-width: 250px; }
+  .table_grid .headlines .headline_source {
+    width: 180px; }
+  .table_grid .headlines .headline_contacts {
+    width: 150px; }
 
 .table_grid .items {
   border: 0;
@@ -58,7 +66,9 @@
   color: #7e959b;
   border: solid 1px #e6e6e6; }
   .table_grid .items td {
-    min-height: 45px; }
+    min-height: 45px;
+    border-left: solid #e6e6e6 1px;
+    padding-left: 5px; }
     .table_grid .items td i {
       padding-right: 5px; }
   .table_grid .items .actions_content {

@@ -20,7 +20,7 @@
   table {
     margin: 20px;
     min-width: 640px;
-    border: 0;
+    width: 100%;
     border-collapse: collapse;
     border: solid 1px #e6e6e6;
     color: white;
@@ -33,12 +33,16 @@
     //border-spacing: 5px;
     border-collapse: separate;
 
+    .button_container {
+      display: flex;
+      flex-direction: row;
+    }
+
     .add_record_button {
       margin-left: 10px;
       margin-right: 10px;
-      padding: 6px 0 5px 15px;
+      padding: 6px 15px 5px 15px;
       height: 30px;
-      width: 170px;
       border-radius: 2px;
     }
     .add_record_button:hover {
@@ -56,13 +60,19 @@
       border: solid 1px #e6e6e6;
       padding-left: 10px;
       padding-right: 10px;
-      min-width: 80px;
+      min-width: 100px;
       cursor: pointer;
       margin-top: 20px;
       margin-left: 20px;
     }
     .headline_prewiev .headline_contacts {
       min-width: 250px;
+    }
+    .headline_source {
+      width: 180px;
+    }
+    .headline_contacts {
+      width: 150px;
     }
   }
 
@@ -74,6 +84,9 @@
     border: solid 1px #e6e6e6;
     td {
       min-height: 45px;
+      border-left: solid #e6e6e6 1px;
+      padding-left: 5px;
+
       // padding-left: 20px;
       i {
         padding-right: 5px;
@@ -88,6 +101,7 @@
     }
 
     button {
+
       margin: 2px;
       background-color: #fafafa;
       padding-left: 15px;
