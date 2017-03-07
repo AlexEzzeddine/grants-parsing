@@ -1,26 +1,36 @@
 from flask import Flask
-from pymongo import MongoClient
-from bson import json_util
+from bson.json_util import dumps
+from mongoengine import *
 
 app = Flask(__name__)
+
+connect('databoard', host='localhost', port=32768)
+
+class Grants(Document):
+    url = StringField(required=False)
+    title = StringField(required=False)
+    text = StringField(required=False)
+    contacts = StringField(required=False)
+    itemType = StringField(required=False)
+    modified = BooleanField(required=False)
 
 
 @app.route('/')
 def hello_world():
-    return 'Hello API'\
+    return 'Hello World!'
+
 
 @app.route('/all')
-def all():
-    conn = 'mongodb://localhost:32768/?3t.uriVersion=2&3t.connectionMode=direct&readPreference=primary&3t.connection.name=localhost%3A32768'
+def get_all():
 
-    cl = MongoClient(conn)
-    coll = cl["local"]["test2"]
+    return dumps(Grants.objects)
 
-    data = [{"foo": "HELLO"}, {"Blah": "Bloh"}]
-    for d in data:
-        coll.insert_one(data)
+    for u in Grants.objects:
 
-    return 'all'
+        return u.url;
+
+    return "OK"
+
 
 if __name__ == '__main__':
     app.run()
