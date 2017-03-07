@@ -22,3 +22,7 @@ wheels/
 
 .idea/
 .scrapy
+
+frontend/node_modules/
+frontend/dist/
+frontend/.sass-cache/
