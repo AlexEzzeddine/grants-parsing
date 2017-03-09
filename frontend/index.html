@@ -1,12 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.11.0/jquery.js" type="text/javascript"></script>
+    <script src="scripts/all-librarys.js" type="text/javascript"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqgrid/4.6.0/js/i18n/grid.locale-en.js"></script>
+    <script src="https://cdn.jsdelivr.net/jqgrid/4.6.0/jquery.jqGrid.min.js"></script>
+    <script src="scripts/all-customs.js" type="text/javascript"></script>
+
     <link rel="stylesheet" type="text/css" href="styles/librarys-concat.css">
     <link rel="stylesheet" type="text/css" href="styles/main.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js" type="text/javascript"></script>
+
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
-    <script src="scripts/all-customs.js" type="text/javascript"></script>
-    <script src="scripts/all-librarys.js" type="text/javascript"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="styles/table_styles.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
@@ -15,7 +20,7 @@
 </head>
 
 
-<body>
+<body style="width: 90%">
 
 <h1>jqgrid</h1>
 
@@ -27,21 +32,23 @@
 
     $(document).ready(function () {
 
+
         $("#jqGrid").jqGrid({
             url: 'data.json',
             datatype: "json",
             colModel: [
-                {label: 'Category Name', name: 'CategoryName', width: 75},
-                {label: 'Product Name', name: 'ProductName', width: 90},
-                {label: 'Country', name: 'Country', width: 100},
-                {label: 'Price', name: 'Price', width: 80, sorttype: 'integer'},
-                // sorttype is used only if the data is loaded locally or loadonce is set to true
-                {label: 'Quantity', name: 'Quantity', width: 80, sorttype: 'number'}
+                {label: 'Date', name: 'date', width: 75},
+                {label: 'Type', name: 'itemType', width: 90},
+                {label: 'Source', name: 'url', width: 100},
+                {label: 'Title', name: 'title', width: 90},
+                {label: 'Content preview', name: 'text', width: 80},
+                {label: 'Contacts', name: 'contacts', width: 90},
+                {label: 'Actions', name: 'actions', width: 80}
             ],
             viewrecords: true, // show the current page, data rang and total records on the toolbar
-            width: 780,
-            height: 200,
-            rowNum: 30,
+            width: 1000,
+            height: 500,
+            rowNum: 100,
             loadonce: true, // this is just for the demo
             pager: "#jqGridPager"
         });
@@ -132,8 +139,3 @@
             </td>
         </tr>
     </table>
-</div>
-
-
-</body>
-</html>
