@@ -4,6 +4,7 @@ from flask import Response
 from flask import request
 from flask_cors import CORS
 from mongoengine import *
+
 # EB looks for an 'application' callable by default.
 application = Flask(__name__)
 CORS(application)
@@ -32,12 +33,12 @@ def get_all():
     page = int(request.args.get('page'))
     page_size = int(request.args.get('page_size'))
     return Response(dumps({
-                            "Count": Grants.objects.count(),
-                            "Data": [
-                                        o.to_mongo()
-                                        for o in Grants.objects.skip((page - 1) * page_size).limit(page_size)
-                                     ]
-                          } , indent=2 , ensure_ascii=False) , mimetype='application/json')
+        "Count": Grants.objects.count(),
+        "Data": [
+            o.to_mongo()
+            for o in Grants.objects.skip((page - 1) * page_size).limit(page_size)
+            ]
+    }, indent=2, ensure_ascii=False), mimetype='application/json')
 
 
 # run the app.
