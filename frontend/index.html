@@ -37,16 +37,16 @@
             url: 'data.json',
             datatype: "json",
             colModel: [
-                {label: 'Date', name: 'date', width: 75},
+                {label: 'Date', name: '', width: 75},
                 {label: 'Type', name: 'itemType', width: 90},
-                {label: 'Source', name: 'url', width: 100},
-                {label: 'Title', name: 'title', width: 90},
-                {label: 'Content preview', name: 'text', width: 80},
-                {label: 'Contacts', name: 'contacts', width: 90},
-                {label: 'Actions', name: 'actions', width: 80}
+                {label: 'Source', name: 'url', formatter: 'link', width: 100},
+                {label: 'Title', name: 'title', width: 120},
+                {label: 'Content preview', name: 'text', width: 200},
+                {label: 'Contacts', name: 'contacts', width: 150},
+                {label: 'Actions', name: 'actions', width: 200}
             ],
             viewrecords: true, // show the current page, data rang and total records on the toolbar
-            width: 1000,
+            width: 1300,
             height: 500,
             rowNum: 100,
             loadonce: true, // this is just for the demo
