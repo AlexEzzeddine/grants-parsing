@@ -47,7 +47,7 @@
                 {label: 'Title', name: 'title', width: 150},
                 {label: 'Content preview', name: 'title', width: 200},
                 {label: 'Contacts', name: 'contacts', width: 150},
-                {label: 'Actions', width: 200}
+                {label: 'Actions', width: 200, formatter: actionsButtons}
             ],
             viewrecords: true, // show the current page, data rang and total records on the toolbar
             width: 1300,
@@ -57,6 +57,26 @@
             pager: "#jqGridPager"
         });
     });
+
+    function actionsButtons() {
+        return "<button onclick='displayItem()'><i class='fa fa-desktop fa-lg' aria-hidden='true' ></i>DISPLAY</button>" +
+            "<button onclick='skipItem()'><i class='fa fa-ban fa-lg' aria-hidden='true'></i>SKIP</button>" +
+            "<button onclick='importantItem()'><i class='fa fa-exclamation-circle fa-lg' aria-hidden='true'></i>IMPORTANT</button>" +
+            "<button onclick='doneItem()'><i class='fa fa-check-circle-o fa-lg' aria-hidden='true'></i>DONE</button>";
+    }
+
+    function displayItem() {
+
+    }
+    function skipItem() {
+
+    }
+    function importantItem() {
+
+    }
+    function doneItem() {
+
+    }
 
 </script>
 
