@@ -37,7 +37,7 @@
         $("#jqGrid").jqGrid({
 
 
-            url: 'data.json',
+            url: 'http://lowcost-env.mri5njt8g2.us-west-2.elasticbeanstalk.com/grants?page=1&page_size=1000',
             datatype: "json",
             jsonReader: {root: "Data"},
             colModel: [
@@ -45,7 +45,7 @@
                 {label: 'Type', name: 'itemType', width: 60},
                 {label: 'Source', name: 'url', formatter: 'link', width: 150},
                 {label: 'Title', name: 'title', width: 150},
-                {label: 'Content preview', name: 'title', width: 200},
+                {label: 'Content preview', name: 'text', width: 200},
                 {label: 'Contacts', name: 'contacts', width: 150},
                 {label: 'Actions', width: 200, formatter: actionsButtons}
             ],
