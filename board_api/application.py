@@ -1,11 +1,13 @@
+from bson.json_util import dumps
 from flask import Flask
+from flask import Response
 from flask import request
-from flask import jsonify
-import json
+from flask_cors import CORS
 from mongoengine import *
 
 # EB looks for an 'application' callable by default.
 application = Flask(__name__)
+CORS(application)
 
 connect('databoard', host='ec2-54-237-130-222.compute-1.amazonaws.com', port=27017, username="root",
         password="test12345", authentication_source="admin")
@@ -29,15 +31,19 @@ def hello_world():
 @application.route('/grants')
 def get_all():
     page = int(request.args.get('page'))
-    page_size = int(request.args.get('pageSize'))
-    return jsonify({"Count": Grants.objects.count(),
-                    "Data": json.loads(Grants.objects.skip((page - 1) * page_size).limit(page_size).to_json())})
+    page_size = int(request.args.get('page_size'))
+    return Response(dumps({
+        "Count": Grants.objects.count(),
+        "Data": [
+            o.to_mongo()
+            for o in Grants.objects.skip((page - 1) * page_size).limit(page_size)
+            ]
+    }, indent=2, ensure_ascii=False), mimetype='application/json')
 
 
 # run the app.
 if __name__ == "__main__":
     # Setting debug to True enables debug output. This line should be
     # removed before deploying a production app.
-    application.config['JSON_AS_ASCII'] = False
     application.debug = True
     application.run()
