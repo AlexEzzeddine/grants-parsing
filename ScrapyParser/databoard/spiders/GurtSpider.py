@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 import scrapy
+import datetime
 from databoard.items import GrantItem
 
 
@@ -28,5 +29,6 @@ class GurtSpider(scrapy.Spider):
         item['title']=response.css(".news h2 *::text").extract_first()
         item['text']=''.join(response.css(".newstxt2 *::text").extract())
         item['contacts']=' '.join(response.css(".contline+ul li *::text").extract())
+        item['publication_date']=datetime.datetime.now()
         item['itemType']="Grant"
         yield item
