@@ -29,6 +29,5 @@ class GurtSpider(scrapy.Spider):
         item['title']=response.css(".article h1:first-of-type::text").extract_first()
         item['text']=''.join(response.css(".article_text *::text").extract())
         item['contacts']=""
-        item['publication_date']=datetime.datetime.now()
         item['itemType']="Grant"
         yield item
