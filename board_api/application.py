@@ -21,6 +21,12 @@ class Grants(Document):
     contacts = StringField(required=False)
     itemType = StringField(required=False)
     modified = BooleanField(required=False)
+    important = BooleanField(required=False, default=False)
+    displayed = BooleanField(required=False, default=False)
+    skipped = BooleanField(required=False, default=False)
+    done = BooleanField(required=False, default=False)
+
+    meta = {'strict': False}
 
 
 @application.route('/')

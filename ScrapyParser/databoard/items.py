@@ -16,3 +16,4 @@ class GrantItem(Item):
     itemType = Field()
     contacts = Field()
     modified = Field()
+    publication_date = Field()
