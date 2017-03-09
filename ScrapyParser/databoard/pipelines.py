@@ -29,8 +29,6 @@ class MongoDBPipeline(object):
                 item['publication_date']=datetime.datetime.now()
                 self.collection.insert(dict(item))
             elif document!=item:
-                spider.logger.info(document)
-                spider.logger.info(item)
                 spider.logger.info("Updating old document")
                 item['modified']=True
                 item['publication_date']=datetime.datetime.now()
