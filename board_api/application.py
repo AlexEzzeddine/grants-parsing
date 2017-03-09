@@ -1,6 +1,8 @@
 from flask import Flask
 from flask import request
 from flask import jsonify
+from flask import Response
+from bson.json_util import dumps
 import json
 from mongoengine import *
 
@@ -30,8 +32,10 @@ def hello_world():
 def get_all():
     page = int(request.args.get('page'))
     page_size = int(request.args.get('pageSize'))
-    return jsonify({"Count": Grants.objects.count(),
-                    "Data": json.loads(Grants.objects.skip((page - 1) * page_size).limit(page_size).to_json())})
+    return Response(dumps({
+                            "Count": Grants.objects.count(),
+                            "Data" : [o.to_mongo() for o in Grants.objects.skip((page - 1) * page_size).limit(page_size)]
+                          } , indent=2 , ensure_ascii=False) , mimetype='application/json')
 
 
 # run the app.
