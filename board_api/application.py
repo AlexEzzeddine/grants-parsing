@@ -5,7 +5,8 @@ from mongoengine import *
 # EB looks for an 'application' callable by default.
 application = Flask(__name__)
 
-connect('databoard', host='ec2-54-237-130-222.compute-1.amazonaws.com', port=27017, username="root", password="test12345", authentication_source="admin")
+connect('databoard', host='ec2-54-237-130-222.compute-1.amazonaws.com', port=27017, username="root",
+        password="test12345", authentication_source="admin")
 
 
 class Grants(Document):
@@ -25,9 +26,11 @@ def hello_world():
 
 @application.route('/grants')
 def get_all():
-    page=int(request.args.get('page'))
-    pageSize=int(request.args.get('pageSize'))
-    return jsonify({"Count":Grants.objects.count(),"Data":json.loads(Grants.objects.skip((page - 1) * pageSize).limit(pageSize).to_json())})
+    page = int(request.args.get('page'))
+    pageSize = int(request.args.get('pageSize'))
+    return jsonify({"Count": Grants.objects.count(),
+                    "Data": json.loads(Grants.objects.skip((page - 1) * pageSize).limit(pageSize).to_json())})
+
 
 # run the app.
 if __name__ == "__main__":
