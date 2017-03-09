@@ -264,6 +264,12 @@
 
 }
 
+.ui-widget-content .ui-state-default {
+  border: solid 1px #e6e6e6;
+  background-color: #fafafa;
+  color: #e6e6e6;
+}
+
 .ui-state-default a, .ui-state-default a:link, .ui-state-default a:visited {
   color: #ffffff;
   text-decoration: none;
@@ -284,7 +290,7 @@
 
 .ui-state-active, .ui-widget-content .ui-state-active, .ui-widget-header .ui-state-active {
   border: 1px solid #72b42d;
-  background: #285c00 url(images/ui-bg_highlight-hard_30_285c00_1x100.png) 50% 50% repeat-x;
+  background: #285c00;
   font-weight: normal;
   color: #ffffff;
 }
@@ -311,7 +317,7 @@
 
 .ui-state-error, .ui-widget-content .ui-state-error, .ui-widget-header .ui-state-error {
   border: 1px solid #fad000;
-  background: #ffdc2e url(images/ui-bg_diagonals-thick_95_ffdc2e_40x40.png) 50% 50% repeat;
+  background: #ffdc2e;
   color: #7e959b;;
 }
 
