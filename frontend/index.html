@@ -20,11 +20,8 @@
 </head>
 
 
-<body style="width: 90%">
-
-<h1>jqgrid</h1>
-
-
+<body>
+<br><br><br><br>
 <table id="jqGrid"></table>
 <div id="jqGridPager"></div>
 <script type="text/javascript">
@@ -37,7 +34,7 @@
         $("#jqGrid").jqGrid({
 
 
-            url: 'http://lowcost-env.mri5njt8g2.us-west-2.elasticbeanstalk.com/grants?page=1&page_size=1000',
+            url: 'http://lowcost-env.mri5njt8g2.us-west-2.elasticbeanstalk.com/grants?page=1&page_size=100',
             datatype: "json",
             jsonReader: {root: "Data"},
             colModel: [
@@ -45,18 +42,29 @@
                 {label: 'Type', name: 'itemType', width: 60},
                 {label: 'Source', name: 'url', formatter: 'link', width: 150},
                 {label: 'Title', name: 'title', width: 150},
-                {label: 'Content preview', name: 'text', width: 200},
-                {label: 'Contacts', name: 'contacts', width: 150},
-                {label: 'Actions', width: 200, formatter: actionsButtons}
+                {label: 'Content preview', name: 'text', width: 500, formatter: prewievStyles},
+                {label: 'Contacts', name: 'contacts', width: 170, formatter: contactsStyles},
+                {label: 'Actions', width: 450, sortable: false, formatter: actionsButtons}
             ],
             viewrecords: true, // show the current page, data rang and total records on the toolbar
-            width: 1300,
+
+            shrinkToFit: false,
             height: 500,
-            rowNum: 100,
+            rowheight: 20,
+            rowNum: 20,
             loadonce: true, // this is just for the demo
+            caption: "<div class='button_container'><div class='add_record_button'>" +
+            " + ADD NEW RECORD</div><div class='add_record_button'> FILTER</div></div>",
             pager: "#jqGridPager"
         });
     });
+
+    function prewievStyles(v) {
+        return '<div style="max-height: 80px; font-size: 12px; width: 500px; padding: 3px">' + v + '</div>';
+    }
+    function contactsStyles(v) {
+        return '<div style="display: flex; flex-wrap: wrap; width: 150px"><p style="word-wrap: normal; width: 150px; padding: 5px">' + v + '</p></div>';
+    }
 
     function actionsButtons() {
         return "<button onclick='displayItem()'><i class='fa fa-desktop fa-lg' aria-hidden='true' ></i>DISPLAY</button>" +
@@ -81,85 +89,5 @@
 </script>
 
 
-<br>
-<br>
-
-<div class="table_grid">
-    <table class="grid">
-        <tr class="add_item">
-            <td class="title" colspan="7">
-                <div class="button_container">
-                    <div class="add_record_button"> + ADD NEW RECORD</div>
-                    <div class="add_record_button"> FILTER</div>
-                </div>
-
-            </td>
-        </tr>
-        <tr class="headlines">
-            <td class="headline_date">Date</td>
-            <td class="headline_type">Type</td>
-            <td class="headline_source">Source</td>
-            <td class="headline_title">Title</td>
-            <td class="headline_prewiev">Content preview</td>
-            <td class="headline_contacts">Contacts</td>
-            <td class="headline_actions">Actions</td>
-        </tr>
-        <tr class="items">
-            <td>2017.01.23</td>
-            <td>Гранд</td>
-            <td>www.google.com</td>
-            <td>My title...</td>
-            <td>5n dbhdtghrxdg drg drgdtr gdr gdr grd g d</td>
-            <td></td>
-            <td class="actions_content">
-                <button><i class="fa fa-desktop fa-lg" aria-hidden="true"></i>DISPLAY</button>
-                <button><i class="fa fa-ban fa-lg" aria-hidden="true"></i>SKIP</button>
-                <button><i class="fa fa-exclamation-circle fa-lg" aria-hidden="true"></i>IMPORTANT</button>
-                <button><i class="fa fa-check-circle-o fa-lg" aria-hidden="true"></i>DONE</button>
-            </td>
-        </tr>
-        <tr class="items">
-            <td>2017.01.23</td>
-            <td>Гранд</td>
-            <td>www.google.com</td>
-            <td>My title...</td>
-            <td>5n dbhdtghrxdg drg drgdtr gdr gdr grd g d</td>
-            <td></td>
-            <td class="actions_content">
-                <button><i class="fa fa-desktop fa-lg" aria-hidden="true"></i>DISPLAY</button>
-                <button><i class="fa fa-ban fa-lg" aria-hidden="true"></i>SKIP</button>
-                <button><i class="fa fa-exclamation-circle fa-lg" aria-hidden="true"></i>IMPORTANT</button>
-                <button><i class="fa fa-check-circle-o fa-lg" aria-hidden="true"></i>DONE</button>
-            </td>
-        </tr>
-        <tr class="items">
-            <td>2017.01.23</td>
-            <td>Гранд</td>
-            <td>www.google.com</td>
-            <td>My title...</td>
-            <td>5n dbhdtghrxdg drg drgdtr gdr gdr grd g d</td>
-            <td></td>
-            <td class="actions_content">
-                <button><i class="fa fa-desktop fa-lg" aria-hidden="true"></i>DISPLAY</button>
-                <button><i class="fa fa-ban fa-lg" aria-hidden="true"></i>SKIP</button>
-                <button><i class="fa fa-exclamation-circle fa-lg" aria-hidden="true"></i>IMPORTANT</button>
-                <button><i class="fa fa-check-circle-o fa-lg" aria-hidden="true"></i>DONE</button>
-            </td>
-        </tr>
-        <tr>
-            <td colspan="7" class="footer">
-                <div class="bottom_container">
-                    <div class="first_page"></div>
-                    <div class="back"></div>
-
-                    <div class="pages">
-                        1 2 3 4 5 6 7 8 9
-                    </div>
-
-                    <div class="next_page"></div>
-                    <div class="last_page"></div>
-                </div>
-
-            </td>
-        </tr>
-    </table>
+</body>
+</html>

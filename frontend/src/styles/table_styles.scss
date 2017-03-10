@@ -227,7 +227,7 @@
 
 .ui-widget button:hover {
   cursor: pointer;
-  background-color: #e6e6e6;
+  background-color: #cacaca;
   transition: all 0.5s;
 }
 
@@ -237,6 +237,7 @@
   background-color: white;
   color: #7e959b;
   border: solid 1px #e6e6e6;
+  transition: all 0.3s;
 }
 
 .ui-widget-content a {
@@ -244,10 +245,33 @@
 }
 
 .ui-widget-header {
-  border: 1px solid #934245;
-  background: #811215 50% 50% repeat-x;
-  color: #ffffff;
-  font-weight: bold;
+  height: 50px;
+  border: 0;
+  border-radius: 0;
+  background-color: #3f51b5;
+  //border-spacing: 5px;
+  border-collapse: separate;
+
+  .button_container {
+    display: flex;
+
+    flex-direction: row;
+  }
+
+  .add_record_button {
+    font-size: 14px;
+    color: white;
+    margin-left: 10px;
+    margin-right: 10px;
+    padding: 6px 15px 5px 15px;
+    height: 30px;
+    border-radius: 2px;
+  }
+
+  .add_record_button:hover {
+    background-color: #5c6dc4;
+    cursor: pointer;
+  }
 }
 
 .ui-widget-header a {
@@ -268,6 +292,7 @@
   border: solid 1px #e6e6e6;
   background-color: #fafafa;
   color: #e6e6e6;
+  transition: all 0.3s;
 }
 
 .ui-state-default a, .ui-state-default a:link, .ui-state-default a:visited {
@@ -278,6 +303,7 @@
 .ui-state-hover, .ui-widget-content .ui-state-hover, .ui-widget-header .ui-state-hover, .ui-state-focus, .ui-widget-content .ui-state-focus, .ui-widget-header .ui-state-focus {
   background-color: #e6e6e6;
   color: #7e959b;
+  transition: all 0.3s;
   a {
     color: #7e959b;
   }
@@ -288,35 +314,42 @@
   text-decoration: none;
 }
 
+//loading allert
 .ui-state-active, .ui-widget-content .ui-state-active, .ui-widget-header .ui-state-active {
-  border: 1px solid #72b42d;
-  background: #285c00;
-  font-weight: normal;
-  color: #ffffff;
+  background-color: white;
+  color: #7e959b;
+  border: solid 1px #e6e6e6;
 }
 
 .ui-state-active a, .ui-state-active a:link, .ui-state-active a:visited {
   color: #ffffff;
   text-decoration: none;
+  transition: all 0.3s;
 }
 
 .ui-widget :active {
   outline: none;
 }
 
-/* Interaction Cues
-----------------------------------*/
+//pressed item
 .ui-state-highlight, .ui-widget-content .ui-state-highlight, .ui-widget-header .ui-state-highlight {
   background-color: #e6e6e6;
-  color: #7e959b;
+  border: solid 1px #bedae0;
+  transition: all 0.3s;
+  color: #617177;
+  a {
+    color: #7e959b;
+  }
+
 }
 
+//presset item a
 .ui-state-highlight a, .ui-widget-content .ui-state-highlight a, .ui-widget-header .ui-state-highlight a {
-  color: #343434;
+  color: #617177;
 }
 
 .ui-state-error, .ui-widget-content .ui-state-error, .ui-widget-header .ui-state-error {
-  border: 1px solid #fad000;
+  border: solid 1px #e6e6e6;
   background: #ffdc2e;
   color: #7e959b;;
 }
@@ -344,3 +377,4 @@
   filter: Alpha(Opacity=35);
   background-image: none;
 }
+
