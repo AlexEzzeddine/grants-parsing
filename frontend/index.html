@@ -95,18 +95,37 @@
             "<button onclick='doneItem()'><i class='fa fa-check-circle-o fa-lg' aria-hidden='true' style='color:green;'></i>DONE</button>";
     }
 
-    function displayItem() {
 
+    function displayItem() {
+        document.getElementById('myModal').style.display = "flex";
     }
     function skipItem() {
-
     }
     function importantItem() {
 
     }
     function doneItem() {
-
     }
 </script>
+
+
+<div id="myModal" class="modal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <p>Some text in the Modal..</p>
+    </div>
+</div>
+<script>
+    var span = document.getElementsByClassName("close")[0];
+    span.onclick = function () {
+        document.getElementById('myModal').style.display = "none";
+    }
+    window.onclick = function (event) {
+        if (event.target == document.getElementById('myModal')) {
+            document.getElementById('myModal').style.display = "none";
+        }
+    }
+</script>
+
 </body>
 </html>
