@@ -12,23 +12,6 @@ CORS(application)
 connect('databoard', host='ec2-54-237-130-222.compute-1.amazonaws.com', port=27017, username="root",
         password="test12345", authentication_source="admin")
 
-class Flags(Document):
-    important=BooleanField(default=False)
-    displayed=BooleanField(default=False)
-    skipped=BooleanField(default=False)
-    done=BooleanField(default=False)
-
-class ViewModel:
-    id=""
-    url=""
-    title=""
-    text=""
-    contacts="N/A"
-    itemType=""
-    modified=False
-    publication_date=0
-    flags=Flags()
-
 class Grants(DynamicDocument):
     _id = ObjectIdField(required=False)
     url = StringField(required=False)
@@ -83,7 +66,7 @@ def get_all():
         data.append(item)
 
     return Response(dumps({
-        "Count": Grants.objects(__raw__=dict([flag for flag in [important,displayed,skipped,done] if flag==True])).count(),
+        "Count": Grants.objects(__raw__={}).count(),
         "Data": data
     }, indent=2, ensure_ascii=False), mimetype='application/json')
 
