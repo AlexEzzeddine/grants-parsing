@@ -38,7 +38,7 @@ def hello_world():
 
 @application.route('/grants')
 def get_all():
-    query = request.args.get('query')
+    q = request.args.get('q',"").split(',')
     page = int(request.args.get('page'))
     page_size = int(request.args.get('page_size'))
     important = bool(request.args.get("important", None))
@@ -46,7 +46,7 @@ def get_all():
     skipped = bool(request.args.get("skipped", None))
     done = bool(request.args.get("done", None))
     data=[]
-    for grant in Grants.objects(__raw__={}).skip((page - 1) * page_size).limit(page_size):
+    for grant in Grants.objects(__raw__={query:True for query in q}).skip((page - 1) * page_size).limit(page_size):
         item= {
             "id":str(grant._id),
             "url":grant.url,
@@ -68,7 +68,7 @@ def get_all():
         data.append(item)
 
     return Response(dumps({
-        "Count": Grants.objects(__raw__={}).count(),
+        "Count": Grants.objects(__raw__={"flags."+query:True for query in q}).count(),
         "Data": data
     }, indent=2, ensure_ascii=False), mimetype='application/json')
 
