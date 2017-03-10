@@ -30,9 +30,15 @@
 
     $(document).ready(function () {
         $("#jqGrid").jqGrid({
-            url: 'http://lowcost-env.mri5njt8g2.us-west-2.elasticbeanstalk.com/grants?page=1&page_size=100',
+            url: 'http://lowcost-env.mri5njt8g2.us-west-2.elasticbeanstalk.com/grants?page_size=20',
+            mtype: "GET",
             datatype: "json",
-            jsonReader: {root: "Data"},
+            jsonReader: {
+                root: "Data",
+                page:  function(obj) { console.error("!!!", obj); return 1; },
+                total: function(obj) { return 2; },
+                records: function(obj) { return obj.Count; },
+            },
             colModel: [
                 {label: 'Date', name: '', width: 75, sortable: false},
                 {label: 'Type', name: 'itemType', width: 60, formatter: typeStyles, sortable: false},
@@ -46,8 +52,8 @@
             height: 750,
             autowidth: true,
             rowheight: 20,
-            rowNum: 16,
-            loadonce: true,
+            page: 1,
+            rowNum: 20,
             datatype: "json",
             caption: "<div class='button_container'><div class='add_record_button'>" +
             " + ADD NEW RECORD</div><div class='add_record_button'> FILTER</div></div>",
@@ -55,7 +61,7 @@
             " IMPORTANT</div><div class='add_record_button'><i class='fa fa-exclamation-circle fa-lg' aria-hidden='true'></i> SKIPPED</div><div class='add_record_button'><i class='fa fa-check-circle-o fa-lg' aria-hidden='true'></i> DONE</div></div>",
             pager: "#jqGridPager"
         });
-        jQuery("#jqGrid").setGridParam({rowNum: 16}).trigger("reloadGrid");
+        //jQuery("#jqGrid").setGridParam({rowNum: 16}).trigger("reloadGrid");
     });
 
 
