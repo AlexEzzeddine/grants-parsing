@@ -48,8 +48,8 @@
             autowidth: true,
             rowheight: 20,
             rowNum: 16,
-            caption: "<div class='button_container'><div class='add_record_button'><i class='fa fa-database' aria-hidden='true'></i>"+
-            "IMPORTANT</div><div class='add_record_button'>SKIPPED</div><div class='add_record_button'>DONE</div></div>",
+            caption: "<div class='button_container'><div class='add_record_button'><i class='fa fa-exclamation-circle fa-lg' aria-hidden='true'></i>"+
+            " IMPORTANT</div><div class='add_record_button'><i class='fa fa-exclamation-circle fa-lg' aria-hidden='true'></i> SKIPPED</div><div class='add_record_button'><i class='fa fa-check-circle-o fa-lg' aria-hidden='true'></i> DONE</div></div>",
             pager: "#jqGridPager"
         });
     });
@@ -70,10 +70,10 @@
     }
 
     function actionsButtons() {
-        return "<button onclick='displayItem()'><i class='fa fa-desktop fa-lg' aria-hidden='true' ></i>DISPLAY</button>" +
-            "<button onclick='skipItem()'><i class='fa fa-ban fa-lg' aria-hidden='true'></i>SKIP</button>" +
-            "<button onclick='importantItem()'><i class='fa fa-exclamation-circle fa-lg' aria-hidden='true'></i>IMPORTANT</button>" +
-            "<button onclick='doneItem()'><i class='fa fa-check-circle-o fa-lg' aria-hidden='true'></i>DONE</button>";
+        return "<button onclick='displayItem()'><i class='fa fa-desktop fa-lg' aria-hidden='true' style='color:blue;'></i>DISPLAY</button>" +
+            "<button onclick='skipItem()'><i class='fa fa-ban fa-lg' aria-hidden='true' style='color:red;'></i>SKIP</button>" +
+            "<button onclick='importantItem()'><i class='fa fa-exclamation-circle fa-lg' aria-hidden='true' style='color:orange;'></i>IMPORTANT</button>" +
+            "<button onclick='doneItem()'><i class='fa fa-check-circle-o fa-lg' aria-hidden='true' style='color:green;'></i>DONE</button>";
     }
 
     function displayItem() {
