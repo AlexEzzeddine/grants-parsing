@@ -13,7 +13,7 @@ connect('databoard', host='ec2-54-237-130-222.compute-1.amazonaws.com', port=270
         password="test12345", authentication_source="admin")
 
 
-class Grants(Document):
+class Grants(DynamicDocument):
     _id = ObjectIdField(required=False)
     url = StringField(required=False)
     title = StringField(required=False)
@@ -21,10 +21,12 @@ class Grants(Document):
     contacts = StringField(required=False)
     itemType = StringField(required=False)
     modified = BooleanField(required=False)
-    important = BooleanField(required=False, default=False)
-    displayed = BooleanField(required=False, default=False)
-    skipped = BooleanField(required=False, default=False)
-    done = BooleanField(required=False, default=False)
+    flags = DynamicField(required=False, default={
+        "important": False,
+        "displayed": False,
+        "skipped": False,
+        "done": False
+    })
 
     meta = {'strict': False}
 
@@ -45,6 +47,17 @@ def get_all():
             for o in Grants.objects.skip((page - 1) * page_size).limit(page_size)
             ]
     }, indent=2, ensure_ascii=False), mimetype='application/json')
+
+
+@application.route('/changestatus')
+def change_status():
+    id = request.args.get('id')
+    status_name = request.args.get('status_name')
+    value = bool(request.args.get('value'))
+    doc = Grants.objects(_id=id).first()
+    doc.flags[status_name] = value
+    doc.save()
+    return dumps(doc.flags)
 
 
 # run the app.
