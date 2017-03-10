@@ -30,7 +30,7 @@
 
     $(document).ready(function () {
         $("#jqGrid").jqGrid({
-            url: 'http://lowcost-env.mri5njt8g2.us-west-2.elasticbeanstalk.com/grants',
+            url: 'http://lowcost-env.mri5njt8g2.us-west-2.elasticbeanstalk.com/grants?page=1&page_size=100',
             datatype: "json",
             jsonReader: {root: "Data"},
             colModel: [
