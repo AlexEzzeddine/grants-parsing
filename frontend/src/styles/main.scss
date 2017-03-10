@@ -29,5 +29,16 @@ h1 {
 			font-size: 13px;
 			color: #000;
 		}
+
+		tr.jqgrow {
+			&:nth-child(odd) {
+				background-color: #ebebeb;
+			}
+			td {
+				a {
+					margin: 0 5px;
+				}
+			}
+		}
 	}
 }

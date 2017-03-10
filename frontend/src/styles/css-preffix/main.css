@@ -20,11 +20,12 @@ h1 {
   color: #007fff; }
 
 .wrapper {
-    position: relative;
-    width: 100%;
-}
-
-.wrapper .ui-jqgrid .ui-jqgrid-htable th {
+  position: relative;
+  width: 100%; }
+  .wrapper .ui-jqgrid .ui-jqgrid-htable th {
     font-size: 13px;
-    color: #000;
-}
+    color: #000; }
+  .wrapper .ui-jqgrid tr.jqgrow:nth-child(odd) {
+    background-color: #ebebeb; }
+  .wrapper .ui-jqgrid tr.jqgrow td a {
+    margin: 0 5px; }
