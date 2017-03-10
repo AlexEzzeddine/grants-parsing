@@ -12,12 +12,13 @@ CORS(application)
 connect('databoard', host='ec2-54-237-130-222.compute-1.amazonaws.com', port=27017, username="root",
         password="test12345", authentication_source="admin")
 
+
 class Grants(DynamicDocument):
     _id = ObjectIdField(required=False)
     url = StringField(required=False)
     title = StringField(required=False)
     text = StringField(required=False)
-    contacts = StringField(required=False,default="N/A")
+    contacts = StringField(required=False, default="N/A")
     itemType = StringField(required=False)
     modified = BooleanField(required=False)
     publication_date = DateTimeField(required=False)
@@ -38,37 +39,37 @@ def hello_world():
 
 @application.route('/grants')
 def get_all():
-    q = request.args.get('q',"").split(',')
+    q = request.args.get('q', "").split(',')
     page = int(request.args.get('page'))
     page_size = int(request.args.get('page_size'))
     important = bool(request.args.get("important", None))
     displayed = bool(request.args.get("displayed", None))
     skipped = bool(request.args.get("skipped", None))
     done = bool(request.args.get("done", None))
-    data=[]
-    for grant in Grants.objects(__raw__={query:True for query in q}).skip((page - 1) * page_size).limit(page_size):
-        item= {
-            "id":str(grant._id),
-            "url":grant.url,
-            "title":grant.title,
-            "text":grant.text,
-            "contacts":grant.contacts,
-            "itemType":grant.itemType,
-            "modified":grant.modified,
-            "publication_date":grant.publication_date.strftime("%d.%m.%Y"),
-            "flags":{
-                "important" : grant.flags['important'],
+    data = []
+    for grant in Grants.objects(__raw__={query: True for query in q}).skip((page - 1) * page_size).limit(page_size):
+        item = {
+            "id": str(grant._id),
+            "url": grant.url,
+            "title": grant.title,
+            "text": grant.text,
+            "contacts": grant.contacts,
+            "itemType": grant.itemType,
+            "modified": grant.modified,
+            "publication_date": grant.publication_date.strftime("%d.%m.%Y"),
+            "flags": {
+                "important": grant.flags['important'],
                 "displayed": grant.flags['displayed'],
                 "skipped": grant.flags['skipped'],
                 "done": grant.flags['done']
             }
         }
-        if item['contacts']=="":
-            item['contacts']="N/A"
+        if item['contacts'] == "":
+            item['contacts'] = "N/A"
         data.append(item)
 
     return Response(dumps({
-        "Count": Grants.objects(__raw__={"flags."+query:True for query in q}).count(),
+        "Count": Grants.objects(__raw__={"flags." + query: True for query in q}).count(),
         "Data": data
     }, indent=2, ensure_ascii=False), mimetype='application/json')
 
