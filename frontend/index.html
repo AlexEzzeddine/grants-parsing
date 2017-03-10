@@ -30,7 +30,7 @@
 
     $(document).ready(function () {
         $("#jqGrid").jqGrid({
-            url: 'http://lowcost-env.mri5njt8g2.us-west-2.elasticbeanstalk.com/grants?page=1&page_size=100',
+            url: 'http://lowcost-env.mri5njt8g2.us-west-2.elasticbeanstalk.com/grants',
             datatype: "json",
             jsonReader: {root: "Data"},
             colModel: [
@@ -48,10 +48,13 @@
             autowidth: true,
             rowheight: 20,
             rowNum: 16,
+            loadonce: true,
+            datatype: "json",
             caption: "<div class='button_container'><div class='add_record_button'>" +
             " + ADD NEW RECORD</div><div class='add_record_button'> FILTER</div></div>",
             pager: "#jqGridPager"
         });
+        jQuery("#jqGrid").setGridParam({rowNum: 16}).trigger("reloadGrid");
     });
 
 
