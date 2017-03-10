@@ -87,7 +87,7 @@ gulp.task('data-saver', function () {
 
 gulp.task('img-saver', function () {
     gulp.src('src/images/*.*')
-        .pipe(gulp.dest('dist/images'))
+        .pipe(gulp.dest('dist/styles/images'))
         .pipe(livereload());
 });
 
