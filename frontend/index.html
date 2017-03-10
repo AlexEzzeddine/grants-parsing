@@ -20,8 +20,11 @@
 </head>
 <body>
 <h1><i class="fa fa-database" aria-hidden="true"></i> SpiderBoard</h1>
-<table id="jqGrid"></table>
-<div id="jqGridPager"></div>
+<div class="wrapper">
+    <table id="jqGrid"></table>
+    <div id="jqGridPager"></div>    
+</div>
+
 <script type="text/javascript">
     $(document).ready(function () {
         $("#jqGrid").jqGrid({
@@ -29,17 +32,18 @@
             datatype: "json",
             jsonReader: {root: "Data"},
             colModel: [
-                {label: 'Date', name: '', width: 75},
-                {label: 'Type', name: 'itemType', width: 60, formatter: typeStyles},
-                {label: 'Source', name: 'url', formatter: 'link', width: 210},
-                {label: 'Title', name: 'title', width: 200, formatter: titleStyles},
-                {label: 'Content preview', name: 'text', width: 580, formatter: prewievStyles},
-                {label: 'Contacts', name: 'contacts', width: 280, formatter: contactsStyles},
-                {label: 'Actions', width: 430, sortable: false, formatter: actionsButtons}
+                {label: 'Date', name: '', width: 75, sortable: false},
+                {label: 'Type', name: 'itemType', width: 60, formatter: typeStyles, sortable: false},
+                {label: 'Source', name: 'url', formatter: 'link', width: 210, sortable: false},
+                {label: 'Title', name: 'title', width: 200, formatter: titleStyles, sortable: false},
+                {label: 'Content preview', name: 'text', width: 580, formatter: prewievStyles, sortable: false},
+                {label: 'Contacts', name: 'contacts', width: 280, formatter: contactsStyles, sortable: false},
+                {label: 'Actions', width: 350, sortable: false, formatter: actionsButtons, sortable: false}
             ],
             viewrecords: true, // show the current page, data rang and total records on the toolbar
-            width: 1900,
+            // width: 1900,
             height: 750,
+            autowidth: true,
             rowheight: 20,
             rowNum: 12,
             loadonce: false, // this is just for the demo
@@ -49,7 +53,7 @@
         });
     });
     function typeStyles(v) {
-        return '<div style="height: 50px; margin: 5px; font-size: 14px; display:flex; align-items: center; justify-content: center">' + v + '</div>';
+        return '<div style="height: 35px; margin: 5px; font-size: 14px; display:flex; align-items: center; justify-content: center">' + v + '</div>';
     }
 
     function titleStyles(v) {

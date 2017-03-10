@@ -207,12 +207,12 @@
 
 .ui-widget input, .ui-widget select, .ui-widget textarea, .ui-widget button {
   font-family: Arial, sans-serif;
-  font-size: 14px;
+  font-size: 10px;
   margin: 2px;
   background-color: #fafafa;
   padding-left: 15px;
   padding-right: 15px;
-  height: 36px;
+  line-height: 22px;
   border: none;
   border-radius: 3px;
   text-decoration: none;
@@ -220,6 +220,7 @@
   box-shadow: -1px 2px 3px rgba(163, 163, 163, 0.5);
   color: #1e1e1e;
   transition: all 0.5s;
+
   i {
     padding-right: 5px;
   }
