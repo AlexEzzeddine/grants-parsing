@@ -16,25 +16,15 @@
     <link rel="stylesheet" href="styles/table_styles.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
     <meta charset="UTF-8">
-    <title>jQuery Grid Plugin – jqGrid</title>
+    <title> SpiderBoard</title>
 </head>
-
-
 <body>
-<br><br><br><br>
-<h1>SpiderBoard</h1>
+<h1><i class="fa fa-database" aria-hidden="true"></i> SpiderBoard</h1>
 <table id="jqGrid"></table>
 <div id="jqGridPager"></div>
 <script type="text/javascript">
-
-
-
     $(document).ready(function () {
-
-
         $("#jqGrid").jqGrid({
-
-
             url: 'http://lowcost-env.mri5njt8g2.us-west-2.elasticbeanstalk.com/grants?page=1&page_size=100',
             datatype: "json",
             jsonReader: {root: "Data"},
@@ -48,7 +38,6 @@
                 {label: 'Actions', width: 450, sortable: false, formatter: actionsButtons}
             ],
             viewrecords: true, // show the current page, data rang and total records on the toolbar
-
             shrinkToFit: false,
             height: 500,
             rowheight: 20,
@@ -86,9 +75,6 @@
     function doneItem() {
 
     }
-
 </script>
-
-
 </body>
 </html>
