@@ -42,7 +42,7 @@
             colModel: [
                 {label: 'Date', name: '', width: 75, sortable: false},
                 {label: 'Type', name: 'itemType', width: 60, formatter: typeStyles, sortable: false},
-                {label: 'Source', name: 'url', formatter: 'link', width: 210, sortable: false},
+                {label: 'Source', name: 'url', formatter: linkStyles, width: 210, sortable: false},
                 {label: 'Title', name: 'title', width: 200, formatter: titleStyles, sortable: false},
                 {label: 'Content preview', name: 'text', width: 580, formatter: prewievStyles, sortable: false},
                 {label: 'Contacts', name: 'contacts', width: 280, formatter: contactsStyles, sortable: false},
@@ -66,17 +66,22 @@
 
 
     function typeStyles(v) {
-        return '<div style="height: 35px; margin: 5px; font-size: 14px; display:flex; align-items: center; justify-content: center">' + v + '</div>';
+        return '<div style="height: 35px; margin: 5px; font-size: 12px; display:flex; align-items: center; justify-content: center">' + v + '</div>';
     }
 
     function titleStyles(v) {
-        return '<div style="height: 35px; margin: 5px; font-size: 12px; overflow: hidden; color: #bd3838;">' + v + '</div>';
+        return '<div style="height: 35px; margin: 5px; font-size: 12px; overflow: hidden; color: #000;">' + v + '</div>';
     }
+
+    function linkStyles(v) {
+        return '<a target="_blank" style="color: #3f51b5; font-size: 12px;" href="' +v+ '"+><i class="fa fa-external-link" aria-hidden="true"></i>'+' '+v+'</a>';
+    }
+
     function prewievStyles(v) {
-        return '<div style="height: 20px; font-size: 12px; color: #bd3838; width: 590px; padding: 5px; overflow: hidden; white-space: nowrap; text-overflow: ellipsis">' + v + '</div>';
+        return '<div style="height: 20px; font-size: 12px; color: #000; width: 590px; padding: 5px; overflow: hidden; white-space: nowrap; text-overflow: ellipsis">' + v + '</div>';
     }
     function contactsStyles(v) {
-        return '<div style="display: flex; font-size: 14px; flex-wrap: wrap; width: 280px; padding: 5px; height: 45px; overflow: hidden">' + v + '</p></div>';
+        return '<div style="display: flex; font-style: italic; font-size: 12px; width: 280px; padding: 5px; height: 45px; overflow: hidden"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>'+ v + '</p></div>';
     }
 
     function actionsButtons() {
