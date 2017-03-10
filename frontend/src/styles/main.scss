@@ -30,9 +30,14 @@ h1 {
 			color: #000;
 		}
 
-		td {
-			a {
-				margin: 0 5px;
+		tr.jqgrow {
+			&:nth-child(odd) {
+				background-color: #ebebeb;
+			}
+			td {
+				a {
+					margin: 0 5px;
+				}
 			}
 		}
 	}
