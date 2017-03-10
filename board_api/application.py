@@ -21,11 +21,11 @@ class Grants(DynamicDocument):
     contacts = StringField(required=False)
     itemType = StringField(required=False)
     modified = BooleanField(required=False)
-    flags = DynamicField(required=False, default= {
-        "important" : False,
-        "displayed" : False,
-        "skipped" : False,
-        "done" : False
+    flags = DynamicField(required=False, default={
+        "important": False,
+        "displayed": False,
+        "skipped": False,
+        "done": False
     })
 
     meta = {'strict': False}
@@ -48,15 +48,17 @@ def get_all():
             ]
     }, indent=2, ensure_ascii=False), mimetype='application/json')
 
+
 @application.route('/changestatus')
 def change_status():
     id = request.args.get('id')
     status_name = request.args.get('status_name')
     value = bool(request.args.get('value'))
-    doc=Grants.objects(_id=id).first()
-    doc.flags[status_name]=value
+    doc = Grants.objects(_id=id).first()
+    doc.flags[status_name] = value
     doc.save()
     return dumps(doc.flags)
+
 
 # run the app.
 if __name__ == "__main__":
