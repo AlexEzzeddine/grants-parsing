@@ -26,9 +26,8 @@ class GurtSpider(scrapy.Spider):
     def getDetails(self,response):
         item=GrantItem()
         item['url']=response.url
-        item['title']=response.css(".news h2 *::text").extract_first()
+        item['title']="".join(response.css(".news>h2:first-of-type *::text").extract())
         item['text']=''.join(response.css(".newstxt2 *::text").extract())
         item['contacts']=' '.join(response.css(".contline+ul li *::text").extract())
-        item['publication_date']=datetime.datetime.now()
         item['itemType']="Grant"
         yield item
