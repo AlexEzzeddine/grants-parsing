@@ -33,7 +33,7 @@ class Grants(DynamicDocument):
 
 @application.route('/')
 def hello_world():
-    return 'Hello 1!'
+    return 'SpiderBoard v0.01 Alpha.'
 
 
 @application.route('/grants')
