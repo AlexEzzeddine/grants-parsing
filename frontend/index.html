@@ -26,6 +26,8 @@
 </div>
 
 <script type="text/javascript">
+
+
     $(document).ready(function () {
         $("#jqGrid").jqGrid({
             url: 'http://lowcost-env.mri5njt8g2.us-west-2.elasticbeanstalk.com/grants?page=1&page_size=100',
@@ -46,12 +48,13 @@
             autowidth: true,
             rowheight: 20,
             rowNum: 12,
-            loadonce: false, // this is just for the demo
             caption: "<div class='button_container'><div class='add_record_button'>" +
             " + ADD NEW RECORD</div><div class='add_record_button'> FILTER</div></div>",
             pager: "#jqGridPager"
         });
     });
+
+
     function typeStyles(v) {
         return '<div style="height: 35px; margin: 5px; font-size: 14px; display:flex; align-items: center; justify-content: center">' + v + '</div>';
     }

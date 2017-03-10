@@ -14,3 +14,13 @@ body {
 
 h1 {
   color: #007fff; }
+
+.wrapper {
+    position: relative;
+    width: 100%;
+}
+
+.wrapper .ui-jqgrid .ui-jqgrid-htable th {
+    font-size: 13px;
+    color: #000;
+}
