@@ -317,7 +317,6 @@ div.tablediv > .table-bordered {
 .ui-jqgrid .ui-jqgrid-pager,
 .ui-jqgrid .ui-jqgrid-toppager {
     border-left-width: 0px;
-    border-top: 1px solid #ddd;
     /*padding : 4px 0px;*/
     position: relative;
     /*height: auto; */
@@ -326,7 +325,7 @@ div.tablediv > .table-bordered {
 }
 
 .ui-jqgrid .ui-jqgrid-toppager {
-    border-top-width: 0;
+
     border-bottom: 1px solid #ddd;
 }
 
@@ -353,7 +352,7 @@ div.tablediv > .table-bordered {
 }
 
 .ui-jqgrid .ui-pager-control .ui-pager-table td {
-    border-top: 0px none !important;
+
     min-height: 20px !important;
 }
 
@@ -410,7 +409,7 @@ div.tablediv > .table-bordered {
 .ui-separator-li {
     height: 2px;
     border: none;
-    border-top: 2px solid #ccc; /*default*/
+    border-top: 1px solid #ccc; /*default*/
     margin: 0;
     padding: 0;
     width: 100%

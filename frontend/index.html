@@ -31,7 +31,7 @@
             colModel: [
                 {label: 'Date', name: '', width: 75},
                 {label: 'Type', name: 'itemType', width: 60, formatter: typeStyles},
-                {label: 'Source', name: 'url', formatter: 'link', width: 210, formatter: sourceStyles},
+                {label: 'Source', name: 'url', formatter: 'link', width: 210},
                 {label: 'Title', name: 'title', width: 200, formatter: titleStyles},
                 {label: 'Content preview', name: 'text', width: 580, formatter: prewievStyles},
                 {label: 'Contacts', name: 'contacts', width: 280, formatter: contactsStyles},
@@ -41,19 +41,17 @@
             width: 1900,
             height: 750,
             rowheight: 20,
-            rowNum: 20,
-            loadonce: true, // this is just for the demo
+            rowNum: 12,
+            loadonce: false, // this is just for the demo
             caption: "<div class='button_container'><div class='add_record_button'>" +
             " + ADD NEW RECORD</div><div class='add_record_button'> FILTER</div></div>",
             pager: "#jqGridPager"
         });
     });
     function typeStyles(v) {
-        return '<div style="height: 50px; margin: 5px; font-size: 14px; display:flex; justify-content: center">' + v + '</div>';
+        return '<div style="height: 50px; margin: 5px; font-size: 14px; display:flex; align-items: center; justify-content: center">' + v + '</div>';
     }
-    function sourceStyles(v) {
-        return '<div style=" margin: 5px; font-size: 12px">' + v + '</div>';
-    }
+
     function titleStyles(v) {
         return '<div style="height: 35px; margin: 5px; font-size: 12px; overflow: hidden;">' + v + '</div>';
     }
@@ -61,7 +59,7 @@
         return '<div style="height: 20px; font-size: 12px; width: 590px; padding: 5px; overflow: hidden; white-space: nowrap; text-overflow: ellipsis">' + v + '</div>';
     }
     function contactsStyles(v) {
-        return '<div style="display: flex; flex-wrap: wrap; width: 280px; padding: 5px; height: 45px; overflow: hidden">' + v + '</p></div>';
+        return '<div style="display: flex; font-size: 14px; flex-wrap: wrap; width: 280px; padding: 5px; height: 45px; overflow: hidden">' + v + '</p></div>';
     }
 
     function actionsButtons() {

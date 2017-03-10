@@ -162,7 +162,7 @@
   text-decoration: none;
   display: inline-block;
   box-shadow: -1px 2px 3px rgba(163, 163, 163, 0.5);
-  color: #794f4f;
+  color: #1e1e1e;
   transition: all 0.5s; }
   .ui-widget input i, .ui-widget select i, .ui-widget textarea i, .ui-widget button i {
     padding-right: 5px; }
@@ -173,15 +173,11 @@
   transition: all 0.5s; }
 
 .ui-widget-content {
-  font-size: 14px;
-  border: 0;
+  font-size: 12px;
   background-color: white;
-  color: #7e959b;
+  color: #000000;
   border: solid 1px #e6e6e6;
   transition: all 0.3s; }
-
-.ui-widget-content a {
-  color: #7e959b; }
 
 .ui-widget-header {
   height: 50px;
@@ -210,30 +206,31 @@
 /* Interaction states
 ----------------------------------*/
 .ui-state-default, .ui-widget-content .ui-state-default, .ui-state-default {
-  border: 1px solid #934245;
+  border: solid 1px #e6e6e6;
   background: #223775;
   font-weight: normal;
   color: #ffffff; }
 
 .ui-widget-content .ui-state-default {
   border: solid 1px #e6e6e6;
-  background-color: #fafafa;
-  color: #e6e6e6;
+  border-radius: 0;
+  background-color: #ebebeb;
+  color: #9b9b9b;
   transition: all 0.3s; }
 
 .ui-state-default a, .ui-state-default a:link, .ui-state-default a:visited {
   color: #ffffff;
   text-decoration: none; }
 
-.ui-state-hover, .ui-widget-content .ui-state-hover, .ui-widget-header .ui-state-hover, .ui-state-focus, .ui-widget-content .ui-state-focus, .ui-widget-header .ui-state-focus {
+.ui-state-hover, .ui-state-hover, .ui-widget-header .ui-state-hover, .ui-state-focus, .ui-widget-content .ui-state-focus, .ui-widget-header .ui-state-focus {
   background-color: #e6e6e6;
   color: #7e959b;
   transition: all 0.3s; }
-  .ui-state-hover a, .ui-widget-content .ui-state-hover a, .ui-widget-header .ui-state-hover a, .ui-state-focus a, .ui-widget-content .ui-state-focus a, .ui-widget-header .ui-state-focus a {
-    color: #7e959b; }
+  .ui-state-hover a, .ui-state-hover a, .ui-widget-header .ui-state-hover a, .ui-state-focus a, .ui-widget-content .ui-state-focus a, .ui-widget-header .ui-state-focus a {
+    color: #000000; }
 
 .ui-state-hover a, .ui-state-hover a:hover {
-  color: #7e959b;
+  color: #000000;
   text-decoration: none; }
 
 .ui-state-active, .ui-widget-content .ui-state-active, .ui-widget-header .ui-state-active {
@@ -250,15 +247,15 @@
   outline: none; }
 
 .ui-state-highlight, .ui-widget-content .ui-state-highlight, .ui-widget-header .ui-state-highlight {
-  background-color: #e6e6e6;
-  border: solid 1px #bedae0;
+  background-color: #ebebeb;
+  border: solid 1px #e6e6e6;
   transition: all 0.3s;
-  color: #617177; }
+  color: #000000; }
   .ui-state-highlight a, .ui-widget-content .ui-state-highlight a, .ui-widget-header .ui-state-highlight a {
-    color: #7e959b; }
+    color: #000000; }
 
 .ui-state-highlight a, .ui-widget-content .ui-state-highlight a, .ui-widget-header .ui-state-highlight a {
-  color: #617177; }
+  color: #000000; }
 
 .ui-state-error, .ui-widget-content .ui-state-error, .ui-widget-header .ui-state-error {
   border: solid 1px #e6e6e6;

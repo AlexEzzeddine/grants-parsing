@@ -777,7 +777,6 @@ button.ui-button::-moz-focus-inner {
 .ui-selectable-helper {
     position: absolute;
     z-index: 100;
-    border: 1px dotted black;
 }
 
 .ui-selectmenu-menu {
@@ -1149,8 +1148,9 @@ a.ui-button:active,
 .ui-state-highlight,
 .ui-widget-content .ui-state-highlight,
 .ui-widget-header .ui-state-highlight {
-    border: 1px solid #dad55e;
+    border: 1px solid #9b9b9b;
     background: #fffa90;
+    border-bottom: 0;
     color: #777620;
 }
 
