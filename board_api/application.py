@@ -55,7 +55,7 @@ def get_all():
             "contacts":grant.contacts,
             "itemType":grant.itemType,
             "modified":grant.modified,
-            "publication_date":str(grant.publication_date),
+            "publication_date":grant.publication_date.strftime("%d.%m.%Y"),
             "flags":{
                 "important" : grant.flags['important'],
                 "displayed": grant.flags['displayed'],
@@ -63,6 +63,8 @@ def get_all():
                 "done": grant.flags['done']
             }
         }
+        if item['contacts']=="":
+            item['contacts']="N/A"
         data.append(item)
 
     return Response(dumps({
