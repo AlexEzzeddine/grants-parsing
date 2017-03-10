@@ -35,8 +35,8 @@
             datatype: "json",
             jsonReader: {
                 root: "Data",
-                page:  function(obj) { console.error("!!!", obj); return 1; },
-                total: function(obj) { return 2; },
+                //page:  function(obj) { console.error("!!!", obj); return 1; },
+                total: function(obj) { return obj.Count / 20; },
                 records: function(obj) { return obj.Count; },
             },
             colModel: [
