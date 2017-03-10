@@ -40,7 +40,7 @@
                 records: function(obj) { return obj.Count; },
             },
             colModel: [
-                {label: 'Date', name: '', width: 75, sortable: false},
+                {label: 'Date', name: '', width: 75, formatter: dateStyles, sortable: false},
                 {label: 'Type', name: 'itemType', width: 60, formatter: typeStyles, sortable: false},
                 {label: 'Source', name: 'url', formatter: linkStyles, width: 210, sortable: false},
                 {label: 'Title', name: 'title', width: 200, formatter: titleStyles, sortable: false},
@@ -64,6 +64,10 @@
         //jQuery("#jqGrid").setGridParam({rowNum: 16}).trigger("reloadGrid");
     });
 
+    function dateStyles(v) {
+        return '<div style="height: 35px; margin: 5px; font-size: 12px; display:flex; align-items: center; justify-content: center">' +
+         '<i class="fa fa-calendar-check-o" style="color: #1756ef;" aria-hidden="true"></i>12.12.2012' + '</div>';
+    }
 
     function typeStyles(v) {
         return '<div style="height: 35px; margin: 5px; font-size: 12px; display:flex; align-items: center; justify-content: center">' + v + '</div>';
@@ -82,7 +86,7 @@
     }
     function contactsStyles(v) {
         return '<div style="display: flex; font-style: italic; font-size: 12px; width: 280px; padding: 5px; height: 45px; overflow: hidden">'+
-        '<i class="fa fa-pencil-square-o" aria-hidden="true"></i>'+ v + '</p></div>';
+        '<i class="fa fa-pencil-square-o" style="color: #227b19;" aria-hidden="true"></i>'+ v + '</p></div>';
     }
 
     function actionsButtons() {
