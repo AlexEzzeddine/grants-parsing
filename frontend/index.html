@@ -44,7 +44,6 @@
                 {label: 'Date', name: 'publication_date', width: 75, formatter: dateStyles, sortable: false},
                 {label: 'Type', name: 'itemType', width: 60, formatter: typeStyles, sortable: false},
                 {label: 'Source', name: 'url', formatter: linkStyles, width: 210, sortable: false},
-                {label: 'Title', name: 'title', width: 200, formatter: titleStyles, sortable: false},
                 {label: 'Content preview', name: 'text', width: 580, formatter: prewievStyles, sortable: false},
                 {label: 'Contacts', name: 'contacts', width: 280, formatter: contactsStyles, sortable: false},
                 {label: 'Actions', width: 350, sortable: false, formatter: actionsButtons, sortable: false}
@@ -65,7 +64,7 @@
         });
     });
 
-    function statusStyles(v) {
+    function statusStyles(cellValue, options, rowObject) {
         return '<div style="height: 35px; margin: 5px; font-size: 12px; display:flex; align-items: center; justify-content: center"><i class="fa fa-envelope-o" aria-hidden="true"></i></div>';
     }
     function dateStyles(v) {
@@ -80,8 +79,8 @@
         return '<div style="height: 35px; margin: 5px; font-size: 12px; overflow: hidden; color: #000;">' + v + '</div>';
     }
 
-    function linkStyles(v) {
-        return '<a target="_blank" style="color: #3f51b5; font-size: 12px;" href="' +v+ '"+>'+v+'</a>';
+    function linkStyles(cellValue, options, rowObject) {
+        return '<a target="_blank" style="color: #3f51b5; font-size: 12px;" href="' + cellValue + '"+>'+ rowObject.title +'</a>';
     }
 
     function prewievStyles(v) {
