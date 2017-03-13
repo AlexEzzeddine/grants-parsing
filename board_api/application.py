@@ -54,12 +54,11 @@ def get_all():
     })
 
 
-@application.route('/changestatus')
-def change_status():
-    _id = request.args.get('id')
-    status_name = request.args.get('status_name')
-    value = request.args.get('value') == "true"
-    doc = Grants.objects(_id=_id).first()
+@application.route('/status/<grant_id>', methods=["POST"])
+def change_status(grant_id):
+    status_name = request.form.get('status_name')
+    value = request.form.get('value') == "true"
+    doc = Grants.objects(_id=grant_id).first()
     doc.flags[status_name] = value
     doc.save()
     return jsonify(doc.flags)
