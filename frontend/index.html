@@ -30,7 +30,7 @@
 
     $(document).ready(function () {
         var grid = $("#jqGrid"),
-            categoriesStr = "0:All;1:Test1;2:Test2";
+            categoriesStr = ":All;Grant:Grant;Conference:Сonference; ****:****;***:***";
 
         grid.jqGrid({
             url: 'http://lowcost-env.mri5njt8g2.us-west-2.elasticbeanstalk.com/grants?page_size=20',
@@ -41,11 +41,27 @@
                 //page:  function(obj) { console.error("!!!", obj); return 1; },
                 total: function(obj) { return obj.Count / 20; },
                 records: function(obj) { return obj.Count; },
+
             },
             colModel: [
                 {label: 'Status', name: '', width: 50, formatter: statusStyles, sortable: false, search:false},
-                {label: 'Date', name: 'publication_date', width: 75, formatter: dateStyles, sortable: false, search:false},
-                {label: 'Type', name: 'itemType', width: 100, formatter: typeStyles, sortable: false, stype: 'select', searchoptions:{ sopt:['eq'], value: categoriesStr }},
+                {
+                    label: 'Date',
+                    name: 'publication_date',
+                    width: 75,
+                    formatter: dateStyles,
+                    sortable: false,
+                    search: false
+                },
+                {
+                    label: 'Type',
+                    name: 'itemType',
+                    width: 100,
+                    formatter: typeStyles,
+                    sortable: false,
+                    stype: 'select',
+                    searchoptions: {value: categoriesStr}
+                },
                 {label: 'Source', name: 'url', formatter: linkStyles, width: 210, sortable: false, search:false},
                 {label: 'Content preview', name: 'text', width: 520, formatter: prewievStyles, sortable: false, search:false},
                 {label: 'Contacts', name: 'contacts', width: 280, formatter: contactsStyles, sortable: false, search:false},
@@ -53,6 +69,7 @@
             ],
             viewrecords: true, // show the current page, data rang and total records on the toolbar
             height: 750,
+            loadonce: true,
             autowidth: true,
             rowheight: 20,
             page: 1,
@@ -68,10 +85,8 @@
             pager: "#jqGridPager"
         });
         grid.jqGrid('filterToolbar', {
-            autosearch: false,
-            beforeSearch: function(){
-                alert('before search action');
-            }
+            autosearch: true,
+            stringResult: true
         });
         grid.jqGrid('navGrid','#pager',{edit:false, add:false, del:false, search:false, cloneToTop:true});
         grid.jqGrid('navButtonAdd', '#' + grid[0].id + '_toppager_left', {
