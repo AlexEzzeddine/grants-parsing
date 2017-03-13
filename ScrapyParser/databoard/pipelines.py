@@ -3,10 +3,19 @@ import pymongo
 from scrapy.conf import settings
 from scrapy.exceptions import DropItem
 from scrapy import log
+from databoard.items import Flags
 import datetime
 
 
 class MongoDBPipeline(object):
+
+    flags={
+        "important" : False, 
+        "displayed" : False,
+        "skipped" : False, 
+        "done" : False, 
+        "modified" : False,
+    }
 
     def __init__(self):
         connection = pymongo.MongoClient(
@@ -22,15 +31,18 @@ class MongoDBPipeline(object):
                 valid = False
                 raise DropItem("Missing {0}!".format(data))
         if valid:
-            document=self.collection.find_one({"url":item['url']},{"_id":0,"modified":0,"publication_date":0, "important":0, "displayed":0, "skipped":0, "done":0})
+            if item['contacts']=="":
+                item['contacts']="N/A"
+            document=self.collection.find_one({"url":item['url']},{"_id":0,"flags":0,"publication_date":0})
             if not document:
                 spider.logger.info("Inserting new document")
-                item['modified']=False
+                item['flags']=self.flags
                 item['publication_date']=datetime.datetime.now()
                 self.collection.insert(dict(item))
             elif document!=item:
                 spider.logger.info("Updating old document")
-                item['modified']=True
+                item['flags']=self.flags
+                item['flags']['modified']=True
                 item['publication_date']=datetime.datetime.now()
                 self.collection.update({"url":item['url']},dict(item))
             else:

@@ -1,7 +1,9 @@
-from bson.json_util import dumps
+from bson import ObjectId
+from datetime import datetime
+from flask import json
 from flask import Flask
-from flask import Response
 from flask import request
+from flask import jsonify
 from flask_cors import CORS
 from mongoengine import *
 
@@ -13,21 +15,24 @@ connect('databoard', host='ec2-54-237-130-222.compute-1.amazonaws.com', port=270
         password="test12345", authentication_source="admin")
 
 
+class MyJSONEncoder(json.JSONEncoder):
+    def default(self, o):
+        if isinstance(o, datetime):
+            return o.strftime("%d.%m.%Y")
+        if isinstance(o, ObjectId):
+            return str(o)
+        return json.JSONEncoder.default(self, o)
+
+
 class Grants(DynamicDocument):
-    _id = ObjectIdField(required=False)
-    url = StringField(required=False)
-    title = StringField(required=False)
-    text = StringField(required=False)
-    contacts = StringField(required=False, default="N/A")
-    itemType = StringField(required=False)
-    modified = BooleanField(required=False)
-    publication_date = DateTimeField(required=False)
-    flags = DynamicField(required=False, default={
-        "important": False,
-        "displayed": False,
-        "skipped": False,
-        "done": False
-    })
+    _id = ObjectIdField()
+    url = StringField()
+    title = StringField()
+    text = StringField()
+    contacts = StringField()
+    itemType = StringField()
+    publication_date = DateTimeField()
+    flags = DictField()
 
     meta = {'strict': False}
 
@@ -39,50 +44,25 @@ def hello_world():
 
 @application.route('/grants')
 def get_all():
-    q = request.args.get('q', "").split(',')
-    page = int(request.args.get('page'))
-    page_size = int(request.args.get('page_size'))
-    important = bool(request.args.get("important", None))
-    displayed = bool(request.args.get("displayed", None))
-    skipped = bool(request.args.get("skipped", None))
-    done = bool(request.args.get("done", None))
-    data = []
-    for grant in Grants.objects(__raw__={query: True for query in q}).skip((page - 1) * page_size).limit(page_size):
-        item = {
-            "id": str(grant._id),
-            "url": grant.url,
-            "title": grant.title,
-            "text": grant.text,
-            "contacts": grant.contacts,
-            "itemType": grant.itemType,
-            "modified": grant.modified,
-            "publication_date": grant.publication_date.strftime("%d.%m.%Y"),
-            "flags": {
-                "important": grant.flags['important'],
-                "displayed": grant.flags['displayed'],
-                "skipped": grant.flags['skipped'],
-                "done": grant.flags['done']
-            }
-        }
-        if item['contacts'] == "":
-            item['contacts'] = "N/A"
-        data.append(item)
-
-    return Response(dumps({
-        "Count": Grants.objects(__raw__={"flags." + query: True for query in q}).count(),
-        "Data": data
-    }, indent=2, ensure_ascii=False), mimetype='application/json')
+    filters = {"flags." + flag: True for flag in filter(None, request.args.get('q', "").split(','))}
+    page = int(request.args.get('page', 1))
+    page_size = int(request.args.get('page_size', 10))
+    data = Grants.objects(__raw__=filters).skip((page - 1) * page_size).limit(page_size)
+    return jsonify({
+        "Count": Grants.objects(__raw__=filters).count(),
+        "Data": [o.to_mongo() for o in data]
+    })
 
 
 @application.route('/changestatus')
 def change_status():
-    id = request.args.get('id')
+    _id = request.args.get('id')
     status_name = request.args.get('status_name')
-    value = bool(request.args.get('value'))
-    doc = Grants.objects(_id=id).first()
+    value = request.args.get('value') == "true"
+    doc = Grants.objects(_id=_id).first()
     doc.flags[status_name] = value
     doc.save()
-    return dumps(doc.flags)
+    return jsonify(doc.flags)
 
 
 # run the app.
@@ -90,4 +70,6 @@ if __name__ == "__main__":
     # Setting debug to True enables debug output. This line should be
     # removed before deploying a production app.
     application.debug = True
+    application.json_encoder = MyJSONEncoder
+    application.config['JSON_AS_ASCII'] = False
     application.run()
