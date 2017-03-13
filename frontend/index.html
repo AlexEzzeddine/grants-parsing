@@ -69,6 +69,7 @@
             ],
             viewrecords: true, // show the current page, data rang and total records on the toolbar
             height: 750,
+            hidegrid: false,
             loadonce: true,
             autowidth: true,
             rowheight: 20,
@@ -110,10 +111,6 @@
         return '<div style="height: 35px; margin: 5px; font-size: 12px; display:flex; align-items: center; justify-content: center">' + v + '</div>';
     }
 
-    function titleStyles(v) {
-        return '<div style="height: 35px; margin: 5px; font-size: 12px; overflow: hidden; color: #000;">' + v + '</div>';
-    }
-
     function linkStyles(cellValue, options, rowObject) {
         return '<a target="_blank" style="color: #3f51b5; font-size: 12px;" href="' + cellValue + '"+>'+ rowObject.title +'</a>';
     }
@@ -125,16 +122,16 @@
         return '<div style="display: flex; font-style: italic; font-size: 12px; width: 280px; padding: 5px; height: 45px; overflow: hidden">'+ v + '</p></div>';
     }
 
-    function actionsButtons() {
+    function actionsButtons(cellValue, options, rowObject) {
         return "<button onclick='displayItem()'><i class='fa fa-desktop fa-lg' aria-hidden='true' style='color:blue;'></i>DISPLAY</button>" +
             "<button onclick='skipItem()'><i class='fa fa-ban fa-lg' aria-hidden='true' style='color:red;'></i>SKIP</button>" +
             "<button onclick='importantItem()'><i class='fa fa-exclamation-circle fa-lg' aria-hidden='true' style='color:orange;'></i>IMPORTANT</button>" +
             "<button onclick='doneItem()'><i class='fa fa-check-circle-o fa-lg' aria-hidden='true' style='color:green;'></i>DONE</button>";
     }
-
-
     function displayItem() {
         document.getElementById('myModal').style.display = "flex";
+
+
     }
     function skipItem() {
     }
@@ -150,6 +147,8 @@
     <div class="modal-content">
         <span class="close">&times;</span>
         <p>Some text in the Modal..</p>
+        <script></script>
+
     </div>
 </div>
 <script>
