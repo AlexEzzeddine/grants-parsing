@@ -1,8 +1,8 @@
 $(document).ready(function () {
     var grid = $("#jqGrid"),
         categoriesStr = ":All;Grant:Grant;Conference:Сonference; ****:****;***:***",
-        host = 'http://lowcost-env.mri5njt8g2.us-west-2.elasticbeanstalk.com/grants?page_size=20';
-        //host = 'http://127.0.0.1:5000/grants?page_size=20';
+        //host = 'http://lowcost-env.mri5njt8g2.us-west-2.elasticbeanstalk.com/grants?page_size=20';
+        host = 'http://127.0.0.1:5000/grants?page_size=20';
 
     grid.jqGrid({
         url: host,
@@ -17,7 +17,6 @@ $(document).ready(function () {
             records: function (obj) {
                 return obj.Count;
             },
-
         },
         colModel: [
             {label: 'Status', name: '', width: 50, formatter: statusStyles, sortable: false, search: false},
@@ -72,7 +71,8 @@ $(document).ready(function () {
         " + ADD NEW RECORD</div><div class='add_record_button'> FILTER</div></div>",
         caption: "<div class='button_container'><div class='add_record_button'><i class='fa fa-envelope-o' aria-hidden='true'></i>" +
         " UNREAD</div><div class='add_record_button'><i class='fa fa-exclamation-circle fa-lg' aria-hidden='true'></i>" +
-        " IMPORTANT</div><div class='add_record_button'><i class='fa fa-exclamation-circle fa-lg' aria-hidden='true'></i> SKIPPED</div><div class='add_record_button'><i class='fa fa-check-circle-o fa-lg' aria-hidden='true'></i> DONE</div></div>",
+        " IMPORTANT</div><div class='add_record_button'><i class='fa fa-exclamation-circle fa-lg' aria-hidden='true'></i>" +
+        "SKIPPED</div><div class='add_record_button'><i class='fa fa-check-circle-o fa-lg' aria-hidden='true'></i> DONE</div></div>",
         pager: "#jqGridPager"
     });
     grid.jqGrid('filterToolbar', {
@@ -91,25 +91,25 @@ $(document).ready(function () {
 });
 
 function statusStyles(cellValue, options, rowObject) {
-    return '<div style="height: 35px; margin: 5px; font-size: 12px; display:flex; align-items: center; justify-content: center"><i class="fa fa-envelope-o" aria-hidden="true"></i></div>';
+    return '<div class="statusStyles"><i class="fa fa-envelope-o" aria-hidden="true"></i></div>';
 }
 function dateStyles(v) {
-    return '<div style="height: 35px; margin: 5px; font-size: 12px; display:flex; align-items: center; justify-content: center">' + v + '</div>';
+    return '<div class=" dateStyles">' + v + '</div>';
 }
 
 function typeStyles(v) {
-    return '<div style="height: 35px; margin: 5px; font-size: 12px; display:flex; align-items: center; justify-content: center">' + v + '</div>';
+    return '<div class="typeStyles">' + v + '</div>';
 }
 
 function linkStyles(cellValue, options, rowObject) {
-    return '<a target="_blank" style="color: #3f51b5; font-size: 12px;" href="' + cellValue + '"+>' + rowObject.title + '</a>';
+    return '<a class="linkStyles" target="_blank" href="' + cellValue + '"+>' + rowObject.title + '</a>';
 }
 
 function prewievStyles(v) {
-    return '<div style="height: 20px; font-size: 12px; color: #000; width: 590px; padding: 5px; overflow: hidden; white-space: nowrap; text-overflow: ellipsis">' + v + '</div>';
+    return '<div class="prewievStyles">' + v + '</div>';
 }
 function contactsStyles(v) {
-    return '<div style="display: flex; font-style: italic; font-size: 12px; width: 280px; padding: 5px; height: 45px; overflow: hidden">' + v + '</p></div>';
+    return '<div class="contactsStyles">' + v + '</p></div>';
 }
 
 function actionsButtons(cellValue, options, rowObject) {
@@ -128,19 +128,17 @@ function displayItem(e) {
     document.getElementById('allertContacts').innerHTML = $(data.contacts).text();
     document.getElementById('myModal').style.display = "flex";
 }
+
 function skipItem() {
 }
 function importantItem() {
-
 }
 function doneItem() {
 }
 
-
 function closeAllert() {
     document.getElementById('myModal').style.display = "none";
 }
-
 window.onclick = function (event) {
     if (event.target == document.getElementById('myModal')) {
         document.getElementById('myModal').style.display = "none";

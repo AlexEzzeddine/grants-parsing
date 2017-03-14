@@ -281,6 +281,59 @@
   filter: Alpha(Opacity=35);
   background-image: none; }
 
+.statusStyles {
+    height: 35px;
+    margin: 5px;
+    font-size: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.dateStyles {
+    height: 35px;
+    margin: 5px;
+    font-size: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.typeStyles {
+    height: 35px;
+    margin: 5px;
+    font-size: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.linkStyles {
+    color: #3f51b5;
+    font-size: 12px;
+}
+
+.prewievStyles {
+    height: 20px;
+    font-size: 12px;
+    color: #000;
+    width: 590px;
+    padding: 5px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.contactsStyles {
+    display: flex;
+    font-style: italic;
+    font-size: 12px;
+    width: 280px;
+    padding: 5px;
+    height: 45px;
+    overflow: hidden;
+}
+
 .modal {
   display: none;
   /* Hidden by default */
