@@ -120,7 +120,7 @@ function actionsButtons(cellValue, options, rowObject) {
 function displayItem(e) {
     var id = $(e).attr('id'),
         data = $("#jqGrid").getRowData(id);
-    console.debug(data.text);
+    console.debug($(data.contacts).text());
     document.getElementById('allertDate').innerHTML = "Date: " + data.publication_date;
     document.getElementById('allertTitle').innerHTML = data.title;
     document.getElementById('allertContent').innerHTML = data.text;
