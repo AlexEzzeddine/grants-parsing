@@ -47,10 +47,15 @@ def hello_world():
 
 @application.route('/grants')
 def get_all():
-    filters = {
+    filters = {}
+    filters.update({
+        "domain": domain for domain in
+        filter(None, request.args.get('domains', "").split(','))
+    })
+    filters.update({
         "flags." + flag: True for flag in
-        filter(None, request.args.get('q', "").split(','))
-    }
+        filter(None, request.args.get('flags', "").split(','))
+    })
     page = int(request.args.get('page', 1))
     page_size = int(request.args.get('page_size', 10))
     data = Grants.objects(__raw__=filters).skip(
