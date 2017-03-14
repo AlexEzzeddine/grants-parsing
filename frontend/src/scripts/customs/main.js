@@ -2,6 +2,7 @@ $(document).ready(function () {
     var grid = $("#jqGrid"),
         categoriesStr = ":All;Grant:Grant;Conference:Сonference; ****:****;***:***",
         host = 'http://lowcost-env.mri5njt8g2.us-west-2.elasticbeanstalk.com/grants?page_size=20';
+        //host = 'http://127.0.0.1:5000/grants?page_size=20';
 
     grid.jqGrid({
         url: host,
@@ -30,7 +31,7 @@ $(document).ready(function () {
             },
             {
                 label: 'Type',
-                name: 'itemType',
+                name: 'domain',
                 width: 100,
                 formatter: typeStyles,
                 sortable: false,

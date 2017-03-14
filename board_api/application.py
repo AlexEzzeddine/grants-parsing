@@ -47,14 +47,15 @@ def hello_world():
 
 @application.route('/grants')
 def get_all():
+    domains = json.loads(request.args.get("domains", "[]"))
+    flags = json.loads(request.args.get("flags", "[]"))
     filters = {}
+    if domains:
+        filters.update({
+            "$or": [{"domain": domain} for domain in domains]
+        })
     filters.update({
-        "domain": domain for domain in
-        filter(None, request.args.get('domains', "").split(','))
-    })
-    filters.update({
-        "flags." + flag: True for flag in
-        filter(None, request.args.get('flags', "").split(','))
+        "flags." + flag: True for flag in flags
     })
     page = int(request.args.get('page', 1))
     page_size = int(request.args.get('page_size', 10))
