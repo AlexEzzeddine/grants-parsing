@@ -122,8 +122,9 @@ function displayItem(e) {
         data = $("#jqGrid").getRowData(id);
     console.debug(data.text);
     document.getElementById('allertDate').innerHTML = "Date: " + data.publication_date;
-    document.getElementById('allertTitle').innerHTML = data.text;
+    document.getElementById('allertTitle').innerHTML = data.title;
     document.getElementById('allertContent').innerHTML = data.text;
+    document.getElementById('allertContacts').innerHTML = data.contacts;
     document.getElementById('myModal').style.display = "flex";
 }
 function skipItem() {
