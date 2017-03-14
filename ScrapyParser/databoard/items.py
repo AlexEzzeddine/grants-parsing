@@ -13,7 +13,7 @@ class GrantItem(Item):
     title = Field()
     url = Field()
     text = Field()
-    itemType = Field()
+    domain = Field()
     contacts = Field()
     publication_date = Field()
     flags = Field()

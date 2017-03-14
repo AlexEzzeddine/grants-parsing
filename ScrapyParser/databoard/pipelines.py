@@ -2,18 +2,17 @@ import pymongo
 
 from scrapy.conf import settings
 from scrapy.exceptions import DropItem
-from scrapy import log
 import datetime
 
 
 class MongoDBPipeline(object):
 
-    flags={
-        "important" : False, 
-        "displayed" : False,
-        "skipped" : False, 
-        "done" : False, 
-        "modified" : False,
+    flags = {
+        "important": False,
+        "displayed": False,
+        "skipped": False,
+        "done": False,
+        "modified": False,
     }
 
     def __init__(self):
@@ -30,20 +29,23 @@ class MongoDBPipeline(object):
                 valid = False
                 raise DropItem("Missing {0}!".format(data))
         if valid:
-            if item['contacts']=="":
-                item['contacts']="N/A"
-            document=self.collection.find_one({"url":item['url']},{"_id":0,"flags":0,"publication_date":0})
+            if item['contacts'] == "":
+                item['contacts'] = "N/A"
+            document = self.collection.find_one({"url": item['url']},
+                                                {"_id": 0,
+                                                 "flags": 0,
+                                                 "publication_date": 0})
             if not document:
                 spider.logger.info("Inserting new document")
-                item['flags']=self.flags
-                item['publication_date']=datetime.datetime.now()
+                item['flags'] = self.flags
+                item['publication_date'] = datetime.datetime.now()
                 self.collection.insert(dict(item))
-            elif document!=item:
+            elif document != item:
                 spider.logger.info("Updating old document")
-                item['flags']=self.flags
-                item['flags']['modified']=True
-                item['publication_date']=datetime.datetime.now()
-                self.collection.update({"url":item['url']},dict(item))
+                item['flags'] = self.flags
+                item['flags']['modified'] = True
+                item['publication_date'] = datetime.datetime.now()
+                self.collection.update({"url": item['url']}, dict(item))
             else:
                 spider.logger.info("Found exact same document")
         return item
