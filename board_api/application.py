@@ -11,8 +11,12 @@ from mongoengine import *
 application = Flask(__name__)
 CORS(application)
 
-connect('databoard', host='ec2-54-237-130-222.compute-1.amazonaws.com', port=27017, username="root",
-        password="test12345", authentication_source="admin")
+connect('databoard',
+        host='ec2-54-237-130-222.compute-1.amazonaws.com',
+        port=27017,
+        username="root",
+        password="test12345",
+        authentication_source="admin")
 
 
 class MyJSONEncoder(json.JSONEncoder):
@@ -30,10 +34,9 @@ class Grants(DynamicDocument):
     title = StringField()
     text = StringField()
     contacts = StringField()
-    itemType = StringField()
+    domain = StringField()
     publication_date = DateTimeField()
     flags = DictField()
-
     meta = {'strict': False}
 
 
@@ -44,10 +47,14 @@ def hello_world():
 
 @application.route('/grants')
 def get_all():
-    filters = {"flags." + flag: True for flag in filter(None, request.args.get('q', "").split(','))}
+    filters = {
+        "flags." + flag: True for flag in
+        filter(None, request.args.get('q', "").split(','))
+    }
     page = int(request.args.get('page', 1))
     page_size = int(request.args.get('page_size', 10))
-    data = Grants.objects(__raw__=filters).skip((page - 1) * page_size).limit(page_size)
+    data = Grants.objects(__raw__=filters).skip(
+        (page - 1) * page_size).limit(page_size)
     return jsonify({
         "Count": Grants.objects(__raw__=filters).count(),
         "Data": [o.to_mongo() for o in data]
