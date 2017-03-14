@@ -1,9 +1,10 @@
 $(document).ready(function () {
     var grid = $("#jqGrid"),
-        categoriesStr = ":All;Grant:Grant;Conference:Сonference;****:****;***:***";
+        categoriesStr = ":All;Grant:Grant;Conference:Сonference; ****:****;***:***",
+        host = 'http://lowcost-env.mri5njt8g2.us-west-2.elasticbeanstalk.com/grants?page_size=20';
 
     grid.jqGrid({
-        url: 'http://lowcost-env.mri5njt8g2.us-west-2.elasticbeanstalk.com/grants?page_size=20',
+        url: host,
         mtype: "GET",
         datatype: "json",
         jsonReader: {
@@ -53,7 +54,7 @@ $(document).ready(function () {
                 sortable: false,
                 search: false
             },
-            {label: 'Actions', width: 350, sortable: false, formatter: actionsButtons, search: false}
+            {label: 'Actions', width: 350, sortable: false, formatter: actionsButtons, sortable: false, search: false}
         ],
         viewrecords: true, // show the current page, data rang and total records on the toolbar
         height: 750,
@@ -111,13 +112,18 @@ function contactsStyles(v) {
 }
 
 function actionsButtons(cellValue, options, rowObject) {
-    console.log(rowObject.id);
-    return "<button onclick='displayItem()'><i class='fa fa-desktop fa-lg' aria-hidden='true' style='color:blue;'></i>DISPLAY</button>" +
+    return "<button onclick=\"displayItem($(this).closest('tr'))\"><i class='fa fa-desktop fa-lg' aria-hidden='true' style='color:blue;'></i>DISPLAY</button>" +
         "<button onclick='skipItem()'><i class='fa fa-ban fa-lg' aria-hidden='true' style='color:red;'></i>SKIP</button>" +
         "<button onclick='importantItem()'><i class='fa fa-exclamation-circle fa-lg' aria-hidden='true' style='color:orange;'></i>IMPORTANT</button>" +
         "<button onclick='doneItem()'><i class='fa fa-check-circle-o fa-lg' aria-hidden='true' style='color:green;'></i>DONE</button>";
 }
-function displayItem() {
+function displayItem(e) {
+    var id = $(e).attr('id'),
+        data = $("#jqGrid").getRowData(id);
+    console.debug(data.text);
+    document.getElementById('allertDate').innerHTML = "Date: " + data.publication_date;
+    document.getElementById('allertTitle').innerHTML = data.text;
+    document.getElementById('allertContent').innerHTML = data.text;
     document.getElementById('myModal').style.display = "flex";
 }
 function skipItem() {
@@ -126,13 +132,13 @@ function importantItem() {
 
 }
 function doneItem() {
-
 }
 
-var span = document.getElementsByClassName("close");
-span.onclick = function () {
+
+function closeAllert() {
     document.getElementById('myModal').style.display = "none";
-};
+}
+
 window.onclick = function (event) {
     if (event.target == document.getElementById('myModal')) {
         document.getElementById('myModal').style.display = "none";
