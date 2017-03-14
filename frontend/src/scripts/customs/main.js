@@ -1,6 +1,6 @@
 $(document).ready(function () {
     var grid = $("#jqGrid"),
-        categoriesStr = ":All;Grant:Grant;Conference:Сonference; ****:****;***:***",
+        categoriesStr = ":All;Grant:Grant;Conference:Сonference;****:****;***:***",
         //host = 'http://lowcost-env.mri5njt8g2.us-west-2.elasticbeanstalk.com/grants?page_size=20';
         host = 'http://127.0.0.1:5000/grants?page_size=20';
 
@@ -102,7 +102,7 @@ function typeStyles(v) {
 }
 
 function linkStyles(cellValue, options, rowObject) {
-    return '<a class="linkStyles" target="_blank" href="' + cellValue + '"+>' + rowObject.title + '</a>';
+    return '<a class="linkStyles" style="color: #3f51b5"  target="_blank" href="' + cellValue + '"+>' + rowObject.title + '</a>';
 }
 
 function prewievStyles(v) {
@@ -127,6 +127,7 @@ function displayItem(e) {
     document.getElementById('allertContent').innerHTML = $(data.text).text();
     document.getElementById('allertContacts').innerHTML = $(data.contacts).text();
     document.getElementById('myModal').style.display = "flex";
+    document.getElementById('body').style.overflow = "hidden";
 }
 
 function skipItem() {
