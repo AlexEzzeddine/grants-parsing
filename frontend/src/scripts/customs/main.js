@@ -121,10 +121,10 @@ function displayItem(e) {
     var id = $(e).attr('id'),
         data = $("#jqGrid").getRowData(id);
     console.debug($(data.contacts).text());
-    document.getElementById('allertDate').innerHTML = "Date: " + data.publication_date;
-    document.getElementById('allertTitle').innerHTML = data.title;
-    document.getElementById('allertContent').innerHTML = data.text;
-    document.getElementById('allertContacts').innerHTML = data.contacts;
+    document.getElementById('allertDate').innerHTML = "Date: " + $(data.publication_date).text();
+    document.getElementById('allertTitle').innerHTML = $(data.title).text();
+    document.getElementById('allertContent').innerHTML = $(data.text).text();
+    document.getElementById('allertContacts').innerHTML = $(data.contacts).text();
     document.getElementById('myModal').style.display = "flex";
 }
 function skipItem() {
