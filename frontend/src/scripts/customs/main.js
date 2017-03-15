@@ -113,6 +113,7 @@ function contactsStyles(v) {
 }
 
 function actionsButtons(cellValue, options, rowObject) {
+    console.debug(rowObject);
     return "<button onclick=\"displayItem($(this).closest('tr'))\"><i class='fa fa-desktop fa-lg' aria-hidden='true' style='color:blue;'></i>DISPLAY</button>" +
         "<button onclick='skipItem()'><i class='fa fa-ban fa-lg' aria-hidden='true' style='color:red;'></i>SKIP</button>" +
         "<button onclick='importantItem()'><i class='fa fa-exclamation-circle fa-lg' aria-hidden='true' style='color:orange;'></i>IMPORTANT</button>" +
@@ -121,10 +122,11 @@ function actionsButtons(cellValue, options, rowObject) {
 function displayItem(e) {
     var id = $(e).attr('id'),
         data = $("#jqGrid").getRowData(id);
-    console.debug($(data.contacts).text());
+    console.debug($(data.text).text());
+    console.debug(data.text);
     document.getElementById('allertDate').innerHTML = "Date: " + $(data.publication_date).text();
-    document.getElementById('allertTitle').innerHTML = $(data.title).text();
-    document.getElementById('allertContent').innerHTML = $(data.text).text();
+    document.getElementById('allertTitle').innerHTML = ($(data.title).text());
+    document.getElementById('allertContent').innerHTML = data.text;
     document.getElementById('allertContacts').innerHTML = $(data.contacts).text();
     document.getElementById('myModal').style.display = "flex";
     document.getElementById('body').style.overflow = "hidden";
