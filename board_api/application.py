@@ -12,7 +12,7 @@ application = Flask(__name__)
 CORS(application)
 
 connect('databoard',
-        host='ec2-54-237-130-222.compute-1.amazonaws.com',
+        host='ec2-54-91-141-246.compute-1.amazonaws.com',
         port=27017,
         username="root",
         password="test12345",
@@ -76,12 +76,13 @@ def change_status(grant_id):
     doc.save()
     return jsonify(doc.flags)
 
+application.debug = True
+application.json_encoder = MyJSONEncoder
+application.config['JSON_AS_ASCII'] = False
+
 
 # run the app.
 if __name__ == "__main__":
     # Setting debug to True enables debug output. This line should be
     # removed before deploying a production app.
-    application.debug = True
-    application.json_encoder = MyJSONEncoder
-    application.config['JSON_AS_ASCII'] = False
     application.run()
