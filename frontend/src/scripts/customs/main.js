@@ -2,7 +2,7 @@ var grantId;
 $(document).ready(function () {
     var grid = $("#jqGrid"),
         categoriesStr = ":All;Grant:Grant;Conference:Сonference;****:****;***:***",
-        host = 'https://shielded-fortress-95039.herokuapp.com/grants?page_size=20';
+        host = 'https://shielded-fortress-95039.herokuapp.com/grants?page_size=20000';
         //host = 'http://127.0.0.1:5000/grants?page_size=20';
 
 
@@ -150,6 +150,14 @@ function displayItem(e) {
     document.getElementById('allertContacts').innerHTML = $(data.contacts).text();
     document.getElementById('myModal').style.display = "flex";
     document.getElementById('body').style.overflow = "hidden";
+    $.ajax({
+        "url": "https://shielded-fortress-95039.herokuapp.com/status/" + grantId,
+        "method": "POST",
+        "data": {
+            "status_name": "displayed",
+            "value": "true"
+        }
+    });
 }
 
 function skip() {

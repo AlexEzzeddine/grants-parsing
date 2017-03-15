@@ -26,3 +26,4 @@ wheels/
 frontend/node_modules/
 frontend/dist/
 frontend/.sass-cache/
+frontend/src/scripts/min
