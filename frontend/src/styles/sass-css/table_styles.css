@@ -213,16 +213,20 @@
   padding: 20px;
   border: 1px solid #888;
   width: 800px;
-  height: 700px; }
+    height: auto;
+}
   .modal-content #allertDate {
     position: absolute;
     top: 20px;
     right: 25px; }
   .modal-content #allertTitle {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
     margin-top: 30px;
     width: 100%;
-    height: 50px;
-      background-color: #f0f0f0;
+      height: auto;
       word-wrap: normal;
   }
   .modal-content #allertContent {
@@ -246,6 +250,7 @@
   }
   .modal-content .buttonContainer {
     margin-top: 10px;
+      margin-bottom: 10px;
     width: 100%;
     height: auto; }
     .modal-content .buttonContainer button {

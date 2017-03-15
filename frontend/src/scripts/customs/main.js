@@ -47,6 +47,14 @@ $(document).ready(function () {
                 search: false
             },
             {
+                name: 'title',
+                width: 0,
+                formatter: prewievStyles,
+                sortable: false,
+                search: false,
+                hidden: true
+            },
+            {
                 label: 'Contacts',
                 name: 'contacts',
                 width: 280,
@@ -90,6 +98,7 @@ $(document).ready(function () {
     $("#jqGrid_toppager_center").hide();
 });
 
+
 function statusStyles(cellValue, options, rowObject) {
     return '<div class="statusStyles"><i class="fa fa-envelope-o" aria-hidden="true"></i></div>';
 }
@@ -122,8 +131,8 @@ function actionsButtons(cellValue, options, rowObject) {
 function displayItem(e) {
     var id = $(e).attr('id'),
         data = $("#jqGrid").getRowData(id);
-    console.debug($(data.text).text());
-    console.debug(data.text);
+
+    console.debug($(data.title).text());
     document.getElementById('allertDate').innerHTML = "Date: " + $(data.publication_date).text();
     document.getElementById('allertTitle').innerHTML = ($(data.title).text());
     document.getElementById('allertContent').innerHTML = ($(data.text).text());
