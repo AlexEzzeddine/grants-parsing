@@ -2,7 +2,7 @@ var grantId;
 $(document).ready(function () {
     var grid = $("#jqGrid"),
         categoriesStr = ":All;Grant:Grant;Conference:Сonference;****:****;***:***",
-        host = 'https://shielded-fortress-95039.herokuapp.com/grants?page_size=20000';
+        host = 'https://shielded-fortress-95039.herokuapp.com/grants?page_size=20';
         //host = 'http://127.0.0.1:5000/grants?page_size=20';
 
 
