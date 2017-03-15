@@ -16,8 +16,8 @@ LOG_LEVEL="INFO"
 SPIDER_MODULES = ['databoard.spiders']
 NEWSPIDER_MODULE = 'databoard.spiders'
 
-CONN_STRING="mongodb://root:test12345@ec2-54-237-130-222.compute-1.amazonaws.com:27017"
-MONGODB_SERVER = "ec2-54-237-130-222.compute-1.amazonaws.com"
+CONN_STRING="mongodb://root:test12345@ec2-54-91-141-246.compute-1.amazonaws.com:27017"
+MONGODB_SERVER = "ec2-54-91-141-246.compute-1.amazonaws.com"
 MONGODB_PORT = 27017
 MONGODB_USER="root"
 MONGODB_PASSWORD="test12345"

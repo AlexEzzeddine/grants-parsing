@@ -12,7 +12,7 @@ application = Flask(__name__)
 CORS(application)
 
 connect('databoard',
-        host='ec2-54-237-130-222.compute-1.amazonaws.com',
+        host='ec2-54-91-141-246.compute-1.amazonaws.com',
         port=27017,
         username="root",
         password="test12345",
