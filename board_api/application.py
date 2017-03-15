@@ -76,9 +76,9 @@ def change_status(grant_id):
     doc.save()
     return jsonify(doc.flags)
 
-    application.debug = True
-    application.json_encoder = MyJSONEncoder
-    application.config['JSON_AS_ASCII'] = False
+application.debug = True
+application.json_encoder = MyJSONEncoder
+application.config['JSON_AS_ASCII'] = False
 
 
 # run the app.
