@@ -55,8 +55,8 @@ def get_all():
             "$or": [{"domain": domain} for domain in domains]
         })
     filters.update({
-        "flags." + flag: True for flag in flags
-    })
+                       "flags." + flag: True for flag in flags
+                       })
     page = int(request.args.get('page', 1))
     page_size = int(request.args.get('page_size', 10))
     data = Grants.objects(__raw__=filters).skip(
@@ -69,14 +69,14 @@ def get_all():
 
 @application.route('/domains')
 def get_domains():
-    domains = ["gurt.org.ua","prostir.ua"]
+    domains = ["gurt.org.ua", "prostir.ua"]
     return jsonify({
         "domains": domains
     })
 
+
 @application.route('/last_updated_date')
 def get_last_updated_date():
-
     now = datetime.now().strftime('%c')
 
     return jsonify({
@@ -97,7 +97,6 @@ def change_status(grant_id):
 application.debug = True
 application.json_encoder = MyJSONEncoder
 application.config['JSON_AS_ASCII'] = False
-
 
 # run the app.
 if __name__ == "__main__":
