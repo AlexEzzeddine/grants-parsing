@@ -67,6 +67,14 @@ def get_all():
     })
 
 
+@application.route('/domains')
+def get_domains():
+    domains = ["gurt.org.ua","prostir.ua"]
+    return jsonify({
+        "domains": domains
+    })
+
+
 @application.route('/status/<grant_id>', methods=["POST"])
 def change_status(grant_id):
     status_name = request.form.get('status_name')
