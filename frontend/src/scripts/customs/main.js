@@ -1,3 +1,4 @@
+var grantId;
 $(document).ready(function () {
     var grid = $("#jqGrid"),
         categoriesStr = ":All;Grant:Grant;Conference:Сonference;****:****;***:***",
@@ -139,7 +140,8 @@ function actionsButtons(cellValue, options, rowObject) {
 function displayItem(e) {
     var id = $(e).attr('id'),
         data = $("#jqGrid").getRowData(id);
-
+    grantId = $(data._id).text();
+    console.debug("grantId grantId grantId " + grantId);
     console.debug($(data.title).text());
     console.debug($(data._id).text());
     document.getElementById('allertDate').innerHTML = "Date: " + $(data.publication_date).text();
@@ -148,6 +150,40 @@ function displayItem(e) {
     document.getElementById('allertContacts').innerHTML = $(data.contacts).text();
     document.getElementById('myModal').style.display = "flex";
     document.getElementById('body').style.overflow = "hidden";
+}
+
+function skip() {
+    console.debug(grantId);
+    $.ajax({
+        "url": "https://shielded-fortress-95039.herokuapp.com/status/" + grantId,
+        "method": "POST",
+        "data": {
+            "status_name": "skipped",
+            "value": "true"
+        }
+    });
+}
+function importAnt() {
+    console.debug(grantId);
+    $.ajax({
+        "url": "https://shielded-fortress-95039.herokuapp.com/status/" + grantId,
+        "method": "POST",
+        "data": {
+            "status_name": "important",
+            "value": "true"
+        }
+    });
+}
+function donE() {
+    console.debug(grantId);
+    $.ajax({
+        "url": "https://shielded-fortress-95039.herokuapp.com/status/" + grantId,
+        "method": "POST",
+        "data": {
+            "status_name": "done",
+            "value": "true"
+        }
+    });
 }
 
 
@@ -161,7 +197,7 @@ function skipItem(e) {
         "method": "POST",
         "data": {
             "status_name": "skipped",
-            "value": "false"
+            "value": "true"
         }
     });
 }
@@ -175,7 +211,7 @@ function importantItem(e) {
         "method": "POST",
         "data": {
             "status_name": "important",
-            "value": "false"
+            "value": "true"
         }
     });
 }
@@ -189,7 +225,7 @@ function doneItem(e) {
         "method": "POST",
         "data": {
             "status_name": "done",
-            "value": "false"
+            "value": "true"
         }
     });
 }
