@@ -13,8 +13,8 @@
   font-size: 10px;
   margin: 2px;
   background-color: #fafafa;
-  padding-left: 15px;
-  padding-right: 15px;
+  padding-left: 6px;
+  padding-right: 6px;
   line-height: 22px;
   border: none;
   border-radius: 3px;
@@ -212,7 +212,7 @@
   height: 20px;
   font-size: 12px;
   color: #000;
-  width: 590px;
+  width: 710px;
   padding: 5px;
   overflow: hidden;
   white-space: nowrap;
@@ -223,10 +223,15 @@
   display: flex;
   font-style: italic;
   font-size: 12px;
-  width: 280px;
+  width: 330px;
   padding: 5px;
   height: 45px;
-  overflow: hidden
+  overflow: hidden;
+  //background-color: #003eff;
+}
+
+.buttonStyles {
+  margin-left: 10px;
 }
 
 //Allert styles start

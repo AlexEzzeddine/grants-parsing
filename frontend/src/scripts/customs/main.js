@@ -2,7 +2,8 @@ $(document).ready(function () {
     var grid = $("#jqGrid"),
         categoriesStr = ":All;Grant:Grant;Conference:Сonference;****:****;***:***",
         //host = 'http://lowcost-env.mri5njt8g2.us-west-2.elasticbeanstalk.com/grants?page_size=20';
-        host = 'http://127.0.0.1:5000/grants?page_size=20';
+        // host = 'http://127.0.0.1:5000/grants?page_size=20';
+        host = 'https://shielded-fortress-95039.herokuapp.com/grants';
 
     grid.jqGrid({
         url: host,
@@ -41,7 +42,7 @@ $(document).ready(function () {
             {
                 label: 'Content preview',
                 name: 'text',
-                width: 520,
+                width: 580,
                 formatter: prewievStyles,
                 sortable: false,
                 search: false
@@ -62,7 +63,7 @@ $(document).ready(function () {
                 sortable: false,
                 search: false
             },
-            {label: 'Actions', width: 350, sortable: false, formatter: actionsButtons, sortable: false, search: false}
+            {label: 'Actions', width: 250, sortable: false, formatter: actionsButtons, sortable: false, search: false}
         ],
         viewrecords: true, // show the current page, data rang and total records on the toolbar
         height: 750,
@@ -123,10 +124,12 @@ function contactsStyles(v) {
 
 function actionsButtons(cellValue, options, rowObject) {
     console.debug(rowObject);
-    return "<button onclick=\"displayItem($(this).closest('tr'))\"><i class='fa fa-desktop fa-lg' aria-hidden='true' style='color:blue;'></i>DISPLAY</button>" +
+    return "<div class='buttonStyles'>" +
+        "<button onclick=\"displayItem($(this).closest('tr'))\"><i class='fa fa-desktop fa-lg' aria-hidden='true' style='color:blue;'></i>DISPLAY</button>" +
         "<button onclick='skipItem()'><i class='fa fa-ban fa-lg' aria-hidden='true' style='color:red;'></i>SKIP</button>" +
         "<button onclick='importantItem()'><i class='fa fa-exclamation-circle fa-lg' aria-hidden='true' style='color:orange;'></i>IMPORTANT</button>" +
-        "<button onclick='doneItem()'><i class='fa fa-check-circle-o fa-lg' aria-hidden='true' style='color:green;'></i>DONE</button>";
+        "<button onclick='doneItem()'><i class='fa fa-check-circle-o fa-lg' aria-hidden='true' style='color:green;'></i>DONE</button>" +
+        "</div>";
 }
 function displayItem(e) {
     var id = $(e).attr('id'),
