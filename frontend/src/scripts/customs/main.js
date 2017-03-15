@@ -4,6 +4,7 @@ $(document).ready(function () {
         host = 'https://shielded-fortress-95039.herokuapp.com/grants?page_size=20';
         //host = 'http://127.0.0.1:5000/grants?page_size=20';
 
+
     grid.jqGrid({
         url: host,
         mtype: "GET",
@@ -55,6 +56,14 @@ $(document).ready(function () {
                 hidden: true
             },
             {
+                name: '_id',
+                width: 0,
+                formatter: prewievStyles,
+                sortable: false,
+                search: false,
+                hidden: true
+            },
+            {
                 label: 'Contacts',
                 name: 'contacts',
                 width: 280,
@@ -74,9 +83,6 @@ $(document).ready(function () {
         rowNum: 20,
         toppager: true,
         cloneToTop: true,
-        datatype: "json",
-        caption: "<div class='button_container'><div class='add_record_button'>" +
-        " + ADD NEW RECORD</div><div class='add_record_button'> FILTER</div></div>",
         caption: "<div class='button_container'><div class='add_record_button'><i class='fa fa-envelope-o' aria-hidden='true'></i>" +
         " UNREAD</div><div class='add_record_button'><i class='fa fa-exclamation-circle fa-lg' aria-hidden='true'></i>" +
         " IMPORTANT</div><div class='add_record_button'><i class='fa fa-exclamation-circle fa-lg' aria-hidden='true'></i>" +
@@ -125,9 +131,9 @@ function actionsButtons(cellValue, options, rowObject) {
     console.debug(rowObject);
     return "<div class='buttonStyles'>" +
         "<button onclick=\"displayItem($(this).closest('tr'))\"><i class='fa fa-desktop fa-lg' aria-hidden='true' style='color:blue;'></i>DISPLAY</button>" +
-        "<button onclick='skipItem()'><i class='fa fa-ban fa-lg' aria-hidden='true' style='color:red;'></i>SKIP</button>" +
-        "<button onclick='importantItem()'><i class='fa fa-exclamation-circle fa-lg' aria-hidden='true' style='color:orange;'></i>IMPORTANT</button>" +
-        "<button onclick='doneItem()'><i class='fa fa-check-circle-o fa-lg' aria-hidden='true' style='color:green;'></i>DONE</button>" +
+        "<button onclick=\"skipItem($(this).closest('tr'))\"><i class='fa fa-ban fa-lg' aria-hidden='true' style='color:red;'></i>SKIP</button>" +
+        "<button onclick=\"importantItem($(this).closest('tr'))\"><i class='fa fa-exclamation-circle fa-lg' aria-hidden='true' style='color:orange;'></i>IMPORTANT</button>" +
+        "<button onclick=\"doneItem($(this).closest('tr'))\"><i class='fa fa-check-circle-o fa-lg' aria-hidden='true' style='color:green;'></i>DONE</button>" +
         "</div>";
 }
 function displayItem(e) {
@@ -135,6 +141,7 @@ function displayItem(e) {
         data = $("#jqGrid").getRowData(id);
 
     console.debug($(data.title).text());
+    console.debug($(data._id).text());
     document.getElementById('allertDate').innerHTML = "Date: " + $(data.publication_date).text();
     document.getElementById('allertTitle').innerHTML = ($(data.title).text());
     document.getElementById('allertContent').innerHTML = ($(data.text).text());
@@ -143,11 +150,48 @@ function displayItem(e) {
     document.getElementById('body').style.overflow = "hidden";
 }
 
-function skipItem() {
+
+function skipItem(e) {
+    var id = $(e).attr('id'),
+        data = $("#jqGrid").getRowData(id);
+    console.debug($(data._id).text());
+    var grant_id = $(data._id).text();
+    $.ajax({
+        "url": "https://shielded-fortress-95039.herokuapp.com/status/" + grant_id,
+        "method": "POST",
+        "data": {
+            "status_name": "skipped",
+            "value": "false"
+        }
+    });
 }
-function importantItem() {
+function importantItem(e) {
+    var id = $(e).attr('id'),
+        data = $("#jqGrid").getRowData(id);
+    console.debug($(data._id).text());
+    var grant_id = $(data._id).text();
+    $.ajax({
+        "url": "https://shielded-fortress-95039.herokuapp.com/status/" + grant_id,
+        "method": "POST",
+        "data": {
+            "status_name": "important",
+            "value": "false"
+        }
+    });
 }
-function doneItem() {
+function doneItem(e) {
+    var id = $(e).attr('id'),
+        data = $("#jqGrid").getRowData(id);
+    console.debug($(data._id).text());
+    var grant_id = $(data._id).text();
+    $.ajax({
+        "url": "https://shielded-fortress-95039.herokuapp.com/status/" + grant_id,
+        "method": "POST",
+        "data": {
+            "status_name": "done",
+            "value": "false"
+        }
+    });
 }
 
 function closeAllert() {
