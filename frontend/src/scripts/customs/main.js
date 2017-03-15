@@ -126,7 +126,7 @@ function displayItem(e) {
     console.debug(data.text);
     document.getElementById('allertDate').innerHTML = "Date: " + $(data.publication_date).text();
     document.getElementById('allertTitle').innerHTML = ($(data.title).text());
-    document.getElementById('allertContent').innerHTML = data.text;
+    document.getElementById('allertContent').innerHTML = ($(data.text).text());
     document.getElementById('allertContacts').innerHTML = $(data.contacts).text();
     document.getElementById('myModal').style.display = "flex";
     document.getElementById('body').style.overflow = "hidden";
@@ -140,7 +140,9 @@ function doneItem() {
 }
 
 function closeAllert() {
+    $('#allertContent').animate({scrollTop: $('html').offset().top});
     document.getElementById('myModal').style.display = "none";
+
 }
 window.onclick = function (event) {
     if (event.target == document.getElementById('myModal')) {

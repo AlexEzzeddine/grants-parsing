@@ -274,7 +274,7 @@
     overflow-y: auto;
     border: solid 1px #dddddd;
     padding: 5px;
-    white-space: normal;
+    white-space: pre-wrap;
   }
   .cont {
     margin-top: 30px;
@@ -283,7 +283,7 @@
     width: 100%;
     height: 50px;
     overflow-y: auto;
-    word-wrap: normal;
+    white-space: pre-wrap;
   }
 
   .buttonContainer {
