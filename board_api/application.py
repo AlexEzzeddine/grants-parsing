@@ -74,6 +74,15 @@ def get_domains():
         "domains": domains
     })
 
+@application.route('/last_updated_date')
+def get_last_updated_date():
+
+    now = datetime.now().strftime('%c')
+
+    return jsonify({
+        "date": now
+    })
+
 
 @application.route('/status/<grant_id>', methods=["POST"])
 def change_status(grant_id):
