@@ -92,10 +92,6 @@ $(document).ready(function () {
         rowNum: 20,
         toppager: true,
         cloneToTop: true,
-        caption: "<div class='button_container'><div class='add_record_button'><i class='fa fa-envelope-o' aria-hidden='true'></i>" +
-        " UNREAD</div><div class='add_record_button'><i class='fa fa-exclamation-circle fa-lg' aria-hidden='true'></i>" +
-        " IMPORTANT</div><div class='add_record_button'><i class='fa fa-exclamation-circle fa-lg' aria-hidden='true'></i>" +
-        "SKIPPED</div><div class='add_record_button'><i class='fa fa-check-circle-o fa-lg' aria-hidden='true'></i> DONE</div></div>",
         pager: "#jqGridPager"
     });
     grid.jqGrid('filterToolbar', {
