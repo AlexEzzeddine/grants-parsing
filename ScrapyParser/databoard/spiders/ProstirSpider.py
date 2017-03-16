@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 import scrapy
+from scrapy.exceptions import CloseSpider
 from databoard.items import GrantItem
 
 
@@ -11,7 +12,8 @@ class GurtSpider(scrapy.Spider):
 
     def parse(self, response):
         links = response.selector.css(".newsblock .more::attr(href)").extract()
-
+        if not links:
+            raise CloseSpider('Last Page Parsed')
         for link in links:
             yield scrapy.Request(link, callback=self.getDetails)
 
