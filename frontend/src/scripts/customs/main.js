@@ -1,12 +1,22 @@
-var grantId;
-$(document).ready(function () {
-    var grid = $("#jqGrid"),
-        categoriesStr = ":All;Grant:Grant;Conference:Сonference;****:****;***:***",
-        host = 'https://shielded-fortress-95039.herokuapp.com/grants?page_size=20';
-    //host = 'http://127.0.0.1:5000/grants?page_size=20';
+var grantId,
+    categoriesStr = ":All;Grant:Grant;Conference:Сonference;****:****;***:***",
+    //host = 'https://shielded-fortress-95039.herokuapp.com',
+    localRoute = 'http://127.0.0.1:5000',
+    host = localRoute,
+    routeArguments = '/grants?page_size=20',
+    routeData = host + "/last_updated_date";
 
+
+$(document).ready(function () {
+
+    $.get(routeData, function (data) {
+        document.getElementById("last-updated-time").innerHTML = "Last updated on: " + data.date;
+    });
+
+
+    var grid = $("#jqGrid");
     grid.jqGrid({
-        url: host,
+        url: host + routeArguments,
         mtype: "GET",
         datatype: "json",
         jsonReader: {
@@ -92,12 +102,40 @@ $(document).ready(function () {
         autosearch: true,
         stringResult: true
     });
-    grid.jqGrid('navGrid', '#pager', {edit: false, add: false, del: false, search: false, cloneToTop: true});
+    grid.jqGrid('navGrid', '#pager', {
+        edit: false,
+        add: false,
+        del: false,
+        search: false,
+        refresh: false,
+        cloneToTop: true
+    });
     grid.jqGrid('navButtonAdd', '#' + grid[0].id + '_toppager_left', {
-        caption: "UNREAD",
-        buttonicon: 'fa fa-exclamation-circle fa-lg',
+        caption: "<div class='add_record_button'><i class='fa fa-envelope-o' aria-hidden='true'></i>UNREAD</div>",
+        buttonicon: 'none',
         onClickButton: function () {
-            alert("CLICK");
+            alert("UNREAD");
+        }
+    });
+    grid.jqGrid('navButtonAdd', '#' + grid[0].id + '_toppager_left', {
+        caption: "<div class='add_record_button'><i class='fa fa-exclamation-circle fa-lg' aria-hidden='true'></i>IMPORTANT</div>",
+        buttonicon: 'none',
+        onClickButton: function () {
+            alert("IMPORTANT");
+        }
+    });
+    grid.jqGrid('navButtonAdd', '#' + grid[0].id + '_toppager_left', {
+        caption: "<div class='add_record_button'><i class='fa fa-exclamation-circle fa-lg' aria-hidden='true'></i>SKIPPED</div>",
+        buttonicon: 'none',
+        onClickButton: function () {
+            alert("SKIPPED");
+        }
+    });
+    grid.jqGrid('navButtonAdd', '#' + grid[0].id + '_toppager_left', {
+        caption: "<div class='add_record_button'><i class='fa fa-check-circle-o fa-lg' aria-hidden='true'></i> DONE</div>",
+        buttonicon: 'none',
+        onClickButton: function () {
+            alert("DONE");
         }
     });
     $("#jqGrid_toppager_center").hide();
@@ -149,7 +187,7 @@ function displayItem(e) {
     document.getElementById('myModal').style.display = "flex";
     document.getElementById('body').style.overflow = "hidden";
     $.ajax({
-        "url": "https://shielded-fortress-95039.herokuapp.com/status/" + grantId,
+        "url": host + "/status/" + grantId,
         "method": "POST",
         "data": {
             "status_name": "displayed",
@@ -161,7 +199,7 @@ function displayItem(e) {
 function skip() {
     console.debug(grantId);
     $.ajax({
-        "url": "https://shielded-fortress-95039.herokuapp.com/status/" + grantId,
+        "url": host + "/status/" + grantId,
         "method": "POST",
         "data": {
             "status_name": "skipped",
@@ -172,7 +210,7 @@ function skip() {
 function importAnt() {
     console.debug(grantId);
     $.ajax({
-        "url": "https://shielded-fortress-95039.herokuapp.com/status/" + grantId,
+        "url": host + "/status/" + grantId,
         "method": "POST",
         "data": {
             "status_name": "important",
@@ -183,7 +221,7 @@ function importAnt() {
 function donE() {
     console.debug(grantId);
     $.ajax({
-        "url": "https://shielded-fortress-95039.herokuapp.com/status/" + grantId,
+        "url": host + "/status/" + grantId,
         "method": "POST",
         "data": {
             "status_name": "done",
@@ -199,7 +237,7 @@ function skipItem(e) {
     console.debug($(data._id).text());
     var grant_id = $(data._id).text();
     $.ajax({
-        "url": "https://shielded-fortress-95039.herokuapp.com/status/" + grant_id,
+        "url": host + "/status/" + grant_id,
         "method": "POST",
         "data": {
             "status_name": "skipped",
@@ -213,7 +251,7 @@ function importantItem(e) {
     console.debug($(data._id).text());
     var grant_id = $(data._id).text();
     $.ajax({
-        "url": "https://shielded-fortress-95039.herokuapp.com/status/" + grant_id,
+        "url": host + "/status/" + grant_id,
         "method": "POST",
         "data": {
             "status_name": "important",
@@ -227,7 +265,7 @@ function doneItem(e) {
     console.debug($(data._id).text());
     var grant_id = $(data._id).text();
     $.ajax({
-        "url": "https://shielded-fortress-95039.herokuapp.com/status/" + grant_id,
+        "url": host + "/status/" + grant_id,
         "method": "POST",
         "data": {
             "status_name": "done",
@@ -235,6 +273,7 @@ function doneItem(e) {
         }
     });
 }
+
 
 function closeAllert() {
     $('#allertContent').animate({scrollTop: $('html').offset().top});
