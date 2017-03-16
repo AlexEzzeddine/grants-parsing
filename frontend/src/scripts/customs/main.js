@@ -3,8 +3,7 @@ $(document).ready(function () {
     var grid = $("#jqGrid"),
         categoriesStr = ":All;Grant:Grant;Conference:Сonference;****:****;***:***",
         host = 'https://shielded-fortress-95039.herokuapp.com/grants?page_size=20';
-    //host = 'http://127.0.0.1:5000/grants?page_size=20';//
-
+    //host = 'http://127.0.0.1:5000/grants?page_size=20';
 
     grid.jqGrid({
         url: host,
@@ -77,7 +76,6 @@ $(document).ready(function () {
         viewrecords: true, // show the current page, data rang and total records on the toolbar
         height: 750,
         hidegrid: false,
-        loadonce: true,
         autowidth: true,
         rowheight: 20,
         page: 1,
