@@ -40,6 +40,10 @@ class Grants(DynamicDocument):
     meta = {'strict': False}
 
 
+class Domains(Document):
+    domain = StringField()
+
+
 @application.route('/')
 def hello_world():
     return 'SpiderBoard v0.01 Alpha.'
@@ -55,24 +59,21 @@ def get_all():
             "$or": [{"domain": domain} for domain in domains]
         })
     filters.update({
-                       "flags." + flag: True for flag in flags
-                       })
+        "flags." + flag: True for flag in flags
+    })
     page = int(request.args.get('page', 1))
     page_size = int(request.args.get('page_size', 10))
     data = Grants.objects(__raw__=filters).skip(
         (page - 1) * page_size).limit(page_size)
     return jsonify({
         "Count": Grants.objects(__raw__=filters).count(),
-        "Data": [o.to_mongo() for o in data]
+        "Data": [obj.to_mongo() for obj in data]
     })
 
 
 @application.route('/domains')
 def get_domains():
-    domains = ["gurt.org.ua", "prostir.ua"]
-    return jsonify({
-        "domains": domains
-    })
+    return jsonify([obj.domain for obj in Domains.objects])
 
 
 @application.route('/last_updated_date')

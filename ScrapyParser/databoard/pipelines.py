@@ -5,6 +5,9 @@ from scrapy.exceptions import DropItem
 import datetime
 
 
+from scrapy import signals
+
+
 class MongoDBPipeline(object):
 
     flags = {
@@ -19,8 +22,22 @@ class MongoDBPipeline(object):
         connection = pymongo.MongoClient(
             settings['CONN_STRING']
         )
-        db = connection[settings['MONGODB_DB']]
-        self.collection = db[settings['MONGODB_COLLECTION']]
+        self.db = connection[settings['MONGODB_DB']]
+        self.collection = self.db[settings['MONGODB_COLLECTION']]
+
+    @classmethod
+    def from_crawler(cls, crawler):
+        pipeline = cls()
+        crawler.signals.connect(pipeline.spider_opened,
+                                signal=signals.spider_opened)
+        return pipeline
+
+    def spider_opened(self, spider):
+        domain = spider.allowed_domains[0]
+        self.db["domains"].update_one(
+            {"domain": domain},
+            {"$setOnInsert": {"domain": domain}},
+            upsert=True)
 
     def process_item(self, item, spider):
         valid = True
