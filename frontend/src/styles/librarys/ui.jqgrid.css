@@ -385,13 +385,14 @@ tr.ui-search-toolbar select {
     height: auto;
 }
 
+/*custom button height*/
 .ui-jqgrid .ui-jqgrid-toppager {
     border-left: 0px none !important;
     border-right: 0px none !important;
     margin: 0px !important;
     padding: 0px !important;
     position: relative;
-    height: 25px !important;
+    height: 50px !important;
     white-space: nowrap;
     overflow: hidden;
 }
