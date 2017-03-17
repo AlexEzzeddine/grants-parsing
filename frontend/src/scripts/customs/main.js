@@ -1,13 +1,25 @@
 var grantId,
-    categoriesStr = ":All;Grant:Grant;Conference:Сonference;****:****;***:***",
+    //categoriesStr,
     //host = 'https://shielded-fortress-95039.herokuapp.com',
     localRoute = 'http://127.0.0.1:5000',
     host = localRoute,
     routeArguments = '/grants?page_size=20',
     routeData = host + "/last_updated_date";
-
+var categoriesStr = ":All";
+$.get("http://127.0.0.1:5000/domains", function (data) {
+    for (var i = 0; i < data.length; i++) {
+        console.debug(data[i]);
+        categoriesStr += ";" + data[i] + ":" + data[i];
+    }
+    console.debug(categoriesStr);
+});
 
 $(document).ready(function () {
+    console.debug(categoriesStr);
+
+
+
+
 
     $.get(routeData, function (data) {
         document.getElementById("last-updated-time").innerHTML = "Last updated on: " + data;
@@ -44,7 +56,6 @@ $(document).ready(function () {
                 name: 'domain',
                 width: 100,
                 formatter: typeStyles,
-                sortable: false,
                 stype: 'select',
                 searchoptions: {value: categoriesStr}
             },
@@ -96,7 +107,7 @@ $(document).ready(function () {
     });
     grid.jqGrid('filterToolbar', {
         autosearch: true,
-        stringResult: true
+        stringResult: true,
     });
     grid.jqGrid('navGrid', '#pager', {
         edit: false,
@@ -135,6 +146,7 @@ $(document).ready(function () {
         }
     });
     $("#jqGrid_toppager_center").hide();
+
 });
 
 
