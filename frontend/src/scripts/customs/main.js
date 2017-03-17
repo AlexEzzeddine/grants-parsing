@@ -1,8 +1,8 @@
 var grantId,
     //categoriesStr,
-    //host = 'https://shielded-fortress-95039.herokuapp.com',
-    localRoute = 'http://127.0.0.1:5000',
-    host = localRoute,
+    host = 'https://shielded-fortress-95039.herokuapp.com',
+    //localRoute = 'http://127.0.0.1:5000',
+    //host = localRoute,
     routeArguments = '/grants?page_size=20',
     routeData = host + "/last_updated_date";
 var categoriesStr = ":All";
@@ -11,20 +11,16 @@ $.get("http://127.0.0.1:5000/domains", function (data) {
         console.debug(data[i]);
         categoriesStr += ";" + data[i] + ":" + data[i];
     }
-    console.debug(categoriesStr);
 });
 
+
 $(document).ready(function () {
+
+
     console.debug(categoriesStr);
-
-
-
-
-
     $.get(routeData, function (data) {
         document.getElementById("last-updated-time").innerHTML = "Last updated on: " + data;
     });
-
 
     var grid = $("#jqGrid");
     grid.jqGrid({
@@ -42,7 +38,7 @@ $(document).ready(function () {
             },
         },
         colModel: [
-            {label: 'Status', name: '', width: 50, formatter: statusStyles, sortable: false, search: false},
+            {label: 'Status', name: 'Status', width: 50, formatter: statusStyles, sortable: false, search: false},
             {
                 label: 'Date',
                 name: 'publication_date',
@@ -175,19 +171,25 @@ function contactsStyles(v) {
 function actionsButtons(cellValue, options, rowObject) {
     console.debug(rowObject);
     return "<div class='buttonStyles'>" +
-        "<button onclick=\"displayItem($(this).closest('tr'))\"><i class='fa fa-desktop fa-lg' aria-hidden='true' style='color:blue;'></i>DISPLAY</button>" +
+        "<button onclick=\"displayItem($(this).closest('tr').addClass('displayed'))\"><i class='fa fa-desktop fa-lg' aria-hidden='true' style='color:blue;'></i>DISPLAY</button>" +
         "<button onclick=\"skipItem($(this).closest('tr'))\"><i class='fa fa-ban fa-lg' aria-hidden='true' style='color:red;'></i>SKIP</button>" +
         "<button onclick=\"importantItem($(this).closest('tr'))\"><i class='fa fa-exclamation-circle fa-lg' aria-hidden='true' style='color:orange;'></i>IMPORTANT</button>" +
         "<button onclick=\"doneItem($(this).closest('tr'))\"><i class='fa fa-check-circle-o fa-lg' aria-hidden='true' style='color:green;'></i>DONE</button>" +
         "</div>";
 }
 function displayItem(e) {
+
     var id = $(e).attr('id'),
         data = $("#jqGrid").getRowData(id);
     grantId = $(data._id).text();
+
+
     console.debug("grantId grantId grantId " + grantId);
     console.debug($(data.title).text());
-    console.debug($(data._id).text());
+    console.debug(data);
+    data.Status.innerHTML = "<div class='statusStyles'><i class='fa fa-envelope-open-o' aria-hidden='true'></i></div>";
+
+
     document.getElementById('allertDate').innerHTML = "Date: " + $(data.publication_date).text();
     document.getElementById('allertTitle').innerHTML = ($(data.title).text());
     document.getElementById('allertContent').innerHTML = ($(data.text).text());
@@ -205,6 +207,7 @@ function displayItem(e) {
 }
 
 function skip() {
+    document.getElementsByClassName("dateStyles").style.fontWeight = "normal";
     console.debug(grantId);
     $.ajax({
         "url": host + "/status/" + grantId,
