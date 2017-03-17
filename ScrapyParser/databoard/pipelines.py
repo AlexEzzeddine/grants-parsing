@@ -2,7 +2,7 @@ import pymongo
 
 from scrapy.conf import settings
 from scrapy.exceptions import DropItem
-import datetime
+from datetime import datetime
 
 
 from scrapy import signals
@@ -30,7 +30,15 @@ class MongoDBPipeline(object):
         pipeline = cls()
         crawler.signals.connect(pipeline.spider_opened,
                                 signal=signals.spider_opened)
+        crawler.signals.connect(pipeline.engine_started,
+                                signal=signals.engine_started)
         return pipeline
+
+    def engine_started(self):
+        self.db["scrapy_dates"].update_one(
+            {"last_updated_date": {'$exists': True}},
+            {"$set": {"last_updated_date": datetime.now()}},
+            upsert=True)
 
     def spider_opened(self, spider):
         domain = spider.allowed_domains[0]

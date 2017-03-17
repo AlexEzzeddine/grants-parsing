@@ -40,10 +40,6 @@ class Grants(DynamicDocument):
     meta = {'strict': False}
 
 
-class Domains(Document):
-    domain = StringField()
-
-
 @application.route('/')
 def hello_world():
     return 'SpiderBoard v0.01 Alpha.'
@@ -73,16 +69,16 @@ def get_all():
 
 @application.route('/domains')
 def get_domains():
-    return jsonify([obj.domain for obj in Domains.objects])
+    db = Grants._get_db()
+    domains = [doc["domain"] for doc in db.domains.find()]
+    return jsonify(domains)
 
 
 @application.route('/last_updated_date')
 def get_last_updated_date():
-    now = datetime.now().strftime('%c')
-
-    return jsonify({
-        "date": now
-    })
+    db = Grants._get_db()
+    last_updated_date = db.scrapy_dates.find_one()['last_updated_date']
+    return jsonify(last_updated_date)
 
 
 @application.route('/status/<grant_id>', methods=["POST"])
