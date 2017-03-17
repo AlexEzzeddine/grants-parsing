@@ -1,14 +1,10 @@
 var grantId,
-    //categoriesStr,
     host = 'https://shielded-fortress-95039.herokuapp.com',
-    //localRoute = 'http://127.0.0.1:5000',
-    //host = localRoute,
     routeArguments = '/grants?page_size=20',
     routeData = host + "/last_updated_date";
 var categoriesStr = ":All";
-$.get("http://127.0.0.1:5000/domains", function (data) {
+$.get(host + "/domains", function (data) {
     for (var i = 0; i < data.length; i++) {
-        console.debug(data[i]);
         categoriesStr += ";" + data[i] + ":" + data[i];
     }
 });
@@ -16,8 +12,6 @@ $.get("http://127.0.0.1:5000/domains", function (data) {
 
 $(document).ready(function () {
 
-
-    console.debug(categoriesStr);
     $.get(routeData, function (data) {
         document.getElementById("last-updated-time").innerHTML = "Last updated on: " + data;
     });
@@ -142,9 +136,7 @@ $(document).ready(function () {
         }
     });
     $("#jqGrid_toppager_center").hide();
-
 });
-
 
 function statusStyles(cellValue, options, rowObject) {
     return '<div class="statusStyles"><i class="fa fa-envelope-o" aria-hidden="true"></i></div>';
@@ -161,6 +153,7 @@ function linkStyles(cellValue, options, rowObject) {
     return '<a class="linkStyles" style="color: #3f51b5"  target="_blank" href="' + cellValue + '"+>' + rowObject.title + '</a>';
 }
 
+
 function prewievStyles(v) {
     return '<div class="prewievStyles">' + v + '</div>';
 }
@@ -169,27 +162,17 @@ function contactsStyles(v) {
 }
 
 function actionsButtons(cellValue, options, rowObject) {
-    console.debug(rowObject);
+
     return "<div class='buttonStyles'>" +
         "<button onclick=\"displayItem($(this).closest('tr').addClass('displayed'))\"><i class='fa fa-desktop fa-lg' aria-hidden='true' style='color:blue;'></i>DISPLAY</button>" +
-        "<button onclick=\"skipItem($(this).closest('tr'))\"><i class='fa fa-ban fa-lg' aria-hidden='true' style='color:red;'></i>SKIP</button>" +
-        "<button onclick=\"importantItem($(this).closest('tr'))\"><i class='fa fa-exclamation-circle fa-lg' aria-hidden='true' style='color:orange;'></i>IMPORTANT</button>" +
-        "<button onclick=\"doneItem($(this).closest('tr'))\"><i class='fa fa-check-circle-o fa-lg' aria-hidden='true' style='color:green;'></i>DONE</button>" +
+        "<button onclick=\"skipItem($(this).closest('tr').addClass('displayed'))\"><i class='fa fa-ban fa-lg' aria-hidden='true' style='color:red;'></i>SKIP</button>" +
+        "<button onclick=\"importantItem($(this).closest('tr').addClass('displayed'))\"><i class='fa fa-exclamation-circle fa-lg' aria-hidden='true' style='color:orange;'></i>IMPORTANT</button>" +
+        "<button onclick=\"doneItem($(this).closest('tr').addClass('displayed'))\"><i class='fa fa-check-circle-o fa-lg' aria-hidden='true' style='color:green;'></i>DONE</button>" +
         "</div>";
 }
 function displayItem(e) {
-
     var id = $(e).attr('id'),
         data = $("#jqGrid").getRowData(id);
-    grantId = $(data._id).text();
-
-
-    console.debug("grantId grantId grantId " + grantId);
-    console.debug($(data.title).text());
-    console.debug(data);
-    data.Status.innerHTML = "<div class='statusStyles'><i class='fa fa-envelope-open-o' aria-hidden='true'></i></div>";
-
-
     document.getElementById('allertDate').innerHTML = "Date: " + $(data.publication_date).text();
     document.getElementById('allertTitle').innerHTML = ($(data.title).text());
     document.getElementById('allertContent').innerHTML = ($(data.text).text());
@@ -208,7 +191,7 @@ function displayItem(e) {
 
 function skip() {
     document.getElementsByClassName("dateStyles").style.fontWeight = "normal";
-    console.debug(grantId);
+
     $.ajax({
         "url": host + "/status/" + grantId,
         "method": "POST",
@@ -219,7 +202,7 @@ function skip() {
     });
 }
 function importAnt() {
-    console.debug(grantId);
+
     $.ajax({
         "url": host + "/status/" + grantId,
         "method": "POST",
@@ -230,7 +213,7 @@ function importAnt() {
     });
 }
 function donE() {
-    console.debug(grantId);
+
     $.ajax({
         "url": host + "/status/" + grantId,
         "method": "POST",
@@ -245,7 +228,7 @@ function donE() {
 function skipItem(e) {
     var id = $(e).attr('id'),
         data = $("#jqGrid").getRowData(id);
-    console.debug($(data._id).text());
+
     var grant_id = $(data._id).text();
     $.ajax({
         "url": host + "/status/" + grant_id,
@@ -259,7 +242,6 @@ function skipItem(e) {
 function importantItem(e) {
     var id = $(e).attr('id'),
         data = $("#jqGrid").getRowData(id);
-    console.debug($(data._id).text());
     var grant_id = $(data._id).text();
     $.ajax({
         "url": host + "/status/" + grant_id,
@@ -273,7 +255,7 @@ function importantItem(e) {
 function doneItem(e) {
     var id = $(e).attr('id'),
         data = $("#jqGrid").getRowData(id);
-    console.debug($(data._id).text());
+
     var grant_id = $(data._id).text();
     $.ajax({
         "url": host + "/status/" + grant_id,
