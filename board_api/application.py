@@ -109,7 +109,7 @@ def login():
 
 
 @application.route('/grants')
-@flask_login.login_required
+#@flask_login.login_required
 def get_all():
     domains = json.loads(request.args.get("domains", "[]"))
     flags = json.loads(request.args.get("flags", "[]"))
