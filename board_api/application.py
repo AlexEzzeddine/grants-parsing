@@ -2,14 +2,18 @@ from bson import ObjectId
 from datetime import datetime
 from flask import json
 from flask import Flask
-from flask import request
+import flask_login
+from flask import request, redirect, url_for
 from flask import jsonify
 from flask_cors import CORS
 from mongoengine import *
 
 # EB looks for an 'application' callable by default.
 application = Flask(__name__)
+application.secret_key = "dsfakadfa2938ghf4b293t34gk3g023hggv"
 CORS(application)
+login_manager = flask_login.LoginManager()
+login_manager.init_app(application)
 
 connect('databoard',
         host='ec2-54-91-141-246.compute-1.amazonaws.com',
@@ -40,12 +44,72 @@ class Grants(DynamicDocument):
     meta = {'strict': False}
 
 
+class Users(Document):
+    email = StringField()
+    password = StringField()
+
+
+class User(flask_login.UserMixin):
+    pass
+
+
+@login_manager.user_loader
+def user_loader(email):
+    if not Users.objects(email=email).first():
+        return
+
+    user = User()
+    user.id = email
+    return user
+
+
+@login_manager.request_loader
+def request_loader(request):
+    email = request.form.get('email')
+    if not Users.objects(email=email).first():
+        return
+
+    user = User()
+    user.id = email
+
+    # DO NOT ever store passwords in plaintext and always compare password
+    # hashes using constant-time comparison!
+    user.is_authenticated = request.form[
+        'pw'] == Users.objects(email=email).first().password
+
+    return user
+
+
 @application.route('/')
 def hello_world():
-    return 'SpiderBoard v0.01 Alpha.'
+    return "Hello World"
+
+
+@application.route('/login', methods=['GET', 'POST'])
+def login():
+    if request.method == 'GET':
+        return '''
+               <form action='login' method='POST'>
+                <input type='text' name='email' id='email' placeholder='email'></input>
+                <input type='password' name='pw' id='pw' placeholder='password'></input>
+                <input type='submit' name='submit'></input>
+               </form>
+               '''
+
+    email = request.form['email']
+    if not Users.objects(email=email).first():
+        return "User not found"
+    if request.form['pw'] == Users.objects(email=email).first().password:
+        user = User()
+        user.id = email
+        flask_login.login_user(user)
+        return redirect(url_for('get_all'))
+
+    return 'Bad login'
 
 
 @application.route('/grants')
+@flask_login.login_required
 def get_all():
     domains = json.loads(request.args.get("domains", "[]"))
     flags = json.loads(request.args.get("flags", "[]"))
