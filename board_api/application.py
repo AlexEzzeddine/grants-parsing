@@ -7,6 +7,8 @@ from flask import request, redirect, url_for
 from flask import jsonify
 from flask_cors import CORS
 from mongoengine import *
+from werkzeug.security import generate_password_hash, \
+    check_password_hash
 
 # EB looks for an 'application' callable by default.
 application = Flask(__name__)
@@ -74,15 +76,11 @@ def request_loader(request):
 
     # DO NOT ever store passwords in plaintext and always compare password
     # hashes using constant-time comparison!
-    user.is_authenticated = request.form[
-        'pw'] == Users.objects(email=email).first().password
+    user.is_authenticated = check_password_hash(
+        Users.objects(email=email).first().password,
+        request.form['pw'])
 
     return user
-
-
-@application.route('/')
-def hello_world():
-    return "Hello World"
 
 
 @application.route('/login', methods=['GET', 'POST'])
@@ -99,13 +97,15 @@ def login():
     email = request.form['email']
     if not Users.objects(email=email).first():
         return "User not found"
-    if request.form['pw'] == Users.objects(email=email).first().password:
+    if check_password_hash(
+            Users.objects(email=email).first().password,
+            request.form['pw']):
         user = User()
         user.id = email
         flask_login.login_user(user)
         return redirect(url_for('get_all'))
 
-    return 'Bad login'
+    return 'Bad password'
 
 
 @application.route('/grants')
