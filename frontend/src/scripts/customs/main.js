@@ -1,8 +1,8 @@
 var grantId,
     categoriesStr = ":All;Grant:Grant;Conference:Сonference;****:****;***:***",
-    host = 'https://shielded-fortress-95039.herokuapp.com',
-    //localRoute = 'http://127.0.0.1:5000',
-    //host = localRoute,
+    //host = 'https://shielded-fortress-95039.herokuapp.com',
+    localRoute = 'http://127.0.0.1:5000',
+    host = localRoute,
     routeArguments = '/grants?page_size=20',
     routeData = host + "/last_updated_date";
 
@@ -10,7 +10,7 @@ var grantId,
 $(document).ready(function () {
 
     $.get(routeData, function (data) {
-        document.getElementById("last-updated-time").innerHTML = "Last updated on: " + data.date;
+        document.getElementById("last-updated-time").innerHTML = "Last updated on: " + data;
     });
 
 
