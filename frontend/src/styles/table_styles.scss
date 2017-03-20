@@ -165,7 +165,7 @@
   text-decoration: none;
 }
 
-//loading allert
+//loading alert
 .ui-state-active, .ui-widget-content .ui-state-active, .ui-widget-header .ui-state-active {
   background-color: white;
   color: #7e959b;
@@ -268,7 +268,7 @@
   .linkStyles {
     font-weight: normal;
   }
-  .prewievStyles {
+  .previewStyles {
     font-weight: normal;
   }
   .contactsStyles {
@@ -304,7 +304,7 @@
   font-weight: bold;
 }
 
-.prewievStyles {
+.previewStyles {
   height: 20px;
   font-size: 12px;
   color: #000;
@@ -361,13 +361,13 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  #allertDate {
+  #alertDate {
     position: absolute;
     font-style: italic;
     top: 20px;
     right: 25px;
   }
-  #allertTitle {
+  #alertTitle {
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -383,7 +383,7 @@
     //white-space: pre-wrap;
     font-weight: bold;
   }
-  #allertContent {
+  #alertContent {
     width: 100%;
     min-height: 370px;
     height: 65%;
@@ -397,7 +397,7 @@
     margin-top: 20px;
     font-weight: bold;
   }
-  #allertContacts {
+  #alertContacts {
     width: 100%;
     height: 50px;
     overflow-y: auto;
