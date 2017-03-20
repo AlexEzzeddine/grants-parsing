@@ -68,6 +68,14 @@ $(document).ready(function () {
                 hidden: true
             },
             {
+                name: 'flags',
+                width: 0,
+                formatter: prewievStyles,
+                sortable: false,
+                search: false
+                //hidden: true
+            },
+            {
                 name: '_id',
                 width: 0,
                 sortable: false,
@@ -170,8 +178,14 @@ function contactsStyles(v) {
 
 function actionsButtons(cellValue, options, rowObject) {
 
+    if (rowObject.flags.displayed == true || rowObject.flags.done == true || rowObject.flags.important == true || rowObject.flags.skipped == true) {
+        console.log("!!!!!!!!!!!!!");
+        $(this).closest('tr').addClass('displayed');
+    }
+    console.log(rowObject.flags.displayed);
+
     return "<div class='buttonStyles'>" +
-        "<button onclick=\"displayItem($(this).closest('tr').addClass('displayed'))\"><i class='fa fa-desktop fa-lg' aria-hidden='true' style='color:blue;'></i>DISPLAY</button>" +
+        "<button onclick=\"displayItem($(this))\"><i class='fa fa-desktop fa-lg' aria-hidden='true' style='color:blue;'></i>DISPLAY</button>" +
         "<button onclick=\"skipItem($(this).closest('tr').addClass('displayed'))\"><i class='fa fa-ban fa-lg' aria-hidden='true' style='color:red;'></i>SKIP</button>" +
         "<button onclick=\"importantItem($(this).closest('tr').addClass('displayed'))\"><i class='fa fa-exclamation-circle fa-lg' aria-hidden='true' style='color:orange;'></i>IMPORTANT</button>" +
         "<button onclick=\"doneItem($(this).closest('tr').addClass('displayed'))\"><i class='fa fa-check-circle-o fa-lg' aria-hidden='true' style='color:green;'></i>DONE</button>" +
@@ -181,13 +195,16 @@ function displayItem(e) {
     var id = $(e).attr('id'),
         data = $("#jqGrid").getRowData(id);
 
+
+    e.closest('tr').addClass('displayed');
+
     document.getElementById('allertDate').innerHTML = "Date: " + $(data.publication_date).text();
     document.getElementById('allertTitle').innerHTML = ($(data.title).text());
     document.getElementById('allertContent').innerHTML = ($(data.text).text());
     document.getElementById('allertContacts').innerHTML = $(data.contacts).text();
     document.getElementById('myModal').style.display = "flex";
     document.getElementById('body').style.overflow = "hidden";
-    
+
     setGridItemStatus(data._id, 'displayed', id);
 }
 
