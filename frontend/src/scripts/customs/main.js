@@ -169,9 +169,15 @@ function typeStyles(v) {
 }
 
 function linkStyles(cellValue, options, rowObject) {
-    return '<a class="linkStyles" style="color: #3f51b5"  target="_blank" href="' + cellValue + '"+>' + rowObject.title + '</a>';
+    return "<a class='linkStyles' onclick=\"clickedLink($(this).closest('tr'))\" style='color: #3f51b5'  target='_blank' href='\" + cellValue + \"'+>" + rowObject.title + "</a>";
 }
+function clickedLink(e) {
+    e.addClass('displayed');
 
+    var id = $(e).attr('id'),
+        data = $("#jqGrid").getRowData(id);
+    setGridItemStatus(data._id, 'displayed', id);
+}
 
 function prewievStyles(v) {
     return '<div class="prewievStyles">' + v + '</div>';
