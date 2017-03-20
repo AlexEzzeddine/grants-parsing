@@ -30,7 +30,7 @@ h1 {
 		}
 
 		tr.jqgrow {
-			&:nth-child(odd) {
+			&:nth-child() {
 				background-color: #ebebeb;
 			}
 			td {
