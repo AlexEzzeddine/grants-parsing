@@ -68,14 +68,6 @@ $(document).ready(function () {
                 hidden: true
             },
             {
-                name: 'flags',
-                width: 0,
-                formatter: prewievStyles,
-                sortable: false,
-                search: false
-                hidden: true
-            },
-            {
                 name: '_id',
                 width: 0,
                 sortable: false,
