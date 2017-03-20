@@ -256,7 +256,7 @@ var setGridItemStatus = function(grant_id, statusName, rowId){
         },
         success: function(res){
             if(rowId) {
-                var newClass = 'fa-envelope-o';
+                var newClass;
 
                 if(res.displayed) newClass = 'fa fa-desktop';
                 if(res.done) newClass = 'fa fa-check-circle-o';

@@ -29,9 +29,13 @@ h1 {
 			color: #000;
 		}
 
+      tr.jqgrow {
+        background-color: #fff8f8;
+      }
+
 		tr.jqgrow {
-			&:nth-child() {
-				background-color: #ebebeb;
+          &:nth-child(odd) {
+            //background-color: #ebebeb;
 			}
 			td {
 				a {
