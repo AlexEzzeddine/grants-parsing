@@ -83,13 +83,6 @@ $(document).ready(function () {
                 hidden: true
             },
             {
-                name: 'flags',
-                width: 0,
-                sortable: false,
-                search: false,
-                hidden: true
-            },
-            {
                 label: 'Contacts',
                 name: 'contacts',
                 width: 280,
