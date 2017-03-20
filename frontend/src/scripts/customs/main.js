@@ -1,7 +1,8 @@
 var grantId,
     host = 'https://shielded-fortress-95039.herokuapp.com',
     //host = 'http://127.0.0.1:5000',
-    routeArguments = '/grants?page_size=20',
+    routeArguments = '/grants?',
+    pageSize = 20,
     routeData = host + "/last_updated_date";
 var categoriesStr = ":All";
 $.get(host + "/domains", function (data) {
@@ -19,7 +20,7 @@ $(document).ready(function () {
 
     var grid = $("#jqGrid");
     grid.jqGrid({
-        url: host + routeArguments,
+        url: host + routeArguments + "page_size=" + pageSize,
         mtype: "GET",
         datatype: "json",
         jsonReader: {
@@ -191,6 +192,8 @@ function actionsButtons(cellValue, options, rowObject) {
 
     if (rowObject.flags.displayed == true || rowObject.flags.done == true || rowObject.flags.important == true || rowObject.flags.skipped == true) {
         console.log("!!!!!!!!!!!!!");
+        console.log(rowObject);
+        console.log($(this).closest('tr'));
         $(this).closest('tr').addClass('displayed');
     }
     console.log(rowObject.flags.displayed);
@@ -208,6 +211,7 @@ function displayItem(e) {
 
 
     e.closest('tr').addClass('displayed');
+    console.log(e.closest('tr'));
 
     document.getElementById('allertDate').innerHTML = "Date: " + $(data.publication_date).text();
     document.getElementById('allertTitle').innerHTML = ($(data.title).text());

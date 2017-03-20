@@ -1149,7 +1149,7 @@ a.ui-button:active,
 .ui-widget-content .ui-state-highlight,
 .ui-widget-header .ui-state-highlight {
     border: 1px solid #9b9b9b;
-    background: #fffa90;
+
     border-bottom: 0;
     color: #777620;
 }
