@@ -1,5 +1,6 @@
 var grantId,
-    host = 'https://shielded-fortress-95039.herokuapp.com',
+    //host = 'https://shielded-fortress-95039.herokuapp.com',
+    host = 'http://127.0.0.1:5000',
     routeArguments = '/grants?page_size=20',
     routeData = host + "/last_updated_date";
 var categoriesStr = ":All";
@@ -42,14 +43,14 @@ $(document).ready(function () {
                 search: false
             },
             {
-                label: 'Type',
+                label: 'Source',
                 name: 'domain',
                 width: 100,
                 formatter: typeStyles,
                 stype: 'select',
                 searchoptions: {value: categoriesStr}
             },
-            {label: 'Source', name: 'url', formatter: linkStyles, width: 210, sortable: false, search: false},
+            {label: 'Title', name: 'url', formatter: linkStyles, width: 210, sortable: false, search: false},
             {
                 label: 'Content preview',
                 name: 'text',
@@ -133,6 +134,13 @@ $(document).ready(function () {
         buttonicon: 'none',
         onClickButton: function () {
             alert("DONE");
+        }
+    });
+    grid.jqGrid('navButtonAdd', '#' + grid[0].id + '_toppager_left', {
+        caption: "<div class='add_record_button'><i class='fa fa-pencil' aria-hidden='true'></i>MODIFIED</div>",
+        buttonicon: 'none',
+        onClickButton: function () {
+            alert("MODIFIED");
         }
     });
     $("#jqGrid_toppager_center").hide();
