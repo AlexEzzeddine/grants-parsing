@@ -2,7 +2,7 @@ var grantId,
     host = 'https://shielded-fortress-95039.herokuapp.com',
     //host = 'http://127.0.0.1:5000',
     routeArguments = '/grants?',
-    pageSize = 20,
+    pageSize = 16,
     routeData = host + "/last_updated_date";
 var categoriesStr = ":All";
 $.get(host + "/domains", function (data) {
