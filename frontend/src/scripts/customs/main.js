@@ -98,15 +98,7 @@ $(document).ready(function () {
     });
     grid.jqGrid('filterToolbar', {
         autosearch: true,
-        stringResult: true,
-    });
-    grid.jqGrid('navGrid', '#pager', {
-        edit: false,
-        add: false,
-        del: false,
-        search: false,
-        refresh: false,
-        cloneToTop: true
+        stringResult: true
     });
     grid.jqGrid('navButtonAdd', '#' + grid[0].id + '_toppager_left', {
         caption: "<div class='add_record_button'><i class='fa fa-envelope-o' aria-hidden='true'></i>UNREAD</div>",
@@ -147,7 +139,7 @@ $(document).ready(function () {
 });
 
 function statusStyles(cellValue, options, rowObject) {
-    var statusIcon;
+    var statusIcon = 'fa-envelope-o';
     if(rowObject.flags.displayed){
         statusIcon = 'fa-desktop';
     }
@@ -189,9 +181,10 @@ function contactsStyles(v) {
 }
 
 function actionsButtons(cellValue, options, rowObject) {
-    if (rowObject.flags.displayed == false || rowObject.flags.done == false || rowObject.flags.important == false || rowObject.flags.skipped == false) {
+    if (rowObject.flags.displayed || rowObject.flags.done || rowObject.flags.important || rowObject.flags.skipped) {
         setTimeout(function () {
-            $("#" + options.rowId).addClass('displayed')
+            $("#" + options.rowId).addClass('displayed');
+
         }, 50);
     }
     return "<div class='buttonStyles'>" +
@@ -216,6 +209,8 @@ function displayItem(e) {
     document.getElementById('body').style.overflow = "hidden";
 
     setGridItemStatus(data._id, 'displayed', id);
+
+
 }
 
 function skip() {
@@ -281,7 +276,6 @@ var setGridItemStatus = function(grant_id, statusName, rowId){
 function closeAllert() {
     $('#allertContent').animate({scrollTop: $('html').offset().top});
     document.getElementById('myModal').style.display = "none";
-
 }
 window.onclick = function (event) {
     if (event.target == document.getElementById('myModal')) {
