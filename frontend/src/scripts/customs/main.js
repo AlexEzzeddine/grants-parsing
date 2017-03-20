@@ -1,6 +1,6 @@
 var grantId,
-    //host = 'https://shielded-fortress-95039.herokuapp.com',
-    host = 'http://127.0.0.1:5000',
+    host = 'https://shielded-fortress-95039.herokuapp.com',
+    //host = 'http://127.0.0.1:5000',
     routeArguments = '/grants?page_size=20',
     routeData = host + "/last_updated_date";
 var categoriesStr = ":All";
@@ -70,7 +70,6 @@ $(document).ready(function () {
             {
                 name: '_id',
                 width: 0,
-                formatter: prewievStyles,
                 sortable: false,
                 search: false,
                 hidden: true
@@ -181,55 +180,26 @@ function actionsButtons(cellValue, options, rowObject) {
 function displayItem(e) {
     var id = $(e).attr('id'),
         data = $("#jqGrid").getRowData(id);
+
     document.getElementById('allertDate').innerHTML = "Date: " + $(data.publication_date).text();
     document.getElementById('allertTitle').innerHTML = ($(data.title).text());
     document.getElementById('allertContent').innerHTML = ($(data.text).text());
     document.getElementById('allertContacts').innerHTML = $(data.contacts).text();
     document.getElementById('myModal').style.display = "flex";
     document.getElementById('body').style.overflow = "hidden";
-    $.ajax({
-        "url": host + "/status/" + grantId,
-        "method": "POST",
-        "data": {
-            "status_name": "displayed",
-            "value": "true"
-        }
-    });
+    
+    setGridItemStatus(data._id, 'displayed', id);
 }
 
 function skip() {
     document.getElementsByClassName("dateStyles").style.fontWeight = "normal";
-
-    $.ajax({
-        "url": host + "/status/" + grantId,
-        "method": "POST",
-        "data": {
-            "status_name": "skipped",
-            "value": "true"
-        }
-    });
+    setGridItemStatus(grantId, 'skipped', null);
 }
 function importAnt() {
-
-    $.ajax({
-        "url": host + "/status/" + grantId,
-        "method": "POST",
-        "data": {
-            "status_name": "important",
-            "value": "true"
-        }
-    });
+    setGridItemStatus(grantId, 'important', null);
 }
 function donE() {
-
-    $.ajax({
-        "url": host + "/status/" + grantId,
-        "method": "POST",
-        "data": {
-            "status_name": "done",
-            "value": "true"
-        }
-    });
+    setGridItemStatus(grantId, 'done', null);
 }
 
 
@@ -237,44 +207,37 @@ function skipItem(e) {
     var id = $(e).attr('id'),
         data = $("#jqGrid").getRowData(id);
 
-    var grant_id = $(data._id).text();
-    $.ajax({
-        "url": host + "/status/" + grant_id,
-        "method": "POST",
-        "data": {
-            "status_name": "skipped",
-            "value": "true"
-        }
-    });
+    setGridItemStatus(data._id, 'skipped', id);
 }
 function importantItem(e) {
     var id = $(e).attr('id'),
         data = $("#jqGrid").getRowData(id);
-    var grant_id = $(data._id).text();
-    $.ajax({
-        "url": host + "/status/" + grant_id,
-        "method": "POST",
-        "data": {
-            "status_name": "important",
-            "value": "true"
-        }
-    });
+
+    setGridItemStatus(data._id, 'important', id);
 }
 function doneItem(e) {
     var id = $(e).attr('id'),
         data = $("#jqGrid").getRowData(id);
 
-    var grant_id = $(data._id).text();
+    setGridItemStatus(data._id, 'done', id);
+}
+
+var setGridItemStatus = function(grant_id, statusName, rowId){
     $.ajax({
         "url": host + "/status/" + grant_id,
         "method": "POST",
         "data": {
-            "status_name": "done",
+            "status_name": statusName,
             "value": "true"
+        },
+        success: function(res){
+            console.debug(res, rowId);
+        },
+        error: function(e){
+            console.error(e.statusText);
         }
     });
-}
-
+};
 
 function closeAllert() {
     $('#allertContent').animate({scrollTop: $('html').offset().top});
