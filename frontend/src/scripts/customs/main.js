@@ -73,7 +73,7 @@ $(document).ready(function () {
                 formatter: prewievStyles,
                 sortable: false,
                 search: false
-                //hidden: true
+                hidden: true
             },
             {
                 name: '_id',
