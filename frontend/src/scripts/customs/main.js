@@ -191,9 +191,8 @@ function contactsStyles(v) {
 function actionsButtons(cellValue, options, rowObject) {
 
     if (rowObject.flags.displayed == false || rowObject.flags.done == false || rowObject.flags.important == false || rowObject.flags.skipped == false) {
-        //  $(this).addClass('displayed');
+        $(this).closest("tr").addClass('displayed');
     }
-    console.log(rowObject.flags.displayed);
 
     return "<div class='buttonStyles'>" +
         "<button onclick=\"displayItem($(this).closest('tr'))\"><i class='fa fa-desktop fa-lg' aria-hidden='true' style='color:blue;'></i>DISPLAY</button>" +
@@ -207,8 +206,6 @@ function displayItem(e) {
 
     var id = $(e).attr('id'),
         data = $("#jqGrid").getRowData(id);
-
-    console.log($(data.publication_date).text());
 
     document.getElementById('allertDate').innerHTML = "Date: " + $(data.publication_date).text();
     document.getElementById('allertTitle').innerHTML = ($(data.title).text());
