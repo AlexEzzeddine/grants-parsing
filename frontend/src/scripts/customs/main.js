@@ -83,6 +83,13 @@ $(document).ready(function () {
                 hidden: true
             },
             {
+                name: 'flags',
+                width: 0,
+                sortable: false,
+                search: false,
+                hidden: true
+            },
+            {
                 label: 'Contacts',
                 name: 'contacts',
                 width: 280,
@@ -154,7 +161,26 @@ $(document).ready(function () {
 });
 
 function statusStyles(cellValue, options, rowObject) {
-    return '<div class="statusStyles"><i class="fa fa-envelope-o" aria-hidden="true"></i></div>';
+    var statusIcon;
+    if(rowObject.flags.displayed){
+        statusIcon = 'fa-desktop';
+    }
+    if(rowObject.flags.done){
+        statusIcon = 'fa-check-circle-o';
+    }
+    if(rowObject.flags.important){
+        statusIcon = 'fa-exclamation-circle';
+    }
+    if(rowObject.flags.skipped){
+        statusIcon = 'fa-ban';
+    }
+    if(rowObject.flags.modified){
+        statusIcon = 'fa-pencil';
+    }
+
+    return '<div class="statusStyles">'+         
+        '<i class="fa '+statusIcon+'" aria-hidden="true"></i>'+
+        '</div>';
 }
 function dateStyles(v) {
     return '<div class=" dateStyles">' + v + '</div>';
@@ -240,6 +266,8 @@ function doneItem(e) {
 }
 
 var setGridItemStatus = function(grant_id, statusName, rowId){
+    if(!grant_id) return;
+
     $.ajax({
         "url": host + "/status/" + grant_id,
         "method": "POST",
@@ -248,7 +276,17 @@ var setGridItemStatus = function(grant_id, statusName, rowId){
             "value": "true"
         },
         success: function(res){
-            console.debug(res, rowId);
+            if(rowId) {
+                var newClass;
+
+                if(res.displayed) newClass = 'fa fa-desktop';
+                if(res.done) newClass = 'fa fa-check-circle-o';
+                if(res.important) newClass = 'fa fa-exclamation-circle';
+                if(res.modified) newClass = 'fa fa-pencil';
+                if(res.skipped) newClass = 'fa fa-ban';
+
+                $('tr#'+rowId+' .statusStyles i').attr('class', newClass);
+            }
         },
         error: function(e){
             console.error(e.statusText);
