@@ -83,7 +83,7 @@ $(document).ready(function () {
                 sortable: false,
                 search: false
             },
-            {label: 'Actions', width: 250, sortable: false, formatter: actionsButtons, sortable: false, search: false}
+            {label: 'Actions', width: 250, formatter: actionsButtons, sortable: false, search: false}
         ],
         viewrecords: true, // show the current page, data rang and total records on the toolbar
         height: 750,
@@ -189,11 +189,11 @@ function contactsStyles(v) {
 }
 
 function actionsButtons(cellValue, options, rowObject) {
-
     if (rowObject.flags.displayed == false || rowObject.flags.done == false || rowObject.flags.important == false || rowObject.flags.skipped == false) {
-        $(this).closest("tr").addClass('displayed');
+        setTimeout(function () {
+            $("#" + options.rowId).addClass('displayed')
+        }, 50);
     }
-
     return "<div class='buttonStyles'>" +
         "<button onclick=\"displayItem($(this).closest('tr'))\"><i class='fa fa-desktop fa-lg' aria-hidden='true' style='color:blue;'></i>DISPLAY</button>" +
         "<button onclick=\"skipItem($(this).closest('tr').addClass('displayed'))\"><i class='fa fa-ban fa-lg' aria-hidden='true' style='color:red;'></i>SKIP</button>" +
@@ -201,6 +201,7 @@ function actionsButtons(cellValue, options, rowObject) {
         "<button onclick=\"doneItem($(this).closest('tr').addClass('displayed'))\"><i class='fa fa-check-circle-o fa-lg' aria-hidden='true' style='color:green;'></i>DONE</button>" +
         "</div>";
 }
+
 function displayItem(e) {
     e.addClass('displayed');
 

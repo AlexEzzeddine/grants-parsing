@@ -342,6 +342,9 @@
   width: 800px;
   height: 90%;
   min-height: 660px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   #allertDate {
     position: absolute;
     font-style: italic;
@@ -375,7 +378,7 @@
     white-space: pre-wrap;
   }
   .cont {
-    margin-top: 30px;
+    margin-top: 20px;
     font-weight: bold;
   }
   #allertContacts {
@@ -386,9 +389,6 @@
   }
 
   .buttonContainer {
-    position: absolute;
-    bottom: 15px;
-    margin-top: 10px;
     margin-bottom: 10px;
     width: 100%;
     height: auto;
