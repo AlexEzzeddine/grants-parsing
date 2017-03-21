@@ -173,12 +173,9 @@ $(document).ready(function () {
 
             var ids = grid.jqGrid('getDataIDs');
             for (var i = 0; i < ids.length; i++) {
-                console.log("for");
                 var rowId = ids[i];
                 var rowData = grid.jqGrid('getRowData', rowId);
-                console.log(rowData);
                 if (($(rowData.displayed).text()) == "false" && ($(rowData.done).text()) == "false" && ($(rowData.important).text()) == "false" && ($(rowData.skipped).text()) == "false") {
-                    console.log("if");
                     $("#" + rowId).addClass('displayed');
                 }
             }
@@ -305,18 +302,13 @@ function displayItem(e) {
 
     var id = $(e).attr('id'),
         data = $("#jqGrid").getRowData(id);
-
-
     document.getElementById('alertDate').innerHTML = "Date: " + $(data.publication_date).text();
     document.getElementById('alertTitle').innerHTML = ($(data.title).text());
     document.getElementById('alertContent').innerHTML = ($(data.text).text());
     document.getElementById('alertContacts').innerHTML = $(data.contacts).text();
     document.getElementById('myModal').style.display = "flex";
     document.getElementById('body').style.overflow = "hidden";
-
     setGridItemStatus(data._id, 'displayed', id);
-
-
 }
 
 function skip() {
