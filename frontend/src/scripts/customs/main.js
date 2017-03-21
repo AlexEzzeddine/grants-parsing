@@ -10,25 +10,25 @@ var grantId,
     };
 
 
-function getDomains(){
+function getDomains() {
     $.ajax({
         url: domainsRoute,
         async: false,
-        success: function(data){
-            for (var i = 0; i < data.length; i++){
+        success: function (data) {
+            for (var i = 0; i < data.length; i++) {
                 domains[data[i]] = data[i];
             }
         }
     });
 }
 
-function displayLastUpdatedDate(){
-    $.get(lastUpdatedDateRoute, function(data){
+function displayLastUpdatedDate() {
+    $.get(lastUpdatedDateRoute, function (data) {
         $("#last-updated-date").text("Last updated on: " + data);
     });
 }
 
-$(document).ready(function(){
+$(document).ready(function () {
 
     getDomains();
     displayLastUpdatedDate();
@@ -41,88 +41,97 @@ $(document).ready(function(){
         jsonReader: {
             root: "Data",
             //page:  function(obj) { console.error("!!!", obj); return 1; },
-            total: function(obj){
+            total: function (obj) {
                 return obj.Count / pageSize;
             },
             records: "Count"
+        },
+        colModel: [
+            {
+                label: 'Status',
+                name: 'Status',
+                width: 50,
+                formatter: statusStyles,
+                sortable: false,
+                search: false
             },
-            colModel: [
-                {
-                    label: 'Status',
-                    name: 'Status',
-                    width: 50,
-                    formatter: statusStyles,
-                    sortable: false,
-                    search: false
-                },
-                {
-                    label: 'Date',
-                    name: 'publication_date',
-                    width: 75,
-                    formatter: dateStyles,
-                    sortable: false,
-                    search: false
-                },
-                {
-                    label: 'Source',
-                    name: 'domain',
-                    width: 100,
-                    formatter: typeStyles,
-                    stype: 'select',
-                    searchoptions: {
-                        value: domains
-                    }
-                },
-                {
-                    label: 'Title',
-                    name: 'url',
-                    formatter: linkStyles,
-                    width: 210,
-                    sortable: false,
-                    search: false
-                },
-                {
-                    label: 'Content preview',
-                    name: 'text',
-                    width: 580,
-                    formatter: previewStyles,
-                    sortable: false,
-                    search: false
+            {
+                label: 'Date',
+                name: 'publication_date',
+                width: 75,
+                formatter: dateStyles,
+                sortable: false,
+                search: false
+            },
+            {
+                label: 'Source',
+                name: 'domain',
+                width: 100,
+                formatter: typeStyles,
+                stype: 'select',
+                searchoptions: {
+                    value: domains
+                }
+            },
+            {
+                label: 'Title',
+                name: 'url',
+                formatter: linkStyles,
+                width: 210,
+                sortable: false,
+                search: false
+            },
+            {
+                label: 'Content preview',
+                name: 'text',
+                width: 580,
+                formatter: previewStyles,
+                sortable: false,
+                search: false
 
-                },
-                {
-                    name: 'title',
-                    width: 0,
-                    formatter: previewStyles,
-                    sortable: false,
-                    search: false,
-                    hidden: true
-                },
-                {
-                    name: '_id',
-                    width: 0,
-                    sortable: false,
-                    search: false,
-                    hidden: true
-                },
-                {
-                    label: 'Contacts',
-                    name: 'contacts',
-                    width: 280,
-                    formatter: contactsStyles,
-                    sortable: false,
-                    search: false
-                },
-                {
-                    label: 'Actions',
-                    width: 250,
-                    formatter: actionsButtons,
-                    sortable: false,
-                    search: false
-                }],
+            },
+            {
+                name: 'flags',
+                width: 580,
+                formatter: previewStyles,
+                sortable: false,
+                search: false,
+                hidden: true
 
-                viewrecords: true, // show the current page, data rang and total records on the toolbar
-   height: 750,
+            },
+            {
+                name: 'title',
+                width: 0,
+                formatter: previewStyles,
+                sortable: false,
+                search: false,
+                hidden: true
+            },
+            {
+                name: '_id',
+                width: 0,
+                sortable: false,
+                search: false,
+                hidden: true
+            },
+            {
+                label: 'Contacts',
+                name: 'contacts',
+                width: 280,
+                formatter: contactsStyles,
+                sortable: false,
+                search: false
+            },
+            {
+                label: 'Actions',
+                width: 250,
+                formatter: actionsButtons,
+                sortable: false,
+                search: false
+            }],
+
+        viewrecords: true, // show the current page, data rang and total records on the toolbar
+        height: 750,
         hidegrid: false,
         autowidth: true,
         rowheight: 20,
@@ -130,7 +139,11 @@ $(document).ready(function(){
         rowNum: 20,
         toppager: true,
         cloneToTop: true,
-        pager: "#jqGridPager"
+        loadonce: false,
+        pager: "#jqGridPager",
+        gridComplete: function () {
+
+        }
     });
     grid.jqGrid('filterToolbar', {
         autosearch: true,
@@ -150,35 +163,35 @@ $(document).ready(function(){
     grid.jqGrid('navButtonAdd', '#' + grid[0].id + '_toppager_left', {
         caption: "<div class='add_record_button'><i class='fa fa-envelope-o' aria-hidden='true'></i>UNREAD</div>",
         buttonicon: 'none',
-        onClickButton: function() {
+        onClickButton: function () {
             alert("UNREAD");
         }
     });
     grid.jqGrid('navButtonAdd', '#' + grid[0].id + '_toppager_left', {
         caption: "<div class='add_record_button'><i class='fa fa-exclamation-circle fa-lg' aria-hidden='true'></i>IMPORTANT</div>",
         buttonicon: 'none',
-        onClickButton: function() {
+        onClickButton: function () {
             alert("IMPORTANT");
         }
     });
     grid.jqGrid('navButtonAdd', '#' + grid[0].id + '_toppager_left', {
         caption: "<div class='add_record_button'><i class='fa fa-exclamation-circle fa-lg' aria-hidden='true'></i>SKIPPED</div>",
         buttonicon: 'none',
-        onClickButton: function() {
+        onClickButton: function () {
             alert("SKIPPED");
         }
     });
     grid.jqGrid('navButtonAdd', '#' + grid[0].id + '_toppager_left', {
         caption: "<div class='add_record_button'><i class='fa fa-check-circle-o fa-lg' aria-hidden='true'></i> DONE</div>",
         buttonicon: 'none',
-        onClickButton: function() {
+        onClickButton: function () {
             alert("DONE");
         }
     });
     grid.jqGrid('navButtonAdd', '#' + grid[0].id + '_toppager_left', {
         caption: "<div class='add_record_button'><i class='fa fa-pencil' aria-hidden='true'></i>MODIFIED</div>",
         buttonicon: 'none',
-        onClickButton: function() {
+        onClickButton: function () {
             alert("MODIFIED");
         }
     });
@@ -230,20 +243,22 @@ function clickedLink(e) {
 }
 
 function previewStyles(v) {
-    return '<div class="previewStyles">' + v + '</div>';
+    return '<div  class="previewStyles">' + v + '</div>';
 }
 
 function contactsStyles(v) {
     return '<div class="contactsStyles">' + v + '</p></div>';
 }
 
+
 function actionsButtons(cellValue, options, rowObject) {
+    console.log("actionsButtons  " + rowObject);
     if (rowObject.flags.displayed == false && rowObject.flags.done == false && rowObject.flags.important == false && rowObject.flags.skipped == false) {
         setTimeout(function() {
             $("#" + options.rowId).addClass('displayed');
-
         }, 5);
     }
+    console.log(rowObject);
     return "<div class='buttonStyles'>" +
         "<button onclick=\"displayItem($(this).closest('tr'))\"><i class='fa fa-desktop fa-lg' aria-hidden='true' style='color:blue;'></i>DISPLAY</button>" +
         "<button onclick=\"skipItem($(this).closest('tr').addClass('displayed'))\"><i class='fa fa-ban fa-lg' aria-hidden='true' style='color:red;'></i>SKIP</button>" +
@@ -309,7 +324,7 @@ function doneItem(e) {
     setGridItemStatus(data._id, 'done', id);
 }
 
-var setGridItemStatus = function(grant_id, statusName, rowId) {
+var setGridItemStatus = function (grant_id, statusName, rowId) {
 
     if (!grant_id) return;
 
@@ -325,9 +340,9 @@ var setGridItemStatus = function(grant_id, statusName, rowId) {
                 var newClass = "fa fa-envelope-o";
 
                 /*if (res.displayed) newClass = 'fa fa-desktop';
-                if (res.done) newClass = 'fa fa-check-circle-o';
-                if (res.important) newClass = 'fa fa-exclamation-circle';
-                if (res.modified) newClass = 'fa fa-pencil';
+                 if (res.done) newClass = 'fa fa-check-circle-o';
+                 if (res.important) newClass = 'fa fa-exclamation-circle';
+                 if (res.modified) newClass = 'fa fa-pencil';
                  if (res.skipped) newClass = 'fa fa-ban';*/
 
                 if (statusName == "displayed") newClass = 'fa fa-envelope-open-o';
@@ -338,7 +353,7 @@ var setGridItemStatus = function(grant_id, statusName, rowId) {
                 $('tr#' + rowId + ' .statusStyles i').attr('class', newClass);
             }
         },
-        error: function(e) {
+        error: function (e) {
             console.error(e.statusText);
         }
     });
