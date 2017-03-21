@@ -91,13 +91,40 @@ $(document).ready(function () {
 
             },
             {
-                name: 'flags',
+                name: 'done',
+                jsonmap: 'flags.done',
                 width: 580,
                 formatter: previewStyles,
                 sortable: false,
                 search: false,
                 hidden: true
-
+            },
+            {
+                name: 'displayed',
+                jsonmap: 'flags.displayed',
+                width: 580,
+                formatter: previewStyles,
+                sortable: false,
+                search: false,
+                hidden: true
+            },
+            {
+                name: 'important',
+                jsonmap: 'flags.important',
+                width: 580,
+                formatter: previewStyles,
+                sortable: false,
+                search: false,
+                hidden: true
+            },
+            {
+                name: 'skipped',
+                jsonmap: 'flags.skipped',
+                width: 580,
+                formatter: previewStyles,
+                sortable: false,
+                search: false,
+                hidden: true
             },
             {
                 name: 'title',
@@ -130,6 +157,7 @@ $(document).ready(function () {
                 search: false
             }],
 
+
         viewrecords: true, // show the current page, data rang and total records on the toolbar
         height: 750,
         hidegrid: false,
@@ -143,6 +171,17 @@ $(document).ready(function () {
         pager: "#jqGridPager",
         gridComplete: function () {
 
+            var ids = grid.jqGrid('getDataIDs');
+            for (var i = 0; i < ids.length; i++) {
+                console.log("for");
+                var rowId = ids[i];
+                var rowData = grid.jqGrid('getRowData', rowId);
+                console.log(rowData);
+                if (($(rowData.displayed).text()) == "false" && ($(rowData.done).text()) == "false" && ($(rowData.important).text()) == "false" && ($(rowData.skipped).text()) == "false") {
+                    console.log("if");
+                    $("#" + rowId).addClass('displayed');
+                }
+            }
         }
     });
     grid.jqGrid('filterToolbar', {
@@ -252,13 +291,7 @@ function contactsStyles(v) {
 
 
 function actionsButtons(cellValue, options, rowObject) {
-    console.log("actionsButtons  " + rowObject);
-    if (rowObject.flags.displayed == false && rowObject.flags.done == false && rowObject.flags.important == false && rowObject.flags.skipped == false) {
-        setTimeout(function() {
-            $("#" + options.rowId).addClass('displayed');
-        }, 5);
-    }
-    console.log(rowObject);
+
     return "<div class='buttonStyles'>" +
         "<button onclick=\"displayItem($(this).closest('tr'))\"><i class='fa fa-desktop fa-lg' aria-hidden='true' style='color:blue;'></i>DISPLAY</button>" +
         "<button onclick=\"skipItem($(this).closest('tr').addClass('displayed'))\"><i class='fa fa-ban fa-lg' aria-hidden='true' style='color:red;'></i>SKIP</button>" +
@@ -312,7 +345,6 @@ function importantItem(e) {
     e.addClass('display');
     var id = $(e).attr('id'),
         data = $("#jqGrid").getRowData(id);
-
     setGridItemStatus(data._id, 'important', id);
 }
 
@@ -325,9 +357,7 @@ function doneItem(e) {
 }
 
 var setGridItemStatus = function (grant_id, statusName, rowId) {
-
     if (!grant_id) return;
-
     $.ajax({
         "url": host + "/status/" + grant_id,
         "method": "POST",
