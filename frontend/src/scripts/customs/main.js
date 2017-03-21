@@ -206,7 +206,7 @@ function typeStyles(v) {
 }
 
 function linkStyles(cellValue, options, rowObject) {
-    return "<a class='linkStyles' onclick=\"clickedLink($(this).closest('tr'))\" style='color: #3f51b5'  target='_blank' href='\" + cellValue + \"'+>" + rowObject.title + "</a>";
+    return "<a class='linkStyles' onclick='clickedLink($(this).closest(\"tr\"))' style='color: #3f51b5'  target='_blank' href='" + cellValue + "'>" + rowObject.title + "</a>";
 }
 
 function clickedLink(e) {
