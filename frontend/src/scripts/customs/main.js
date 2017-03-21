@@ -29,21 +29,17 @@ function displayLastUpdatedDate() {
 }
 
 $(document).ready(function () {
-
     getDomains();
     displayLastUpdatedDate();
 
     var grid = $("#jqGrid");
     grid.jqGrid({
-        url: grantsRoute + "?page_size=" + pageSize,
+        url: grantsRoute,
         mtype: "GET",
         datatype: "json",
         jsonReader: {
             root: "Data",
-            //page:  function(obj) { console.error("!!!", obj); return 1; },
-            total: function (obj) {
-                return obj.Count / pageSize;
-            },
+            total: "Pages",
             records: "Count"
         },
         colModel: [
@@ -68,6 +64,7 @@ $(document).ready(function () {
                 name: 'domain',
                 width: 100,
                 formatter: typeStyles,
+                sortable: false,
                 stype: 'select',
                 searchoptions: {
                     value: domains
@@ -164,13 +161,12 @@ $(document).ready(function () {
         autowidth: true,
         rowheight: 20,
         page: 1,
-        rowNum: 20,
+        rowNum: pageSize,
         toppager: true,
         cloneToTop: true,
         loadonce: false,
         pager: "#jqGridPager",
         gridComplete: function () {
-
             var ids = grid.jqGrid('getDataIDs');
             for (var i = 0; i < ids.length; i++) {
                 var rowId = ids[i];
@@ -298,8 +294,6 @@ function actionsButtons(cellValue, options, rowObject) {
 }
 
 function displayItem(e) {
-    e.addClass('display');
-
     var id = $(e).attr('id'),
         data = $("#jqGrid").getRowData(id);
     document.getElementById('alertDate').innerHTML = "Date: " + $(data.publication_date).text();
@@ -309,6 +303,7 @@ function displayItem(e) {
     document.getElementById('myModal').style.display = "flex";
     document.getElementById('body').style.overflow = "hidden";
     setGridItemStatus(data._id, 'displayed', id);
+    e.addClass('display');
 }
 
 function skip() {
@@ -359,13 +354,7 @@ var setGridItemStatus = function (grant_id, statusName, rowId) {
         },
         success: function () {
             if (rowId) {
-                var newClass = "fa fa-envelope-o";
-
-                /*if (res.displayed) newClass = 'fa fa-desktop';
-                 if (res.done) newClass = 'fa fa-check-circle-o';
-                 if (res.important) newClass = 'fa fa-exclamation-circle';
-                 if (res.modified) newClass = 'fa fa-pencil';
-                 if (res.skipped) newClass = 'fa fa-ban';*/
+                var newClass;
 
                 if (statusName == "displayed") newClass = 'fa fa-envelope-open-o';
                 if (statusName == "done") newClass = 'fa fa-check-circle-o';

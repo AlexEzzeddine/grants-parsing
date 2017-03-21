@@ -1,4 +1,5 @@
 from bson import ObjectId
+from math import ceil
 from datetime import datetime
 from flask import json
 from flask import Flask
@@ -123,11 +124,13 @@ def get_all():
         "flags." + flag: True for flag in flags
     })
     page = int(request.args.get('page', 1))
-    page_size = int(request.args.get('page_size', 10))
+    rows = int(request.args.get('rows', 16))
     data = Grants.objects(__raw__=filters).skip(
-        (page - 1) * page_size).limit(page_size)
+        (page - 1) * rows).limit(rows)
+    count = Grants.objects(__raw__=filters).count()
     return jsonify({
-        "Count": Grants.objects(__raw__=filters).count(),
+        "Count": count,
+        "Pages": ceil(count / rows),
         "Data": [obj.to_mongo() for obj in data]
     })
 
