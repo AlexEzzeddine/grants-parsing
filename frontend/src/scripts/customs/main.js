@@ -348,10 +348,10 @@ function closeAlert() {
     $('#alertContent').animate({
         scrollTop: $('html').offset().top
     });
-    document.getElementById('myModal').style.display = "none";
+    $("#myModal").hide();
 }
 window.onclick = function(event) {
-    if (event.target == document.getElementById('myModal')) {
-        document.getElementById('myModal').style.display = "none";
+    if ($(event.target).is("#myModal")) {
+        closeAlert();
     }
 }
