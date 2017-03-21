@@ -187,9 +187,7 @@ $(document).ready(function(){
 
 function statusStyles(cellValue, options, rowObject) {
     var statusIcon = 'fa-envelope-o';
-    if (rowObject.flags.displayed) {
-        statusIcon = 'fa-desktop';
-    }
+
     if (rowObject.flags.done) {
         statusIcon = 'fa-check-circle-o';
     }
@@ -198,6 +196,9 @@ function statusStyles(cellValue, options, rowObject) {
     }
     if (rowObject.flags.skipped) {
         statusIcon = 'fa-ban';
+    }
+    if (rowObject.flags.displayed) {
+        statusIcon = 'fa-envelope-open-o';
     }
     if (rowObject.flags.modified) {
         statusIcon = 'fa-pencil';
@@ -314,15 +315,20 @@ var setGridItemStatus = function(grant_id, statusName, rowId) {
             "status_name": statusName,
             "value": "true"
         },
-        success: function(res) {
+        success: function () {
             if (rowId) {
                 var newClass = "fa fa-envelope-o";
 
-                if (res.displayed) newClass = 'fa fa-desktop';
+                /*if (res.displayed) newClass = 'fa fa-desktop';
                 if (res.done) newClass = 'fa fa-check-circle-o';
                 if (res.important) newClass = 'fa fa-exclamation-circle';
                 if (res.modified) newClass = 'fa fa-pencil';
-                if (res.skipped) newClass = 'fa fa-ban';
+                 if (res.skipped) newClass = 'fa fa-ban';*/
+
+                if (statusName == "displayed") newClass = 'fa fa-envelope-open-o';
+                if (statusName == "done") newClass = 'fa fa-check-circle-o';
+                if (statusName == "important") newClass = 'fa fa-exclamation-circle';
+                if (statusName == "skipped") newClass = 'fa fa-ban';
 
                 $('tr#' + rowId + ' .statusStyles i').attr('class', newClass);
             }
