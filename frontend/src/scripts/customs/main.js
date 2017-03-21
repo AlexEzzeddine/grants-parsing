@@ -136,6 +136,17 @@ $(document).ready(function(){
         autosearch: true,
         stringResult: true
     });
+    grid.navGrid('#',
+        {
+            edit: false,
+            add: false,
+            del: false,
+            search: false,
+            refresh: false,
+            view: false,
+            position: "left",
+            cloneToTop: true
+        });
     grid.jqGrid('navButtonAdd', '#' + grid[0].id + '_toppager_left', {
         caption: "<div class='add_record_button'><i class='fa fa-envelope-o' aria-hidden='true'></i>UNREAD</div>",
         buttonicon: 'none',
@@ -230,7 +241,7 @@ function actionsButtons(cellValue, options, rowObject) {
         setTimeout(function() {
             $("#" + options.rowId).addClass('displayed');
 
-        }, 50);
+        }, 5);
     }
     return "<div class='buttonStyles'>" +
         "<button onclick=\"displayItem($(this).closest('tr'))\"><i class='fa fa-desktop fa-lg' aria-hidden='true' style='color:blue;'></i>DISPLAY</button>" +
@@ -305,7 +316,7 @@ var setGridItemStatus = function(grant_id, statusName, rowId) {
         },
         success: function(res) {
             if (rowId) {
-                var newClass;
+                var newClass = "fa fa-envelope-o";
 
                 if (res.displayed) newClass = 'fa fa-desktop';
                 if (res.done) newClass = 'fa fa-check-circle-o';
