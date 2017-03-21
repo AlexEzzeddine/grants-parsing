@@ -15,5 +15,6 @@ class GrantItem(Item):
     text = Field()
     domain = Field()
     contacts = Field()
+    notes = Field()
     publication_date = Field()
     flags = Field()

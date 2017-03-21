@@ -41,6 +41,7 @@ class Grants(DynamicDocument):
     text = StringField()
     contacts = StringField()
     domain = StringField()
+    notes = StringField()
     publication_date = DateTimeField()
     flags = DictField()
     meta = {'strict': False}

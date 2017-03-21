@@ -10,7 +10,7 @@ from scrapy import signals
 
 class MongoDBPipeline(object):
 
-    flags = {
+    EMPTY_FLAGS = {
         "important": False,
         "displayed": False,
         "skipped": False,
@@ -59,17 +59,19 @@ class MongoDBPipeline(object):
             document = self.collection.find_one({"url": item['url']},
                                                 {"_id": 0,
                                                  "flags": 0,
+                                                 "notes": 0,
                                                  "publication_date": 0})
             if not document:
                 spider.logger.info("Inserting new document")
-                item['flags'] = self.flags
-                item['publication_date'] = datetime.datetime.now()
+                item['flags'] = self.EMPTY_FLAGS
+                item["notes"] = ""
+                item['publication_date'] = datetime.now()
                 self.collection.insert(dict(item))
             elif document != item:
                 spider.logger.info("Updating old document")
-                item['flags'] = self.flags
+                item['flags'] = self.EMPTY_FLAGS
                 item['flags']['modified'] = True
-                item['publication_date'] = datetime.datetime.now()
+                item['publication_date'] = datetime.now()
                 self.collection.update({"url": item['url']}, dict(item))
             else:
                 spider.logger.info("Found exact same document")
