@@ -218,7 +218,7 @@ function typeStyles(v) {
 }
 
 function linkStyles(cellValue, options, rowObject) {
-    return "<a class='linkStyles' onclick='clickedLink($(this).closest(\"tr\"))' style='color: #3f51b5'  target='_blank' href='" + cellValue + "'>" + rowObject.title + "</a>";
+    return "<a class='linkStyles' onclick='clickedLink($(this).closest(\"tr\"))' style='color: #3f51b5; height: 25px'   target='_blank' href='" + cellValue + "'>" + rowObject.title + "</a>";
 }
 
 function clickedLink(e) {
@@ -238,7 +238,7 @@ function contactsStyles(v) {
 }
 
 function actionsButtons(cellValue, options, rowObject) {
-    if (rowObject.flags.displayed || rowObject.flags.done || rowObject.flags.important || rowObject.flags.skipped) {
+    if (rowObject.flags.displayed == false && rowObject.flags.done == false && rowObject.flags.important == false && rowObject.flags.skipped == false) {
         setTimeout(function() {
             $("#" + options.rowId).addClass('displayed');
 
@@ -253,10 +253,11 @@ function actionsButtons(cellValue, options, rowObject) {
 }
 
 function displayItem(e) {
-    e.addClass('displayed');
+    e.addClass('display');
 
     var id = $(e).attr('id'),
         data = $("#jqGrid").getRowData(id);
+
 
     document.getElementById('alertDate').innerHTML = "Date: " + $(data.publication_date).text();
     document.getElementById('alertTitle').innerHTML = ($(data.title).text());
@@ -285,6 +286,7 @@ function donE() {
 
 
 function skipItem(e) {
+    e.addClass('display');
     var id = $(e).attr('id'),
         data = $("#jqGrid").getRowData(id);
 
@@ -292,6 +294,7 @@ function skipItem(e) {
 }
 
 function importantItem(e) {
+    e.addClass('display');
     var id = $(e).attr('id'),
         data = $("#jqGrid").getRowData(id);
 
@@ -299,6 +302,7 @@ function importantItem(e) {
 }
 
 function doneItem(e) {
+    e.addClass('display');
     var id = $(e).attr('id'),
         data = $("#jqGrid").getRowData(id);
 
@@ -306,6 +310,7 @@ function doneItem(e) {
 }
 
 var setGridItemStatus = function(grant_id, statusName, rowId) {
+
     if (!grant_id) return;
 
     $.ajax({
