@@ -28,6 +28,7 @@ function displayLastUpdatedDate() {
     });
 }
 
+
 $(document).ready(function () {
     getDomains();
     displayLastUpdatedDate();
@@ -228,7 +229,10 @@ $(document).ready(function () {
         }
     });
     $("#jqGrid_toppager_center").hide();
+
+
 });
+
 
 function statusStyles(cellValue, options, rowObject) {
     var statusIcon = 'fa-envelope-o';

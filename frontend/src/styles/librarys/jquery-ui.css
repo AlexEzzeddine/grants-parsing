@@ -2000,3 +2000,29 @@ a.ui-button:active,
     -webkit-box-shadow: 0px 0px 5px #666666;
     box-shadow: 0px 0px 5px #666666;
 }
+
+.ui-icon-seek-next, .ui-icon-seek-prev, .ui-icon-seek-end, .ui-icon-seek-first {
+    display: inline-block;
+    font-family: FontAwesome;
+    font-style: normal;
+    font-weight: normal;
+    line-height: 1;
+    -webkit-font-smoothing: antialiased;
+
+}
+
+.ui-icon-seek-next:before {
+    content: "\f105";
+}
+
+.ui-icon-seek-prev:before {
+    content: "\f104";
+}
+
+.ui-icon-seek-end:before {
+    content: "\f101";
+}
+
+.ui-icon-seek-first:before {
+    content: "\f100";
+}
