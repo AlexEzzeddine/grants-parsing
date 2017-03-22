@@ -172,8 +172,8 @@ $(document).ready(function () {
             for (var i = 0; i < ids.length; i++) {
                 var rowId = ids[i];
                 var rowData = grid.jqGrid('getRowData', rowId);
-                if (($(rowData.unread).text()) == "false" && ($(rowData.done).text()) == "false" && ($(rowData.important).text()) == "false" && ($(rowData.skipped).text()) == "false") {
-                    $("#" + rowId).addClass('displayed');
+                if (($(rowData.unread).text()) == "true") {
+                    $("#" + rowId).addClass('unread');
                 }
             }
         }
@@ -236,7 +236,7 @@ $(document).ready(function () {
 
 
 function statusStyles(cellValue, options, rowObject) {
-    var statusIcon = 'fa-envelope-o';
+    var statusIcon = 'fa-envelope-open-o';
 
     if (rowObject.flags.done) {
         statusIcon = 'fa-check-circle-o';
@@ -248,7 +248,7 @@ function statusStyles(cellValue, options, rowObject) {
         statusIcon = 'fa-ban';
     }
     if (rowObject.flags.unread) {
-        statusIcon = 'fa-envelope-open-o';
+        statusIcon = 'fa-envelope-o';
     }
     if (rowObject.flags.modified) {
         statusIcon = 'fa-pencil';
@@ -272,7 +272,7 @@ function linkStyles(cellValue, options, rowObject) {
 }
 
 function clickedLink(e) {
-    e.addClass('display');
+    e.removeClass('unread');
 
     var id = $(e).attr('id'),
         data = $("#jqGrid").getRowData(id);
@@ -299,7 +299,7 @@ function actionsButtons(cellValue, options, rowObject) {
 }
 
 function displayItem(e) {
-    e.addClass('display');
+    e.removeClass('unread');
     var id = $(e).attr('id'),
         data = $("#jqGrid").getRowData(id);
     document.getElementById('alertDate').innerHTML = "Date: " + $(data.publication_date).text();
