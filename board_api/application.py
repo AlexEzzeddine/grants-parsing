@@ -113,13 +113,14 @@ def login():
 @application.route('/grants')
 #@flask_login.login_required
 def get_all():
-    domains = json.loads(request.args.get("domains", "[]"))
-    flags = json.loads(request.args.get("flags", "[]"))
     filters = {}
-    if domains:
-        filters.update({
-            "$or": [{"domain": domain} for domain in domains]
-        })
+    domain="All"
+    domain_filters = request.args.get("filters")
+    if domain_filters:
+        domain = json.loads(domain_filters)['rules'][0]['data']
+    if domain and domain != "All":
+        filters.update({"domain": domain})
+    flags = json.loads(request.args.get("flags", "[]"))
     filters.update({
         "flags." + flag: True for flag in flags
     })
