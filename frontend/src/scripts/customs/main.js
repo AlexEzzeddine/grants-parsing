@@ -197,35 +197,36 @@ $(document).ready(function () {
         caption: "<div class='add_record_button'><i class='fa fa-envelope-o' aria-hidden='true'></i>UNREAD</div>",
         buttonicon: 'none',
         onClickButton: function () {
-            alert("UNREAD");
+            grid.setGridParam({url: grantsRoute, postData: {flags: '["unread"]'}}).trigger('reloadGrid');
+
         }
     });
     grid.jqGrid('navButtonAdd', '#' + grid[0].id + '_toppager_left', {
         caption: "<div class='add_record_button'><i class='fa fa-exclamation-circle fa-lg' aria-hidden='true'></i>IMPORTANT</div>",
         buttonicon: 'none',
         onClickButton: function () {
-            alert("IMPORTANT");
+            grid.setGridParam({url: grantsRoute, postData: {flags: '["important"]'}}).trigger('reloadGrid');
         }
     });
     grid.jqGrid('navButtonAdd', '#' + grid[0].id + '_toppager_left', {
         caption: "<div class='add_record_button'><i class='fa fa-exclamation-circle fa-lg' aria-hidden='true'></i>SKIPPED</div>",
         buttonicon: 'none',
         onClickButton: function () {
-            alert("SKIPPED");
+            grid.setGridParam({url: grantsRoute, postData: {flags: '["skipped"]'}}).trigger('reloadGrid');
         }
     });
     grid.jqGrid('navButtonAdd', '#' + grid[0].id + '_toppager_left', {
         caption: "<div class='add_record_button'><i class='fa fa-check-circle-o fa-lg' aria-hidden='true'></i> DONE</div>",
         buttonicon: 'none',
         onClickButton: function () {
-            alert("DONE");
+            grid.setGridParam({url: grantsRoute, postData: {flags: '["done"]'}}).trigger('reloadGrid');
         }
     });
     grid.jqGrid('navButtonAdd', '#' + grid[0].id + '_toppager_left', {
         caption: "<div class='add_record_button'><i class='fa fa-pencil' aria-hidden='true'></i>MODIFIED</div>",
         buttonicon: 'none',
         onClickButton: function () {
-            alert("MODIFIED");
+            grid.setGridParam({url: grantsRoute, postData: {flags: '["modified"]'}}).trigger('reloadGrid');
         }
     });
     $("#jqGrid_toppager_center").hide();
