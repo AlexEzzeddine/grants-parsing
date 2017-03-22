@@ -266,25 +266,10 @@
     background: #fff8f8;
     color: #3f51b5;
   }
-  .dateStyles {
+  .dateStyles, .typeStyles, .linkStyles, .previewStyles, .contactsStyles {
     font-weight: normal;
   }
 
-  .typeStyles {
-    font-weight: normal;
-  }
-
-  .linkStyles {
-    font-weight: normal;
-  }
-
-  .previewStyles {
-    font-weight: normal;
-  }
-
-  .contactsStyles {
-    font-weight: normal;
-  }
 }
 
 
@@ -362,7 +347,6 @@
   background-color: rgba(0, 0, 0, 0.4);
   border: 0;
 }
-
 .modal-content {
   border-radius: 0;
   background-color: #fefefe;
