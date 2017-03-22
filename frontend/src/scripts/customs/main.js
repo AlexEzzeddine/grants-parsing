@@ -263,11 +263,11 @@ function typeStyles(v) {
 }
 
 function linkStyles(cellValue, options, rowObject) {
-    return "<a class='linkStyles' onclick='clickedLink($(this).closest(\"tr\").addClass(\"display\"))' style='color: #3f51b5; height: 25px'   target='_blank' href='" + cellValue + "'>" + rowObject.title + "</a>";
+    return "<a class='linkStyles' onclick='clickedLink($(this).closest(\"tr\"))' style='color: #3f51b5; height: 25px'   target='_blank' href='" + cellValue + "'>" + rowObject.title + "</a>";
 }
 
 function clickedLink(e) {
-    e.addClass('displayed');
+    e.addClass('display');
 
     var id = $(e).attr('id'),
         data = $("#jqGrid").getRowData(id);
