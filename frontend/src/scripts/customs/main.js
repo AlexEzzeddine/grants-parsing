@@ -193,7 +193,17 @@ $(document).ready(function () {
             position: "left",
             cloneToTop: true
         });
-    grid.jqGrid('navButtonAdd', '#' + grid[0].id + '_toppager_left', {
+    
+       grid.jqGrid('navButtonAdd', '#' + grid[0].id + '_toppager_left', {
+        caption: "<div class='add_record_button'><i class='fa fa-list' aria-hidden='true'></i>ALL</div>",
+        buttonicon: 'none',
+        onClickButton: function () {
+            grid.setGridParam({url: grantsRoute, postData: {flags: '["all"]'}}).trigger('reloadGrid');
+
+        }
+    });
+
+        grid.jqGrid('navButtonAdd', '#' + grid[0].id + '_toppager_left', {
         caption: "<div class='add_record_button'><i class='fa fa-envelope-o' aria-hidden='true'></i>UNREAD</div>",
         buttonicon: 'none',
         onClickButton: function () {
