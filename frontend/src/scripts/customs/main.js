@@ -98,8 +98,8 @@ $(document).ready(function () {
                 hidden: true
             },
             {
-                name: 'displayed',
-                jsonmap: 'flags.displayed',
+                name: 'unread',
+                jsonmap: 'flags.unread',
                 width: 580,
                 formatter: previewStyles,
                 sortable: false,
@@ -172,7 +172,7 @@ $(document).ready(function () {
             for (var i = 0; i < ids.length; i++) {
                 var rowId = ids[i];
                 var rowData = grid.jqGrid('getRowData', rowId);
-                if (($(rowData.displayed).text()) == "false" && ($(rowData.done).text()) == "false" && ($(rowData.important).text()) == "false" && ($(rowData.skipped).text()) == "false") {
+                if (($(rowData.unread).text()) == "false" && ($(rowData.done).text()) == "false" && ($(rowData.important).text()) == "false" && ($(rowData.skipped).text()) == "false") {
                     $("#" + rowId).addClass('displayed');
                 }
             }
@@ -246,7 +246,7 @@ function statusStyles(cellValue, options, rowObject) {
     if (rowObject.flags.skipped) {
         statusIcon = 'fa-ban';
     }
-    if (rowObject.flags.displayed) {
+    if (rowObject.flags.unread) {
         statusIcon = 'fa-envelope-open-o';
     }
     if (rowObject.flags.modified) {
@@ -275,7 +275,7 @@ function clickedLink(e) {
 
     var id = $(e).attr('id'),
         data = $("#jqGrid").getRowData(id);
-    setGridItemStatus(data._id, 'displayed', id);
+    setGridItemStatus(data._id, 'unread', id);
 }
 
 function previewStyles(v) {
@@ -307,7 +307,7 @@ function displayItem(e) {
     document.getElementById('alertContacts').innerHTML = $(data.contacts).text();
     document.getElementById('myModal').style.display = "flex";
     document.getElementById('body').style.overflow = "hidden";
-    setGridItemStatus(data._id, 'displayed', id);
+    setGridItemStatus(data._id, 'unread', id);
 
 }
 
@@ -361,7 +361,7 @@ var setGridItemStatus = function (grant_id, statusName, rowId) {
             if (rowId) {
                 var newClass;
 
-                if (statusName == "displayed") newClass = 'fa fa-envelope-open-o';
+                if (statusName == "unread") newClass = 'fa fa-envelope-open-o';
                 if (statusName == "done") newClass = 'fa fa-check-circle-o';
                 if (statusName == "important") newClass = 'fa fa-exclamation-circle';
                 if (statusName == "skipped") newClass = 'fa fa-ban';
