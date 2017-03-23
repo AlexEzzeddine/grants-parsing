@@ -198,8 +198,7 @@ $(document).ready(function () {
         caption: "<div class='add_record_button'><i class='fa fa-list' aria-hidden='true'></i>ALL</div>",
         buttonicon: 'none',
         onClickButton: function () {
-            grid.setGridParam({url: grantsRoute, postData: {flags: '["all"]'}}).trigger('reloadGrid');
-
+            grid.setGridParam({url: grantsRoute, postData: {flags: '[]'}}).trigger('reloadGrid');
         }
     });
 
