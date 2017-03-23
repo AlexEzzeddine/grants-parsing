@@ -350,6 +350,7 @@ function donE() {
 
 
 function skipItem(e) {
+
     e.removeClass('unread');
     e.addClass('buttonPressedSkip');
     var id = $(e).attr('id'),
