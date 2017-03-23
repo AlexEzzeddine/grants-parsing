@@ -172,7 +172,7 @@ $(document).ready(function () {
             for (var i = 0; i < ids.length; i++) {
                 var rowId = ids[i];
                 var rowData = grid.jqGrid('getRowData', rowId);
-                if (($(rowData.unread).text()) == "true") {
+                if (($(rowData.unread).text()) == "true" && ($(rowData.important).text()) == "false" && ($(rowData.skipped).text()) == "false" && ($(rowData.done).text()) == "false") {
                     $("#" + rowId).addClass('unread');
                 }
 
