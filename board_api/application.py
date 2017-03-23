@@ -111,7 +111,7 @@ def login():
 
 
 @application.route('/grants')
-#@flask_login.login_required
+@flask_login.login_required
 def get_all():
     filters = {}
     domain="All"

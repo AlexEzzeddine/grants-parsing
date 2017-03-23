@@ -1,6 +1,6 @@
 var grantId,
-    //host = 'https://shielded-fortress-95039.herokuapp.com',
-    host = 'http://127.0.0.1:5000',
+    host = 'https://shielded-fortress-95039.herokuapp.com',
+    //host = 'http://127.0.0.1:5000',
     grantsRoute = host + '/grants',
     lastUpdatedDateRoute = host + "/last_updated_date",
     domainsRoute = host + "/domains",
@@ -167,6 +167,13 @@ $(document).ready(function () {
         cloneToTop: true,
         loadonce: false,
         pager: "#jqGridPager",
+        loadError : function(xhr,st,err) { 
+            if(xhr.status == 401)
+            {
+                console.log(window.location.protocol);
+                window.location.href = '/login.html';
+            }
+        },
         gridComplete: function () {
             var ids = grid.jqGrid('getDataIDs');
             for (var i = 0; i < ids.length; i++) {
@@ -188,6 +195,7 @@ $(document).ready(function () {
             }
         }
     });
+
     grid.jqGrid('filterToolbar', {
         autosearch: true,
         stringResult: true
@@ -419,7 +427,7 @@ var setGridItemStatus = function (grant_id, statusName, rowId) {
             }
         },
         error: function (e) {
-            console.error(e.statusText);
+            console.error(e);
         }
     });
 };

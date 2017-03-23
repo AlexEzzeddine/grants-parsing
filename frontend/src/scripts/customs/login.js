@@ -28,7 +28,7 @@ function validateForm() {
              });
 
              if (data !== "User not found" && data !== "Bad password") {
-                 window.location.href = "../dist/index.html";
+                 window.location.href = "/index.html";
              }
         }
     });
