@@ -152,12 +152,20 @@ def get_last_updated_date():
 
 @application.route('/grants/<grant_id>', methods=["POST"])
 def change_status(grant_id):
+    flags = {
+        "important": False,
+        "unread": False,
+        "skipped": False,
+        "done": False,
+        "modified": False,
+    }
     doc = Grants.objects(_id=grant_id).first()
     for status, value in request.form.items():
         status=status.lower()
         value=value.lower()
-        if status in doc.flags and value in ["true","false"]:
-            doc.flags[status] = value == "true"
+        if status in ["important", "skipped", "done"] and value in ["true","false"]:
+            flags[status] = value == "true"
+    doc.flags=flags
     doc.save()
     return jsonify(doc.flags)
 
