@@ -259,19 +259,8 @@
   .contactsStyles {
     font-weight: bold;
   }
-}
-
-.display {
-  .statusStyles {
-    background: #fff8f8;
-    color: #3f51b5;
-  }
-  .dateStyles, .typeStyles, .linkStyles, .previewStyles, .contactsStyles {
-    font-weight: normal;
-  }
 
 }
-
 
 .dateStyles {
   height: 35px;
@@ -329,6 +318,10 @@
 .buttonStyles {
   height: 35px;
   margin-left: 10px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
 }
 
 //Allert styles start
