@@ -176,9 +176,6 @@ $(document).ready(function () {
                     $("#" + rowId).addClass('unread');
                 }
 
-                if (($(rowData.unread).text()) == "false") {
-                    $("#" + rowId).addClass('buttonPressedDisplay');
-                }
                 if (($(rowData.skipped).text()) == "true") {
                     $("#" + rowId).addClass('buttonPressedSkip');
                 }
@@ -322,7 +319,6 @@ function actionsButtons(cellValue, options, rowObject) {
 
 function displayItem(e) {
     e.removeClass('unread');
-    e.addClass('buttonPressedDisplay');
     var id = $(e).attr('id'),
         data = $("#jqGrid").getRowData(id);
     document.getElementById('alertDate').innerHTML = "Date: " + $(data.publication_date).text();
