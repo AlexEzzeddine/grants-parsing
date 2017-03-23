@@ -361,11 +361,10 @@ function doneItem(e) {
 var setGridItemStatus = function (grant_id, statusName, rowId) {
     if (!grant_id) return;
     $.ajax({
-        "url": host + "/status/" + grant_id,
-        "method": "POST",
+        "url": host + "/grants/" + grant_id,
+        "method": "PUT",
         "data": {
-            "status_name": statusName,
-            "value": "true"
+            [statusName]: "true"
         },
         success: function () {
             if (rowId) {
