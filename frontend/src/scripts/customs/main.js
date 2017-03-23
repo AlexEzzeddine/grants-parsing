@@ -216,7 +216,7 @@ $(document).ready(function () {
         caption: "<div class='add_record_button' id='all-button'><i class='fa fa-list' aria-hidden='true'></i>ALL</div>",
         buttonicon: 'none',
         onClickButton: function () {
-            grid.setGridParam({url: grantsRoute, postData: {flags: '[]'}}).trigger('reloadGrid');
+            grid.setGridParam({url: grantsRoute, postData: {flags: '[]'}, page: 1}).trigger('reloadGrid');
              $( "#all-button" ).css( "background-color", "#bdc3c7" );
             topButtonsDefaultBackgroundColor('all-button');
         }
@@ -226,7 +226,7 @@ $(document).ready(function () {
         caption: "<div class='add_record_button' id='unread-button'><i class='fa fa-envelope-o' aria-hidden='true'></i>UNREAD</div>",
         buttonicon: 'none',
         onClickButton: function () {
-            grid.setGridParam({url: grantsRoute, postData: {flags: '["unread"]'}}).trigger('reloadGrid');
+            grid.setGridParam({url: grantsRoute, postData: {flags: '["unread"]'}, page: 1}).trigger('reloadGrid');
             $( "#unread-button" ).css( "background-color", "#bdc3c7" );
             topButtonsDefaultBackgroundColor('unread-button');
         }
@@ -235,7 +235,7 @@ $(document).ready(function () {
         caption: "<div class='add_record_button' id='important-button'><i class='fa fa-exclamation-circle fa-lg' aria-hidden='true'></i>IMPORTANT</div>",
         buttonicon: 'none',
         onClickButton: function () {
-            grid.setGridParam({url: grantsRoute, postData: {flags: '["important"]'}}).trigger('reloadGrid');
+            grid.setGridParam({url: grantsRoute, postData: {flags: '["important"]'}, page: 1}).trigger('reloadGrid');
              $( "#important-button" ).css( "background-color", "#bdc3c7" );
             topButtonsDefaultBackgroundColor('important-button');
         }
@@ -244,7 +244,7 @@ $(document).ready(function () {
         caption: "<div class='add_record_button' id='skipped-button'><i class='fa fa-exclamation-circle fa-lg' aria-hidden='true'></i>SKIPPED</div>",
         buttonicon: 'none',
         onClickButton: function () {
-            grid.setGridParam({url: grantsRoute, postData: {flags: '["skipped"]'}}).trigger('reloadGrid');
+            grid.setGridParam({url: grantsRoute, postData: {flags: '["skipped"]'}, page: 1}).trigger('reloadGrid');
             $( "#skipped-button" ).css( "background-color", "#bdc3c7" );
             topButtonsDefaultBackgroundColor('skipped-button');
         }
@@ -253,7 +253,7 @@ $(document).ready(function () {
         caption: "<div class='add_record_button' id='done-button'><i class='fa fa-check-circle-o fa-lg' aria-hidden='true'></i> DONE</div>",
         buttonicon: 'none',
         onClickButton: function () {
-            grid.setGridParam({url: grantsRoute, postData: {flags: '["done"]'}}).trigger('reloadGrid');
+            grid.setGridParam({url: grantsRoute, postData: {flags: '["done"]'}, page: 1}).trigger('reloadGrid');
             $( "#done-button" ).css( "background-color", "#bdc3c7" );
             topButtonsDefaultBackgroundColor('done-button');
         }
@@ -262,7 +262,7 @@ $(document).ready(function () {
         caption: "<div class='add_record_button' id='modified-button'><i class='fa fa-pencil' aria-hidden='true'></i>MODIFIED</div>",
         buttonicon: 'none',
         onClickButton: function () {
-            grid.setGridParam({url: grantsRoute, postData: {flags: '["modified"]'}}).trigger('reloadGrid');
+            grid.setGridParam({url: grantsRoute, postData: {flags: '["modified"]'}, page: 1}).trigger('reloadGrid');
             $( "#modified-button" ).css( "background-color", "#bdc3c7" );
             topButtonsDefaultBackgroundColor('modified-button');
         }
