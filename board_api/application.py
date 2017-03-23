@@ -105,7 +105,7 @@ def login():
         user = User()
         user.id = email
         flask_login.login_user(user)
-        return redirect(url_for('get_all'))
+        return "Ok"
 
     return 'Bad password'
 

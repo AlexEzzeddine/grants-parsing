@@ -13,12 +13,13 @@ function validateForm() {
             "pw": pw
         },
         success: function(data){
-             $(document).ready(function(){
-                 if(data === "User not found") {
-                     console.log("user!!!");
-                     $(".user-not-found").show();
-                 }});
-            //window.location.href = "../dist/index.html";
-        }
-    });
-  }
+            if(data === "User not found") {
+                console.log("user!!!");
+                $(".user-not-found").show();
+            }
+            else if (data=="Ok"){
+                window.location.href = "../dist/index.html";
+            }
+        }            
+    })
+}
