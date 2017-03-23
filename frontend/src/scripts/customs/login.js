@@ -13,13 +13,23 @@ function validateForm() {
             "pw": pw
         },
         success: function(data){
-            if(data === "User not found") {
-                console.log("user!!!");
-                $(".user-not-found").show();
-            }
-            else if (data=="Ok"){
-                window.location.href = "../dist/index.html";
-            }
-        }            
-    })
-}
+             $(document).ready(function(){
+                 $("#user-not-found").hide();
+                 $("#bad-password").hide();
+
+                 if(data === "User not found") {
+                     $("#user-not-found").show();
+                     return false;
+                 }
+                 if(data === "Bad password"){
+                     $("#bad-password").show();
+                     return false;
+                 }
+             });
+
+             if (data !== "User not found" && data !== "Bad password") {
+                 window.location.href = "../dist/index.html";
+             }
+        }
+    });
+  }
