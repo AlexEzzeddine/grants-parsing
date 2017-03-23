@@ -425,7 +425,7 @@ var setGridItemStatus = function (grant_id, statusName, rowId) {
 
                 $('tr#' + rowId + ' .statusStyles i').attr('class', newClass);
             }
-            grid.trigger('reloadGrid');
+            $("#jqGrid").trigger('reloadGrid');
         },
         error: function (e) {
             console.error(e);
