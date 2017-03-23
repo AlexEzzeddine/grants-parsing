@@ -205,53 +205,74 @@ $(document).ready(function () {
         });
     
        grid.jqGrid('navButtonAdd', '#' + grid[0].id + '_toppager_left', {
-        caption: "<div class='add_record_button'><i class='fa fa-list' aria-hidden='true'></i>ALL</div>",
+        caption: "<div class='add_record_button' id='all-button'><i class='fa fa-list' aria-hidden='true'></i>ALL</div>",
         buttonicon: 'none',
         onClickButton: function () {
             grid.setGridParam({url: grantsRoute, postData: {flags: '[]'}}).trigger('reloadGrid');
+             $( "#all-button" ).css( "background-color", "#bdc3c7" );
+            topButtonsDefaultBackgroundColor('all-button');
         }
     });
 
         grid.jqGrid('navButtonAdd', '#' + grid[0].id + '_toppager_left', {
-        caption: "<div class='add_record_button'><i class='fa fa-envelope-o' aria-hidden='true'></i>UNREAD</div>",
+        caption: "<div class='add_record_button' id='unread-button'><i class='fa fa-envelope-o' aria-hidden='true'></i>UNREAD</div>",
         buttonicon: 'none',
         onClickButton: function () {
             grid.setGridParam({url: grantsRoute, postData: {flags: '["unread"]'}}).trigger('reloadGrid');
-
+            $( "#unread-button" ).css( "background-color", "#bdc3c7" );
+            topButtonsDefaultBackgroundColor('unread-button');
         }
     });
     grid.jqGrid('navButtonAdd', '#' + grid[0].id + '_toppager_left', {
-        caption: "<div class='add_record_button'><i class='fa fa-exclamation-circle fa-lg' aria-hidden='true'></i>IMPORTANT</div>",
+        caption: "<div class='add_record_button' id='important-button'><i class='fa fa-exclamation-circle fa-lg' aria-hidden='true'></i>IMPORTANT</div>",
         buttonicon: 'none',
         onClickButton: function () {
             grid.setGridParam({url: grantsRoute, postData: {flags: '["important"]'}}).trigger('reloadGrid');
+             $( "#important-button" ).css( "background-color", "#bdc3c7" );
+            topButtonsDefaultBackgroundColor('important-button');
         }
     });
     grid.jqGrid('navButtonAdd', '#' + grid[0].id + '_toppager_left', {
-        caption: "<div class='add_record_button'><i class='fa fa-exclamation-circle fa-lg' aria-hidden='true'></i>SKIPPED</div>",
+        caption: "<div class='add_record_button' id='skipped-button'><i class='fa fa-exclamation-circle fa-lg' aria-hidden='true'></i>SKIPPED</div>",
         buttonicon: 'none',
         onClickButton: function () {
             grid.setGridParam({url: grantsRoute, postData: {flags: '["skipped"]'}}).trigger('reloadGrid');
+            $( "#skipped-button" ).css( "background-color", "#bdc3c7" );
+            topButtonsDefaultBackgroundColor('skipped-button');
         }
     });
     grid.jqGrid('navButtonAdd', '#' + grid[0].id + '_toppager_left', {
-        caption: "<div class='add_record_button'><i class='fa fa-check-circle-o fa-lg' aria-hidden='true'></i> DONE</div>",
+        caption: "<div class='add_record_button' id='done-button'><i class='fa fa-check-circle-o fa-lg' aria-hidden='true'></i> DONE</div>",
         buttonicon: 'none',
         onClickButton: function () {
             grid.setGridParam({url: grantsRoute, postData: {flags: '["done"]'}}).trigger('reloadGrid');
+            $( "#done-button" ).css( "background-color", "#bdc3c7" );
+            topButtonsDefaultBackgroundColor('done-button');
         }
     });
     grid.jqGrid('navButtonAdd', '#' + grid[0].id + '_toppager_left', {
-        caption: "<div class='add_record_button'><i class='fa fa-pencil' aria-hidden='true'></i>MODIFIED</div>",
+        caption: "<div class='add_record_button' id='modified-button'><i class='fa fa-pencil' aria-hidden='true'></i>MODIFIED</div>",
         buttonicon: 'none',
         onClickButton: function () {
             grid.setGridParam({url: grantsRoute, postData: {flags: '["modified"]'}}).trigger('reloadGrid');
+            $( "#modified-button" ).css( "background-color", "#bdc3c7" );
+            topButtonsDefaultBackgroundColor('modified-button');
         }
     });
     $("#jqGrid_toppager_center").hide();
 
 
 });
+
+function topButtonsDefaultBackgroundColor(elementId) {
+    var elementsId = new Array('all-button', 'unread-button', 'important-button', 'skipped-button', 'done-button', 'modified-button');
+    var index = $.inArray(elementId, elementsId);
+    elementsId.splice(index, 1);
+
+    for (i = 0; i < elementsId.length; i++) {
+        $( '#'+elementsId[i] ).css( "background-color", "#3f51b5" );
+    }
+}
 
 
 function statusStyles(cellValue, options, rowObject) {
