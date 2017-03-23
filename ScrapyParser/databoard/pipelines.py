@@ -12,7 +12,7 @@ class MongoDBPipeline(object):
 
     EMPTY_FLAGS = {
         "important": False,
-        "displayed": False,
+        "unread": False,
         "skipped": False,
         "done": False,
         "modified": False,
