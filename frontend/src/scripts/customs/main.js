@@ -175,6 +175,19 @@ $(document).ready(function () {
                 if (($(rowData.unread).text()) == "true") {
                     $("#" + rowId).addClass('unread');
                 }
+
+                if (($(rowData.unread).text()) == "false") {
+                    $("#" + rowId).addClass('buttonPressedDisplay');
+                }
+                if (($(rowData.skipped).text()) == "true") {
+                    $("#" + rowId).addClass('buttonPressedSkip');
+                }
+                if (($(rowData.important).text()) == "true") {
+                    $("#" + rowId).addClass('buttonPressedImportant');
+                }
+                if (($(rowData.done).text()) == "true") {
+                    $("#" + rowId).addClass('buttonPressedDone');
+                }
             }
         }
     });
@@ -300,15 +313,16 @@ function contactsStyles(v) {
 function actionsButtons(cellValue, options, rowObject) {
 
     return "<div class='buttonStyles'>" +
-        "<button onclick=\"displayItem($(this).closest('tr'))\"><i class='fa fa-desktop fa-lg' aria-hidden='true' style='color:blue;'></i>DISPLAY</button>" +
-        "<button onclick=\"skipItem($(this).closest('tr').addClass('displayed'))\"><i class='fa fa-ban fa-lg' aria-hidden='true' style='color:red;'></i>SKIP</button>" +
-        "<button onclick=\"importantItem($(this).closest('tr').addClass('displayed'))\"><i class='fa fa-exclamation-circle fa-lg' aria-hidden='true' style='color:orange;'></i>IMPORTANT</button>" +
-        "<button onclick=\"doneItem($(this).closest('tr').addClass('displayed'))\"><i class='fa fa-check-circle-o fa-lg' aria-hidden='true' style='color:green;'></i>DONE</button>" +
+        "<button class='dsp' onclick=\"displayItem($(this).closest('tr'))\"><i class='fa fa-desktop fa-lg' aria-hidden='true' style='color:blue;'></i>DISPLAY</button>" +
+        "<button class='skp' onclick=\"skipItem($(this).closest('tr').addClass('displayed'))\"><i class='fa fa-ban fa-lg' aria-hidden='true' style='color:red;'></i>SKIP</button>" +
+        "<button class='imp' onclick=\"importantItem($(this).closest('tr').addClass('displayed'))\"><i class='fa fa-exclamation-circle fa-lg' aria-hidden='true' style='color:orange;'></i>IMPORTANT</button>" +
+        "<button class='dn' onclick=\"doneItem($(this).closest('tr').addClass('displayed'))\"><i class='fa fa-check-circle-o fa-lg' aria-hidden='true' style='color:green;'></i>DONE</button>" +
         "</div>";
 }
 
 function displayItem(e) {
     e.removeClass('unread');
+    e.addClass('buttonPressedDisplay');
     var id = $(e).attr('id'),
         data = $("#jqGrid").getRowData(id);
     document.getElementById('alertDate').innerHTML = "Date: " + $(data.publication_date).text();
@@ -336,7 +350,8 @@ function donE() {
 
 
 function skipItem(e) {
-    e.addClass('display');
+    e.removeClass('unread');
+    e.addClass('buttonPressedSkip');
     var id = $(e).attr('id'),
         data = $("#jqGrid").getRowData(id);
 
@@ -344,19 +359,22 @@ function skipItem(e) {
 }
 
 function importantItem(e) {
-    e.addClass('display');
+    e.removeClass('unread');
+    e.addClass('buttonPressedImportant');
     var id = $(e).attr('id'),
         data = $("#jqGrid").getRowData(id);
     setGridItemStatus(data._id, 'important', id);
 }
 
 function doneItem(e) {
-    e.addClass('display');
+    e.removeClass('unread');
+    e.addClass('buttonPressedDone');
     var id = $(e).attr('id'),
         data = $("#jqGrid").getRowData(id);
 
     setGridItemStatus(data._id, 'done', id);
 }
+
 
 var setGridItemStatus = function (grant_id, statusName, rowId) {
     if (!grant_id) return;
