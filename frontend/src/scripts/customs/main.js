@@ -366,7 +366,7 @@ var setGridItemStatus = function (grant_id, statusName, rowId) {
 
     $.ajax({
         "url": host + "/grants/" + grant_id,
-        "method": "PUT",
+        "method": "POST",
         "data": {
             [statusName]: statusValue
         },
