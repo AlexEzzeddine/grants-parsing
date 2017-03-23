@@ -360,11 +360,15 @@ function doneItem(e) {
 
 var setGridItemStatus = function (grant_id, statusName, rowId) {
     if (!grant_id) return;
+
+    var statusValue = "true";
+    if (statusName == "unread") statusValue = "false";
+
     $.ajax({
         "url": host + "/grants/" + grant_id,
         "method": "PUT",
         "data": {
-            [statusName]: "true"
+            [statusName]: statusValue
         },
         success: function () {
             if (rowId) {
