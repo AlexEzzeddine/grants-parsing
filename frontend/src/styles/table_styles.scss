@@ -262,32 +262,6 @@
 
 }
 
-
-.buttonPressedSkip {
-  .buttonStyles {
-    .skp {
-      background-color: #d4d4d4;
-    }
-  }
-}
-
-.buttonPressedImportant {
-  .buttonStyles {
-    .imp {
-      background-color: #d4d4d4;
-    }
-  }
-}
-
-.buttonPressedDone {
-  .buttonStyles {
-    .dn {
-      background-color: #d4d4d4;
-    }
-  }
-}
-
-
 .dateStyles {
   height: 35px;
   margin: 5px;
@@ -458,4 +432,12 @@
       width: 190px;
     }
   }
+}
+
+.filterButtonPressed {
+  background-color: #009900 !important;
+}
+
+.sideButtonPressed{
+  background-color: #d4d4d4 !important;
 }

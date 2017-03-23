@@ -179,18 +179,17 @@ $(document).ready(function () {
             for (var i = 0; i < ids.length; i++) {
                 var rowId = ids[i];
                 var rowData = grid.jqGrid('getRowData', rowId);
-                if (($(rowData.unread).text()) == "true" && ($(rowData.important).text()) == "false" && ($(rowData.skipped).text()) == "false" && ($(rowData.done).text()) == "false") {
+                if ($(rowData.unread).text() == "true" ) {
                     $("#" + rowId).addClass('unread');
                 }
-
                 if (($(rowData.skipped).text()) == "true") {
-                    $("#" + rowId).addClass('buttonPressedSkip');
+                    $("#" + rowId+" .skp").addClass('sideButtonPressed');
                 }
                 if (($(rowData.important).text()) == "true") {
-                    $("#" + rowId).addClass('buttonPressedImportant');
+                    $("#" + rowId+" .imp").addClass('sideButtonPressed');
                 }
                 if (($(rowData.done).text()) == "true") {
-                    $("#" + rowId).addClass('buttonPressedDone');
+                    $("#" + rowId+" .dn").addClass('sideButtonPressed');
                 }
             }
         }
@@ -213,12 +212,11 @@ $(document).ready(function () {
         });
     
        grid.jqGrid('navButtonAdd', '#' + grid[0].id + '_toppager_left', {
-        caption: "<div class='add_record_button' id='all-button'><i class='fa fa-list' aria-hidden='true'></i>ALL</div>",
+        caption: "<div class='add_record_button filterButtonPressed' id='all-button'><i class='fa fa-list' aria-hidden='true'></i>ALL</div>",
         buttonicon: 'none',
         onClickButton: function () {
             grid.setGridParam({url: grantsRoute, postData: {flags: '[]'}, page: 1}).trigger('reloadGrid');
-             $( "#all-button" ).css( "background-color", "#bdc3c7" );
-            topButtonsDefaultBackgroundColor('all-button');
+            highlightTopButtons('all-button');
         }
     });
 
@@ -227,44 +225,43 @@ $(document).ready(function () {
         buttonicon: 'none',
         onClickButton: function () {
             grid.setGridParam({url: grantsRoute, postData: {flags: '["unread"]'}, page: 1}).trigger('reloadGrid');
-            $( "#unread-button" ).css( "background-color", "#bdc3c7" );
-            topButtonsDefaultBackgroundColor('unread-button');
+            highlightTopButtons('unread-button');
         }
     });
+
     grid.jqGrid('navButtonAdd', '#' + grid[0].id + '_toppager_left', {
         caption: "<div class='add_record_button' id='important-button'><i class='fa fa-exclamation-circle fa-lg' aria-hidden='true'></i>IMPORTANT</div>",
         buttonicon: 'none',
         onClickButton: function () {
             grid.setGridParam({url: grantsRoute, postData: {flags: '["important"]'}, page: 1}).trigger('reloadGrid');
-             $( "#important-button" ).css( "background-color", "#bdc3c7" );
-            topButtonsDefaultBackgroundColor('important-button');
+            highlightTopButtons('important-button');
         }
     });
+
     grid.jqGrid('navButtonAdd', '#' + grid[0].id + '_toppager_left', {
         caption: "<div class='add_record_button' id='skipped-button'><i class='fa fa-exclamation-circle fa-lg' aria-hidden='true'></i>SKIPPED</div>",
         buttonicon: 'none',
         onClickButton: function () {
             grid.setGridParam({url: grantsRoute, postData: {flags: '["skipped"]'}, page: 1}).trigger('reloadGrid');
-            $( "#skipped-button" ).css( "background-color", "#bdc3c7" );
-            topButtonsDefaultBackgroundColor('skipped-button');
+            highlightTopButtons('skipped-button');
         }
     });
+
     grid.jqGrid('navButtonAdd', '#' + grid[0].id + '_toppager_left', {
         caption: "<div class='add_record_button' id='done-button'><i class='fa fa-check-circle-o fa-lg' aria-hidden='true'></i> DONE</div>",
         buttonicon: 'none',
         onClickButton: function () {
             grid.setGridParam({url: grantsRoute, postData: {flags: '["done"]'}, page: 1}).trigger('reloadGrid');
-            $( "#done-button" ).css( "background-color", "#bdc3c7" );
-            topButtonsDefaultBackgroundColor('done-button');
+            highlightTopButtons('done-button');
         }
     });
+
     grid.jqGrid('navButtonAdd', '#' + grid[0].id + '_toppager_left', {
         caption: "<div class='add_record_button' id='modified-button'><i class='fa fa-pencil' aria-hidden='true'></i>MODIFIED</div>",
         buttonicon: 'none',
         onClickButton: function () {
             grid.setGridParam({url: grantsRoute, postData: {flags: '["modified"]'}, page: 1}).trigger('reloadGrid');
-            $( "#modified-button" ).css( "background-color", "#bdc3c7" );
-            topButtonsDefaultBackgroundColor('modified-button');
+            highlightTopButtons('modified-button');
         }
     });
     $("#jqGrid_toppager_center").hide();
@@ -272,13 +269,15 @@ $(document).ready(function () {
 
 });
 
-function topButtonsDefaultBackgroundColor(elementId) {
-    var elementsId = new Array('all-button', 'unread-button', 'important-button', 'skipped-button', 'done-button', 'modified-button');
-    var index = $.inArray(elementId, elementsId);
-    elementsId.splice(index, 1);
-
-    for (i = 0; i < elementsId.length; i++) {
-        $( '#'+elementsId[i] ).css( "background-color", "#3f51b5" );
+function highlightTopButtons(e) {
+    var filterButtons = ["all-button", "unread-button", "important-button", "skipped-button", "done-button", "modified-button"];
+    for (var i = 0; i < filterButtons.length; i++) {
+        if (e==filterButtons[i]){
+            $("#"+filterButtons[i]).addClass("filterButtonPressed");
+        }
+        else{
+            $("#"+filterButtons[i]).removeClass("filterButtonPressed");
+        }
     }
 }
 
@@ -357,7 +356,6 @@ function displayItem(e) {
     document.getElementById('myModal').style.display = "flex";
     document.getElementById('body').style.overflow = "hidden";
     setGridItemStatus(data._id, 'unread', id);
-
 }
 
 function skip() {
