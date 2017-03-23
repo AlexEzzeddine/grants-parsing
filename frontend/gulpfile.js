@@ -38,9 +38,13 @@ gulp.task('styles-libs', function () {
 });
 
 gulp.task('js-custom', function () {
-    gulp.src('src/scripts/customs/*.js')
+    gulp.src(['src/scripts/customs/*.js', "!src/scripts/customs/login.js"])
         .pipe(jsmin())
         .pipe(concat('all-customs.js'))
+        .pipe(gulp.dest('dist/scripts/'))
+        .pipe(livereload());
+    gulp.src("src/scripts/customs/login.js")
+        .pipe(jsmin())
         .pipe(gulp.dest('dist/scripts/'))
         .pipe(livereload());
 });
