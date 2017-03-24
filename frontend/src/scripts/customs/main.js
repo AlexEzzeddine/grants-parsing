@@ -1,6 +1,6 @@
 var grantId,
-    host = 'https://shielded-fortress-95039.herokuapp.com',
-    //host = 'http://127.0.0.1:5000',
+    //host = 'https://shielded-fortress-95039.herokuapp.com',
+    host = 'http://127.0.0.1:5000',
     grantsRoute = host + '/grants',
     lastUpdatedDateRoute = host + "/last_updated_date",
     domainsRoute = host + "/domains",
@@ -368,25 +368,51 @@ function displayItem(e) {
     document.getElementById('myModal').style.display = "flex";
     document.getElementById('body').style.overflow = "hidden";
     setGridItemStatus(data._id, 'unread', id);
+
+    $("#myId").val(data._id);
+
+    $("#myIdSkip").val($(data.skipped).text());
+    $("#myIdDone").val($(data.done).text());
+    $("#myIdImportant").val($(data.important).text());
+
+
 }
 
 function skip() {
-    setGridItemStatus(grantId, 'skip', null);
+    innerButtonFlagChanger("skipped");
 }
-
 function importAnt() {
-    setGridItemStatus(grantId, 'important', null);
+    innerButtonFlagChanger("important");
 }
-
 function donE() {
-    setGridItemStatus(grantId, 'done', null);
+    innerButtonFlagChanger("done");
+}
+function innerButtonFlagChanger(flag) {
+    var id = $("#myId").val();
+    $.ajax({
+        "url": host + "/grants/" + id,
+        "method": "POST",
+        "data": {
+            [flag]: "true"
+        },
+        success: function () {
+            $("#jqGrid").trigger('reloadGrid');
+        },
+        error: function (e) {
+            console.error(e);
+        }
+    });
 }
 
 function updateNote() {
+    var val = $("#myId").val();
     var noteText;
     noteText = document.getElementById('noteText').value;
+
+    console.log(noteText);
+    console.log(val);
     $.ajax({
-        "url": host + "/grants/" + grantId,
+        "url": host + "/grants/" + val,
         "method": "POST",
         "data": {
             ["notes"]: noteText
@@ -398,7 +424,7 @@ function updateNote() {
             console.error(e);
         }
     });
-
+    closeAlert();
 }
 
 
@@ -431,6 +457,11 @@ function doneItem(e) {
 
 
 var setGridItemStatus = function (grant_id, statusName, rowId) {
+
+    console.log(grant_id);
+    console.log(rowId);
+
+
     if (!grant_id) return;
 
     var statusValue = "true";

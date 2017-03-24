@@ -1,7 +1,8 @@
 /**
  * Created by AMaslii on 22.03.2017.
  */
-host="https://shielded-fortress-95039.herokuapp.com"
+host = 'http://127.0.0.1:5000'
+//host="https://shielded-fortress-95039.herokuapp.com"
 function validateForm() {
     var email = document.loginform.email.value;
     var pw = document.loginform.password.value;

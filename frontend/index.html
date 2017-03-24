@@ -34,14 +34,7 @@
         <p class="cont">Contacts:</p>
         <div id="alertContacts"></div>
         <p class="note">Notes:</p>
-        <div class="noteContainer">
-            <form onsubmit="return false">
-                <textarea id="noteText"></textarea>
-                <input type="submit" class="updateNote" onclick="updateNote()" value="UPDATE NOTE">
-            </form>
-
-        </div>
-
+        <textarea id="noteText"></textarea>
         <div class="buttonContainer">
             <button onclick='skip()'><i class='fa fa-ban fa-lg' aria-hidden='true' style='color:red;'></i>SKIP
             </button>
@@ -51,11 +44,15 @@
             <button onclick='donE()'><i class='fa fa-check-circle-o fa-lg' aria-hidden='true'
                                         style='color:green;'></i>DONE
             </button>
-            <button class="closeAlert" onclick="closeAlert()"><i class="fa fa-times" aria-hidden="true"></i>CLOSE
+            <button class="updateNote" onclick="updateNote()"><i class="fa fa-check" aria-hidden="true"></i> OK</button>
+            <button class="closeAlert" onclick="closeAlert()"><i class="fa fa-times" aria-hidden="true"></i>CANCEL
             </button>
         </div>
     </div>
 </div>
-
+<input type="hidden" id="myId" value="data"/>
+<input type="hidden" id="myIdSkip" value="data"/>
+<input type="hidden" id="myIdDone" value="data"/>
+<input type="hidden" id="myIdImportant" value="data"/>
 </body>
 </html>
