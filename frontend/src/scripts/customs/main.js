@@ -354,7 +354,6 @@ function actionsButtons(cellValue, options, rowObject) {
 }
 
 function displayItem(e) {
-    console.log(e);
     e.removeClass('unread');
     var id = $(e).attr('id'),
         data = $("#jqGrid").getRowData(id);
