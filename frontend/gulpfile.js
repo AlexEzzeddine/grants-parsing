@@ -13,13 +13,13 @@ var gulp = require('gulp'),
     merge = require('merge-stream');
 
 gulp.task('html:dev', function () {
-    return gulp.src('*.html')
+    return gulp.src('src/*.html')
         .pipe(gulp.dest('dist'))
         .pipe(livereload());
 });
 
 gulp.task('html:prod', function () {
-    return gulp.src('*.html')
+    return gulp.src('src/*.html')
         .pipe(htmlmin({collapseWhitespace: true}))
         .pipe(gulp.dest('dist'))
 });
