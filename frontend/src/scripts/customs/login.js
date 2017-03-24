@@ -31,6 +31,7 @@ function validateForm() {
              });
 
              if (data !== "User not found" && data !== "Bad password") {
+                console.log("going to index")
                 document.cookie="auth=Ok";
                 window.location.href = "./index.html";
              }

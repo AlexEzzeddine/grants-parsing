@@ -9,6 +9,7 @@ var gulp = require('gulp'),
     concat = require('gulp-concat'),
     concatCss = require('gulp-concat-css'),
     clean = require('gulp-clean');
+    webserver = require('gulp-webserver');
 
 gulp.task('html', function () {
     return gulp.src('*.html')
@@ -73,4 +74,13 @@ gulp.task('watch', function () {
     gulp.watch('*.json', ['img-saver']);
 });
 
-gulp.task('default', ['html', 'styles-custom', 'styles-libs', 'js-libs', 'js-custom', 'img-saver', 'watch']);
+gulp.task('webserver', function() {
+  gulp.src('./dist')
+    .pipe(webserver({
+      livereload: true,
+      directoryListing: false,
+      open: true
+    }));
+});
+
+gulp.task('default', ['html', 'styles-custom', 'styles-libs', 'js-libs', 'js-custom', 'img-saver', 'watch', 'webserver']);
