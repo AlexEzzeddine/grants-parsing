@@ -370,10 +370,7 @@ function displayItem(e) {
     setGridItemStatus(data._id, 'unread', id);
 
     $("#myId").val(data._id);
-
-    $("#myIdSkip").val($(data.skipped).text());
-    $("#myIdDone").val($(data.done).text());
-    $("#myIdImportant").val($(data.important).text());
+    $("#noteText").val($(data.notes).text());
 
 
 }
