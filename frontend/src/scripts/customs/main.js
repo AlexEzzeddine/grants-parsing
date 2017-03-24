@@ -404,9 +404,6 @@ function innerButtonFlagChanger(flag) {
 function updateNote() {
     var id = $("#myId").val();
     var noteText = $("#noteText").val();
-
-    console.log(noteText);
-    console.log(id);
     $.ajax({
         "url": host + "/grants/" + id,
         "method": "POST",
@@ -453,11 +450,6 @@ function doneItem(e) {
 
 
 var setGridItemStatus = function (grant_id, statusName, rowId) {
-
-    console.log(grant_id);
-    console.log(rowId);
-
-
     if (!grant_id) return;
 
     var statusValue = "true";
