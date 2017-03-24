@@ -188,4 +188,4 @@ application.config['JSON_AS_ASCII'] = False
 if __name__ == "__main__":
     # Setting debug to True enables debug output. This line should be
     # removed before deploying a production app.
-    application.run()
+    application.run(threaded=True)

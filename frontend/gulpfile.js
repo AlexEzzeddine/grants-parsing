@@ -11,14 +11,19 @@ var gulp = require('gulp'),
     clean = require('gulp-clean');
     webserver = require('gulp-webserver');
 
-gulp.task('html', function () {
+gulp.task('html:dev', function () {
     return gulp.src('*.html')
-        .pipe(htmlmin({collapseWhitespace: true}))
         .pipe(gulp.dest('dist'))
         .pipe(livereload());
 });
 
-gulp.task('styles-custom', function () {
+gulp.task('html:prod', function () {
+    return gulp.src('*.html')
+        .pipe(htmlmin({collapseWhitespace: true}))
+        .pipe(gulp.dest('dist'))
+});
+
+gulp.task('styles-custom:dev', function () {
     return gulp.src('src/styles/*.scss')
         .pipe(sass().on('error', sass.logError))
         .pipe(autoprefixer({
@@ -31,56 +36,93 @@ gulp.task('styles-custom', function () {
         .pipe(livereload());
 });
 
-gulp.task('styles-libs', function () {
-    gulp.src('src/styles/librarys/*.css')
+gulp.task('styles-custom:prod', function () {
+    return gulp.src('src/styles/*.scss')
+        .pipe(sass().on('error', sass.logError))
+        .pipe(autoprefixer({
+            browsers: ['last 2 versions'],
+            cascade: false
+        }))
+        .pipe(cleanCSS({compatibility: 'ie8'}))
+        .pipe(concatCss("customs-concat.css"))
+        .pipe(gulp.dest('dist/styles'))
+});
+
+gulp.task('styles-libs:dev', function () {
+    return gulp.src('src/styles/librarys/*.css')
         .pipe(concatCss("librarys-concat.css"))
         .pipe(gulp.dest('dist/styles'))
         .pipe(livereload());
 });
 
-gulp.task('js-custom', function () {
+gulp.task('styles-libs:prod', function () {
+    return gulp.src('src/styles/librarys/*.css')
+        .pipe(concatCss("librarys-concat.css"))
+        .pipe(gulp.dest('dist/styles'))
+});
+
+gulp.task('js-custom:dev', function () {
     gulp.src(['src/scripts/customs/*.js', "!src/scripts/customs/login.js"])
-        .pipe(jsmin())
         .pipe(concat('all-customs.js'))
         .pipe(gulp.dest('dist/scripts/'))
         .pipe(livereload());
     gulp.src("src/scripts/customs/login.js")
-        .pipe(jsmin())
         .pipe(gulp.dest('dist/scripts/'))
         .pipe(livereload());
 });
 
-gulp.task('js-libs', function () {
-    gulp.src('src/scripts/librarys/*.js')
+gulp.task('js-custom:prod', function () {
+    gulp.src(['src/scripts/customs/*.js', "!src/scripts/customs/login.js"])
         .pipe(jsmin())
+        .pipe(concat('all-customs.js'))
+        .pipe(gulp.dest('dist/scripts/'))
+    gulp.src("src/scripts/customs/login.js")
+        .pipe(jsmin())
+        .pipe(gulp.dest('dist/scripts/'))
+});
+
+gulp.task('js-libs:dev', function () {
+    return gulp.src('src/scripts/librarys/*.js')
         .pipe(concat('all-librarys.js'))
         .pipe(gulp.dest('dist/scripts/'))
         .pipe(livereload());
 });
 
-gulp.task('img-saver', function () {
+gulp.task('js-libs:prod', function () {
+    return gulp.src('src/scripts/librarys/*.js') 
+        .pipe(concat('all-librarys.js'))
+        .pipe(gulp.dest('dist/scripts/'))
+});
+
+gulp.task('img-saver:dev', function () {
     gulp.src('src/images/*.*')
         .pipe(gulp.dest('dist/styles/images'))
         .pipe(livereload());
 });
 
+gulp.task('img-saver:prod', function () {
+    gulp.src('src/images/*.*')
+        .pipe(gulp.dest('dist/styles/images'))
+});
+
 gulp.task('watch', function () {
     var server = livereload.listen();
-    gulp.watch('src/styles/*.scss', ['styles-custom']);
-    gulp.watch('src/styles/librarys/*.css', ['styles-libs']);
-    gulp.watch('*.html', ['html']);
-    gulp.watch('src/scripts/customs/*.js', ['js-custom']);
-    gulp.watch('src/scripts/librarys/*.js', ['js-libs']);
-    gulp.watch('*.json', ['img-saver']);
+    gulp.watch('src/styles/*.scss', ['styles-custom:dev']);
+    gulp.watch('src/styles/librarys/*.css', ['styles-libs:dev']);
+    gulp.watch('*.html', ['html:dev']);
+    gulp.watch('src/scripts/customs/*.js', ['js-custom:dev']);
+    gulp.watch('src/scripts/librarys/*.js', ['js-libs:dev']);
+    gulp.watch('*.json', ['img-saver:dev']);
 });
 
 gulp.task('webserver', function() {
-  gulp.src('./dist')
+  gulp.src('dist')
     .pipe(webserver({
-      livereload: true,
-      directoryListing: false,
-      open: true
+        livereload: false,
+        directoryListing: false,
+        open: false
     }));
 });
 
-gulp.task('default', ['html', 'styles-custom', 'styles-libs', 'js-libs', 'js-custom', 'img-saver', 'watch', 'webserver']);
+gulp.task('dev', ['html:dev', 'styles-custom:dev', 'styles-libs:dev', 'js-libs:dev', 'js-custom:dev', 'img-saver:dev', 'watch', 'webserver']);
+gulp.task('prod', ['html:prod', 'styles-custom:prod', 'styles-libs:prod', 'js-libs:prod', 'js-custom:prod', 'img-saver:prod']);

@@ -1,6 +1,6 @@
 var grantId,
     //host = 'https://shielded-fortress-95039.herokuapp.com',
-    host = 'http://127.0.0.1:5000',
+    host = 'http://localhost:5000',
     grantsRoute = host + '/grants',
     lastUpdatedDateRoute = host + "/last_updated_date",
     domainsRoute = host + "/domains",
@@ -9,9 +9,9 @@ var grantId,
         All: "All"
     };
 
-if(document.cookie.length==0){
-    window.location.href = "./login.html";
-}
+// if(document.cookie.length==0){
+//     window.location.href = "./login.html";
+// }
 
 function getDomains() {
     $.ajax({
