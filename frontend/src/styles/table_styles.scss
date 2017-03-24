@@ -394,6 +394,45 @@
     overflow-y: auto;
     white-space: pre-wrap;
   }
+  .note {
+    font-weight: bold;
+    margin-bottom: 15px;
+  }
+
+  .noteContainer {
+    margin-bottom: 25px;
+    #noteText {
+      width: 100%;
+      height: 50px;
+      overflow-x: hidden;
+      overflow-y: auto;
+      border: solid 1px #dddddd;
+      padding: 5px;
+      white-space: pre-wrap;
+      margin-bottom: 5px;
+
+    }
+
+    button {
+      padding-left: 15px;
+      padding-right: 15px;
+      margin: 2px;
+      background-color: #e9e9e9;
+      height: 36px;
+      border: none;
+      border-radius: 3px;
+      text-decoration: none;
+      display: inline-block;
+      box-shadow: -1px 2px 3px rgba(163, 163, 163, 0.5);
+      color: #794f4f;
+      transition: all 0.5s;
+      i {
+        margin-right: 5px;
+      }
+    }
+  }
+
+
 
   .buttonContainer {
     margin-bottom: 10px;

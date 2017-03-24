@@ -148,6 +148,14 @@ $(document).ready(function () {
                 search: false
             },
             {
+                name: 'notes',
+                width: 280,
+                formatter: contactsStyles,
+                sortable: false,
+                search: false,
+                hidden: true
+            },
+            {
                 label: 'Actions',
                 width: 250,
                 formatter: actionsButtons,
@@ -346,6 +354,7 @@ function actionsButtons(cellValue, options, rowObject) {
 }
 
 function displayItem(e) {
+    console.log(e);
     e.removeClass('unread');
     var id = $(e).attr('id'),
         data = $("#jqGrid").getRowData(id);
@@ -353,14 +362,14 @@ function displayItem(e) {
     document.getElementById('alertTitle').innerHTML = ($(data.title).text());
     document.getElementById('alertContent').innerHTML = ($(data.text).text());
     document.getElementById('alertContacts').innerHTML = $(data.contacts).text();
+    document.getElementById('noteText').innerHTML = $(data.notes).text();
     document.getElementById('myModal').style.display = "flex";
     document.getElementById('body').style.overflow = "hidden";
     setGridItemStatus(data._id, 'unread', id);
 }
 
 function skip() {
-    document.getElementsByClassName("dateStyles").style.fontWeight = "normal";
-    setGridItemStatus(grantId, 'skipped', null);
+    setGridItemStatus(grantId, 'skip', null);
 }
 
 function importAnt() {
@@ -369,6 +378,23 @@ function importAnt() {
 
 function donE() {
     setGridItemStatus(grantId, 'done', null);
+}
+
+function updateNote() {
+    $.ajax({
+        "url": host + "/grants/" + grantId,
+        "method": "POST",
+        "data": {
+            ["notes"]: "My note"
+        },
+        success: function () {
+            $("#jqGrid").trigger('reloadGrid');
+        },
+        error: function (e) {
+            console.error(e);
+        }
+    });
+
 }
 
 
