@@ -1,8 +1,3 @@
-/**
- * Created by AMaslii on 22.03.2017.
- */
-host = 'http://localhost:5000'
-//host="https://shielded-fortress-95039.herokuapp.com"
 function validateForm() {
     var email = document.loginform.email.value;
     var pw = document.loginform.password.value;
@@ -21,19 +16,19 @@ function validateForm() {
 
                  if(data === "User not found") {
                      $("#user-not-found").show();
-                     document.cookie="";
+                     localStorage.setItem("auth", false);
                      return false;
                  }
                  if(data === "Bad password"){
                      $("#bad-password").show();
-                      document.cookie="";
+                     localStorage.setItem("auth", false);
                      return false;
                  }
              });
 
              if (data !== "User not found" && data !== "Bad password") {
                 console.log("going to index")
-                document.cookie="auth=Ok";
+                localStorage.setItem("auth", true);
                 window.location.href = "./index.html";
              }
         }
