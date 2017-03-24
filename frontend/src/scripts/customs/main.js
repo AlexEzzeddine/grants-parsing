@@ -413,7 +413,9 @@ function updateNote() {
     $.ajax({
         "url": host + "/grants/" + id,
         "method": "POST",
-        "notes": noteText,
+        "data": {
+            notes: noteText
+        },
         success: function () {
             $("#jqGrid").trigger('reloadGrid');
         },

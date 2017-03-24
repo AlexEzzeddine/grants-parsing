@@ -171,7 +171,7 @@ def change_field(grant_id):
         flags["unread"]=False
         flags["modified"]=False
         if field == "notes":
-            doc.notes = value
+            doc['notes'] = value
         if field in ["important", "skipped", "done"] and value in ["true","false"]:
             ISDflags[field] = value == "true"
             flags.update(ISDflags)
