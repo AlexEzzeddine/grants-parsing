@@ -381,11 +381,13 @@ function donE() {
 }
 
 function updateNote() {
+    var noteText;
+    noteText = document.getElementById('noteText').value;
     $.ajax({
         "url": host + "/grants/" + grantId,
         "method": "POST",
         "data": {
-            ["notes"]: "My note"
+            ["notes"]: noteText
         },
         success: function () {
             $("#jqGrid").trigger('reloadGrid');
