@@ -157,21 +157,23 @@ def get_last_updated_date():
 
 
 @application.route('/grants/<grant_id>', methods=["POST"])
-def change_status(grant_id):
+def change_field(grant_id):
     ISDflags = {
         "important": False,
         "skipped": False,
         "done": False
     }
     doc = Grants.objects(_id=grant_id).first()
-    for status, value in request.form.items():
-        status=status.lower()
+    for field, value in request.form.items():
+        field=field.lower()
         value=value.lower()
         flags=doc.flags
         flags["unread"]=False
         flags["modified"]=False
-        if status in ["important", "skipped", "done"] and value in ["true","false"]:
-            ISDflags[status] = value == "true"
+        if field == "notes":
+            doc.notes = value
+        if field in ["important", "skipped", "done"] and value in ["true","false"]:
+            ISDflags[field] = value == "true"
             flags.update(ISDflags)
     doc.flags=flags
     doc.save()
