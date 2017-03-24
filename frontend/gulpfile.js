@@ -7,6 +7,7 @@ var gulp = require('gulp'),
     jsmin = require('gulp-jsmin'),
     rename = require('gulp-rename'),
     concat = require('gulp-concat'),
+    concat_multi = require('gulp-concat-multi');
     concatCss = require('gulp-concat-css'),
     clean = require('gulp-clean');
     webserver = require('gulp-webserver');
@@ -63,23 +64,20 @@ gulp.task('styles-libs:prod', function () {
 });
 
 gulp.task('js-custom:dev', function () {
-    return merge(gulp.src(['src/scripts/customs/*.js', "!src/scripts/customs/login.js"])
-                    .pipe(concat('all-customs.js'))
-                    .pipe(gulp.dest('dist/scripts/'))
-                    .pipe(livereload()),
-                gulp.src("src/scripts/customs/login.js")
-                    .pipe(gulp.dest('dist/scripts/'))
-                    .pipe(livereload()))
+    concat_multi({
+        'main.js': ["src/scripts/customs/config.dev.js", 'src/scripts/customs/main.js'],
+        'login.js': ["src/scripts/customs/config.dev.js", 'src/scripts/customs/login.js']
+    })
+    .pipe(gulp.dest('dist/scripts/'))
 });
 
 gulp.task('js-custom:prod', function () {
-    return merge(gulp.src(['src/scripts/customs/*.js', "!src/scripts/customs/login.js"])
-                    .pipe(jsmin())
-                    .pipe(concat('all-customs.js'))
-                    .pipe(gulp.dest('dist/scripts/')),
-                gulp.src("src/scripts/customs/login.js")
-                    .pipe(jsmin())
-                    .pipe(gulp.dest('dist/scripts/')))
+    concat_multi({
+        'main.js': ["src/scripts/customs/config.prod.js", 'src/scripts/customs/main.js'],
+        'login.js': ["src/scripts/customs/config.prod.js", 'src/scripts/customs/login.js']
+    })
+    .pipe(jsmin())
+    .pipe(gulp.dest('dist/scripts/'))
 });
 
 gulp.task('js-libs:dev', function () {
@@ -117,7 +115,7 @@ gulp.task('watch', function () {
 });
 
 gulp.task('webserver', function() {
-  gulp.src('dist')
+  gulp.src('./dist/')
     .pipe(webserver({
         livereload: false,
         directoryListing: false,

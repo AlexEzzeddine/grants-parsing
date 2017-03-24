@@ -7,7 +7,7 @@ var grantId,
         All: "All"
     };
 
-if(localStorage.getItem("auth") == "false"){
+if(localStorage.getItem("auth") != "true"){
     window.location.href = "./login.html";
 }
 
