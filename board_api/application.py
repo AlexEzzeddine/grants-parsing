@@ -69,20 +69,28 @@ def user_loader(email):
 
 @login_manager.request_loader
 def request_loader(request):
-    email = request.form.get('email')
-    if not Users.objects(email=email).first():
-        return
+    # first, try to login using the api_key url arg
+    userid = request.args.get('userid')
+    pw = request.args.get('password')
+    if userid:
+        user = User.query.filter_by(api_key=api_key).first()
+        if user:
+            return user
 
-    user = User()
-    user.id = email
+    # next, try to login using Basic Auth
+    api_key = request.headers.get('Authorization')
+    if api_key:
+        api_key = api_key.replace('Basic ', '', 1)
+        try:
+            api_key = base64.b64decode(api_key)
+        except TypeError:
+            pass
+        user = User.query.filter_by(api_key=api_key).first()
+        if user:
+            return user
 
-    # DO NOT ever store passwords in plaintext and always compare password
-    # hashes using constant-time comparison!
-    user.is_authenticated = check_password_hash(
-        Users.objects(email=email).first().password,
-        request.form['pw'])
-
-    return user
+    # finally, return None if both methods did not login the user
+    return None
 
 
 @application.route('/login', methods=['GET', 'POST'])
@@ -104,14 +112,12 @@ def login():
             request.form['pw']):
         user = User()
         user.id = email
-        flask_login.login_user(user)
         return "Ok"
 
     return 'Bad password'
 
 
 @application.route('/grants')
-#@flask_login.login_required
 def get_all():
     filters = {}
     domain="All"

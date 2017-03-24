@@ -9,6 +9,9 @@ var grantId,
         All: "All"
     };
 
+if(document.cookie.length==0){
+    window.location.href = "./login.html";
+}
 
 function getDomains() {
     $.ajax({

@@ -20,16 +20,19 @@ function validateForm() {
 
                  if(data === "User not found") {
                      $("#user-not-found").show();
+                     document.cookie="";
                      return false;
                  }
                  if(data === "Bad password"){
                      $("#bad-password").show();
+                      document.cookie="";
                      return false;
                  }
              });
 
              if (data !== "User not found" && data !== "Bad password") {
-                 window.location.href = "/index.html";
+                document.cookie="auth=Ok";
+                window.location.href = "./index.html";
              }
         }
     });
