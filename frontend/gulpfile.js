@@ -10,6 +10,7 @@ var gulp = require('gulp'),
     concatCss = require('gulp-concat-css'),
     clean = require('gulp-clean');
     webserver = require('gulp-webserver');
+    merge = require('merge-stream');
 
 gulp.task('html:dev', function () {
     return gulp.src('*.html')
@@ -62,23 +63,23 @@ gulp.task('styles-libs:prod', function () {
 });
 
 gulp.task('js-custom:dev', function () {
-    gulp.src(['src/scripts/customs/*.js', "!src/scripts/customs/login.js"])
-        .pipe(concat('all-customs.js'))
-        .pipe(gulp.dest('dist/scripts/'))
-        .pipe(livereload());
-    gulp.src("src/scripts/customs/login.js")
-        .pipe(gulp.dest('dist/scripts/'))
-        .pipe(livereload());
+    return merge(gulp.src(['src/scripts/customs/*.js', "!src/scripts/customs/login.js"])
+                    .pipe(concat('all-customs.js'))
+                    .pipe(gulp.dest('dist/scripts/'))
+                    .pipe(livereload()),
+                gulp.src("src/scripts/customs/login.js")
+                    .pipe(gulp.dest('dist/scripts/'))
+                    .pipe(livereload()))
 });
 
 gulp.task('js-custom:prod', function () {
-    gulp.src(['src/scripts/customs/*.js', "!src/scripts/customs/login.js"])
-        .pipe(jsmin())
-        .pipe(concat('all-customs.js'))
-        .pipe(gulp.dest('dist/scripts/'))
-    gulp.src("src/scripts/customs/login.js")
-        .pipe(jsmin())
-        .pipe(gulp.dest('dist/scripts/'))
+    return merge(gulp.src(['src/scripts/customs/*.js', "!src/scripts/customs/login.js"])
+                    .pipe(jsmin())
+                    .pipe(concat('all-customs.js'))
+                    .pipe(gulp.dest('dist/scripts/')),
+                gulp.src("src/scripts/customs/login.js")
+                    .pipe(jsmin())
+                    .pipe(gulp.dest('dist/scripts/')))
 });
 
 gulp.task('js-libs:dev', function () {
@@ -95,13 +96,13 @@ gulp.task('js-libs:prod', function () {
 });
 
 gulp.task('img-saver:dev', function () {
-    gulp.src('src/images/*.*')
+    return gulp.src('src/images/*.*')
         .pipe(gulp.dest('dist/styles/images'))
         .pipe(livereload());
 });
 
 gulp.task('img-saver:prod', function () {
-    gulp.src('src/images/*.*')
+    return gulp.src('src/images/*.*')
         .pipe(gulp.dest('dist/styles/images'))
 });
 
