@@ -405,18 +405,15 @@ function innerButtonFlagChanger(flag) {
 }
 
 function updateNote() {
-    var val = $("#myId").val();
-    var noteText;
-    noteText = document.getElementById('noteText').value;
+    var id = $("#myId").val();
+    var noteText = $("#noteText").val();
 
     console.log(noteText);
-    console.log(val);
+    console.log(id);
     $.ajax({
-        "url": host + "/grants/" + val,
+        "url": host + "/grants/" + id,
         "method": "POST",
-        "data": {
-            ["notes"]: noteText
-        },
+        "notes": noteText,
         success: function () {
             $("#jqGrid").trigger('reloadGrid');
         },
