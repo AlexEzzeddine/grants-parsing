@@ -7,7 +7,7 @@ var grantId,
         All: "All"
     };
 
-if(localStorage.getItem("auth") != "true"){
+if(!localStorage.getItem("auth")){
     window.location.href = "./login.html";
 }
 
@@ -38,6 +38,11 @@ $(document).ready(function () {
     grid.jqGrid({
         url: grantsRoute,
         mtype: "GET",
+        ajaxGridOptions: {
+            headers: {
+                "auth": localStorage.getItem("auth"),
+            }
+        },
         datatype: "json",
         jsonReader: {
             root: "Data",

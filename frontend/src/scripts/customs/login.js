@@ -18,7 +18,7 @@ function validateForm() {
             if(xhr.responseText === "Bad password"){
                 $("#bad-password").show();
             }
-            localStorage.setItem("auth", false);
+            localStorage.removeItem("auth");
         },
         success: function(data){
             localStorage.setItem("auth", data.api_key);
