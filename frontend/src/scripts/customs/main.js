@@ -274,7 +274,7 @@ $(document).ready(function () {
     });
     $("#jqGrid_toppager_center").hide();
     $(window).bind('resize', function () {
-        if ($(window).width() >= 1330) {
+        if ($(window).width() >= 800) {
             $("#jqGrid").setGridWidth($(window).width());
         }
 
