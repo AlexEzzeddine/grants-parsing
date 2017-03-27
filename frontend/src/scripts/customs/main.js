@@ -168,7 +168,6 @@ $(document).ready(function () {
         viewrecords: true, // show the current page, data rang and total records on the toolbar
         height: 750,
         hidegrid: false,
-        autowidth: true,
         rowheight: 20,
         page: 1,
         rowNum: pageSize,
@@ -274,9 +273,16 @@ $(document).ready(function () {
         }
     });
     $("#jqGrid_toppager_center").hide();
+    $(window).bind('resize', function () {
+        if ($(window).width() >= 1330) {
+            $("#jqGrid").setGridWidth($(window).width());
+        }
 
+        console.log($(window).width());
+    }).trigger('resize');
 
 });
+
 
 function highlightTopButtons(e) {
     var filterButtons = ["all-button", "unread-button", "important-button", "skipped-button", "done-button", "modified-button"];
