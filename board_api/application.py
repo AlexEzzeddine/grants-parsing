@@ -3,9 +3,10 @@ from math import ceil
 from datetime import datetime
 from flask import json
 from flask import Flask
+import jwt
 import flask_login
-from flask import request, redirect, url_for
-from flask import jsonify
+from flask import request, Response, redirect, url_for, \
+    jsonify
 from flask_cors import CORS
 from mongoengine import *
 from werkzeug.security import generate_password_hash, \
@@ -48,6 +49,10 @@ class Grants(DynamicDocument):
     meta = {'strict': False}
 
 
+class User(flask_login.UserMixin):
+    pass
+
+
 class Users(Document):
     email = StringField()
     password = StringField()
@@ -69,24 +74,16 @@ def user_loader(email):
 
 @login_manager.request_loader
 def request_loader(request):
-    # first, try to login using the api_key url arg
-    userid = request.args.get('userid')
-    pw = request.args.get('password')
-    if userid:
-        user = User.query.filter_by(api_key=api_key).first()
-        if user:
-            return user
-
     # next, try to login using Basic Auth
-    api_key = request.headers.get('Authorization')
+    api_key = request.headers.get('auth')
     if api_key:
-        api_key = api_key.replace('Basic ', '', 1)
         try:
-            api_key = base64.b64decode(api_key)
+            api_key = jwt.decode(api_key, application.secret_key)
         except TypeError:
             pass
-        user = User.query.filter_by(api_key=api_key).first()
-        if user:
+        if Users.objects(email=api_key["email"]).first():
+            user = User()
+            user.email = api_key["email"]
             return user
 
     # finally, return None if both methods did not login the user
@@ -97,30 +94,33 @@ def request_loader(request):
 def login():
     if request.method == 'GET':
         return '''
-               <form action='login' method='POST'>
-                <input type='text' name='email' id='email' placeholder='email'></input>
-                <input type='password' name='pw' id='pw' placeholder='password'></input>
-                <input type='submit' name='submit'></input>
-               </form>
-               '''
-
+            <form action='login' method='POST'>
+            <input type='text' name='email' id='email' placeholder='email'>
+            </input>
+            <input type='password' name='pw' id='pw' placeholder='password'>
+            </input>
+            <input type='submit' name='submit'></input>
+            </form>
+            '''
     email = request.form['email']
+    password = request.form['password']
     if not Users.objects(email=email).first():
-        return "User not found"
+        return Response("User not found", 401)
     if check_password_hash(
             Users.objects(email=email).first().password,
-            request.form['pw']):
-        user = User()
-        user.id = email
-        return "Ok"
-
-    return 'Bad password'
+            password):
+        return jsonify({"api_key":
+                        jwt.encode({"email": email,
+                                    "password": password},
+                                   application.secret_key).decode()})
+    return Response("Bad password", 401)
 
 
 @application.route('/grants')
+@flask_login.login_required
 def get_all():
     filters = {}
-    domain="All"
+    domain = "All"
     domain_filters = request.args.get("filters")
     if domain_filters:
         domain = json.loads(domain_filters)['rules'][0]['data']
@@ -165,17 +165,18 @@ def change_field(grant_id):
     }
     doc = Grants.objects(_id=grant_id).first()
     for field, value in request.form.items():
-        field=field.lower()
-        value=value.lower()
-        flags=doc.flags
-        flags["unread"]=False
-        flags["modified"]=False
+        field = field.lower()
+        value = value.lower()
+        flags = doc.flags
+        flags["unread"] = False
+        flags["modified"] = False
         if field == "notes":
             doc['notes'] = value
-        if field in ["important", "skipped", "done"] and value in ["true","false"]:
+        if (field in ["important", "skipped", "done"] and
+                value in ["true", "false"]):
             ISDflags[field] = value == "true"
             flags.update(ISDflags)
-    doc.flags=flags
+    doc.flags = flags
     doc.save()
     return jsonify(doc.flags)
 
