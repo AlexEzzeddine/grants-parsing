@@ -74,6 +74,7 @@
   .add_record_button:hover {
     background-color: #5c6dc4;
     cursor: pointer;
+    border-radius: 10px !important;
   }
 }
 
@@ -347,6 +348,7 @@
   padding: 20px;
   border: 1px solid #888;
   min-width: 800px;
+  width: 800px;
   height: 90%;
   min-height: 680px;
   display: flex;
