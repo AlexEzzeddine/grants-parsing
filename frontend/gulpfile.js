@@ -109,7 +109,7 @@ gulp.task('watch', function () {
     var server = livereload.listen();
     gulp.watch('src/styles/*.scss', ['styles-custom:dev']);
     gulp.watch('src/styles/librarys/*.css', ['styles-libs:dev']);
-    gulp.watch('*.html', ['html:dev']);
+    gulp.watch('src/*.html', ['html:dev']);
     gulp.watch('src/scripts/customs/*.js', ['js-custom:dev']);
     gulp.watch('src/scripts/librarys/*.js', ['js-libs:dev']);
     gulp.watch('*.json', ['img-saver:dev']);
