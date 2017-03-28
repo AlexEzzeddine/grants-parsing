@@ -286,6 +286,11 @@ $(document).ready(function () {
         console.log($(window).width());
     }).trigger('resize');
 
+    $("#logout-button").click(function(){
+        localStorage.clear();
+        window.location.href = '/login.html';
+    });
+
 });
 
 
