@@ -12,6 +12,16 @@ var gulp = require('gulp'),
     clean = require('gulp-clean');
     webserver = require('gulp-webserver');
     merge = require('merge-stream');
+    exec = require('child_process').exec;
+    os = require('os');
+
+
+gulp.task("python",function(){
+    if (os.platform() === 'win32'){
+        exec("start \"Flask\" python ..\\board_api\\application.py");
+    }
+})
+
 
 gulp.task('html:dev', function () {
     return gulp.src('src/*.html')
@@ -124,5 +134,5 @@ gulp.task('webserver', function() {
     }));
 });
 
-gulp.task('dev', ['html:dev', 'styles-custom:dev', 'styles-libs:dev', 'js-libs:dev', 'js-custom:dev', 'img-saver:dev', 'watch', 'webserver']);
+gulp.task('dev', ['python', 'html:dev', 'styles-custom:dev', 'styles-libs:dev', 'js-libs:dev', 'js-custom:dev', 'img-saver:dev', 'watch', 'webserver']);
 gulp.task('prod', ['html:prod', 'styles-custom:prod', 'styles-libs:prod', 'js-libs:prod', 'js-custom:prod', 'img-saver:prod']);
