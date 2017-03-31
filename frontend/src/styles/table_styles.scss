@@ -294,23 +294,25 @@ html, body {
 
 .linkStyles {
 
-  margin-left: 5px;
+  //margin-left: 5px;
   color: #3f51b5;
   font-size: 12px;
   font-weight: normal;
+  text-align: center;
 }
 
 .previewStyles {
   height: 20px;
   font-size: 12px;
   color: #000;
-  width: 710px;
+  width: 610px;
   padding: 5px;
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
   font-weight: normal;
 }
+
 
 .contactsStyles {
   height: 35px;
@@ -324,13 +326,90 @@ html, body {
   //background-color: #003eff;
 }
 
+//small size
+.previewStyles_S {
+  height: 90px;
+  font-size: 12px;
+  color: #000;
+  width: 100%;
+  padding: 5px;
+  overflow: hidden;
+  white-space: normal;
+  font-weight: normal;
+  text-align: center;
+}
+
+.contactsStyles_S {
+  height: 60px;
+  display: flex;
+  font-style: italic;
+  font-size: 12px;
+  width: 100%;
+  padding: 5px;
+  overflow: hidden;
+  font-weight: normal;
+  //background-color: #003eff;
+}
+
+.linkStyles_S {
+  display: flex;
+  align-items: center;
+  height: 70px;
+  width: 100%;
+  color: #3f51b5;
+  font-size: 12px;
+  font-weight: normal;
+  text-align: center;
+}
+
+//medium size
+.previewStyles_M {
+  height: 55px;
+  font-size: 12px;
+  color: #000;
+  width: 100%;
+  padding: 5px;
+  overflow: hidden;
+  white-space: normal;
+  font-weight: normal;
+  text-align: center;
+}
+
+.contactsStyles_M {
+  height: 55px;
+  display: flex;
+  font-style: italic;
+  font-size: 12px;
+  width: 100%;
+  padding: 5px;
+  overflow: hidden;
+  font-weight: normal;
+  //background-color: #003eff;
+}
+
+.linkStyles_M {
+  display: flex;
+  align-items: center;
+  height: 55px;
+  width: 100%;
+  color: #3f51b5;
+  font-size: 12px;
+  font-weight: normal;
+  text-align: center;
+}
+
+
+
 .buttonStyles {
-  height: 35px;
+  width: auto;
+  min-height: 35px;
+  // max-height: 45px;
   margin-left: 10px;
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: center;
+  flex-wrap: wrap;
 }
 
 //Allert styles start

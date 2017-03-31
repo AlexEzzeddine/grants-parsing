@@ -159,6 +159,7 @@ tr.ui-search-toolbar select {
     padding: 0;
     overflow: auto;
     text-align: left;
+    overflow-x: hidden;
 }
 
 .ui-jqgrid .ui-jqgrid-btable {

@@ -53,7 +53,7 @@ $(document).ready(function () {
             {
                 label: 'Status',
                 name: 'Status',
-                width: 50,
+                width: 35,
                 formatter: statusStyles,
                 sortable: false,
                 search: false
@@ -61,7 +61,7 @@ $(document).ready(function () {
             {
                 label: 'Date',
                 name: 'publication_date',
-                width: 75,
+                width: 60,
                 formatter: dateStyles,
                 sortable: false,
                 search: false
@@ -69,7 +69,7 @@ $(document).ready(function () {
             {
                 label: 'Source',
                 name: 'domain',
-                width: 100,
+                width: 55,
                 formatter: typeStyles,
                 sortable: false,
                 stype: 'select',
@@ -81,14 +81,14 @@ $(document).ready(function () {
                 label: 'Title',
                 name: 'url',
                 formatter: linkStyles,
-                width: 210,
+                //width: 210,
                 sortable: false,
                 search: false
             },
             {
                 label: 'Content preview',
                 name: 'text',
-                width: 580,
+                //width: 580,
                 formatter: previewStyles,
                 sortable: false,
                 search: false
@@ -97,7 +97,7 @@ $(document).ready(function () {
             {
                 name: 'done',
                 jsonmap: 'flags.done',
-                width: 580,
+                //width: 580,
                 formatter: previewStyles,
                 sortable: false,
                 search: false,
@@ -106,7 +106,7 @@ $(document).ready(function () {
             {
                 name: 'unread',
                 jsonmap: 'flags.unread',
-                width: 580,
+                // width: 580,
                 formatter: previewStyles,
                 sortable: false,
                 search: false,
@@ -115,7 +115,7 @@ $(document).ready(function () {
             {
                 name: 'important',
                 jsonmap: 'flags.important',
-                width: 580,
+                // width: 580,
                 formatter: previewStyles,
                 sortable: false,
                 search: false,
@@ -124,7 +124,7 @@ $(document).ready(function () {
             {
                 name: 'skipped',
                 jsonmap: 'flags.skipped',
-                width: 580,
+                //width: 580,
                 formatter: previewStyles,
                 sortable: false,
                 search: false,
@@ -148,14 +148,14 @@ $(document).ready(function () {
             {
                 label: 'Contacts',
                 name: 'contacts',
-                width: 280,
+                //width: 90,
                 formatter: contactsStyles,
                 sortable: false,
                 search: false
             },
             {
                 name: 'notes',
-                width: 280,
+                //width: 280,
                 formatter: contactsStyles,
                 sortable: false,
                 search: false,
@@ -163,7 +163,7 @@ $(document).ready(function () {
             },
             {
                 label: 'Actions',
-                width: 250,
+                width: 120,
                 formatter: actionsButtons,
                 sortable: false,
                 search: false
@@ -278,10 +278,47 @@ $(document).ready(function () {
         }
     });
     $("#jqGrid_toppager_center").hide();
+
     $(window).bind('resize', function () {
+
+        $("#jqGrid").setGridHeight($(window).height() - 200);
+
         if ($(window).width() >= 800) {
             $("#jqGrid").setGridWidth($(window).width());
         }
+        if ($(window).width() <= 1200) {
+            $("#jqGrid").hideCol("domain");
+            // $('.previewStyles').css('text-align', 'center');
+        }
+        if ($(window).width() > 1200) {
+            $("#jqGrid").showCol("domain");
+        }
+
+        if ($(window).width() <= 1200) {
+            $("#jqGrid").hideCol("domain");
+        }
+        if ($(window).width() > 1200) {
+            $("#jqGrid").showCol("domain");
+        }
+        if ($(window).width() < 950) {
+            $(".previewStyles").addClass("previewStyles_S").removeClass("previewStyles_M");
+            $(".linkStyles").addClass("linkStyles_S").removeClass("linkStyles_M");
+            $(".contactsStyles").addClass("contactsStyles_S").removeClass("contactsStyles_M");
+        }
+        if ($(window).width() < 1500 && $(window).width() > 950) {
+            $(".previewStyles").addClass("previewStyles_M").removeClass("previewStyles_S");
+            $(".linkStyles").addClass("linkStyles_M").removeClass("linkStyles_S");
+            $(".contactsStyles").addClass("contactsStyles_M").removeClass("contactsStyles_S");
+        }
+        if ($(window).width() > 1580) {
+            $(".previewStyles").removeClass("previewStyles_S").removeClass("previewStyles_M");
+            $(".linkStyles").removeClass("linkStyles_S").removeClass("linkStyles_M");
+            $(".contactsStyles").removeClass("contactsStyles_S").removeClass("contactsStyles_M");
+        }
+
+
+        $("#jqGrid").columnWidth("domain");
+
 
         console.log($(window).width());
     }).trigger('resize');
@@ -340,7 +377,7 @@ function typeStyles(v) {
 }
 
 function linkStyles(cellValue, options, rowObject) {
-    return "<a class='linkStyles' onclick='clickedLink($(this).closest(\"tr\"))' style='color: #3f51b5; height: 25px'   target='_blank' href='" + cellValue + "'>" + rowObject.title + "</a>";
+    return "<a class='linkStyles' onclick='clickedLink($(this).closest(\"tr\"))' style='color: #3f51b5; '   target='_blank' href='" + cellValue + "'>" + rowObject.title + "</a>";
 }
 
 function clickedLink(e) {
