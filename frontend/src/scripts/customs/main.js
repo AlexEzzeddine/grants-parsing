@@ -175,8 +175,8 @@ $(document).ready(function () {
         height: 750,
         hidegrid: false,
         rowheight: 20,
-		width : null,
-		shrinkToFit : false,
+        //width : null,
+        //shrinkToFit : false,
         page: 1,
         rowNum: pageSize,
         toppager: true,
@@ -284,7 +284,7 @@ $(document).ready(function () {
 
     $(window).bind('resize', function () {
 
-	/*
+
         $("#jqGrid").setGridHeight($(window).height() - 200);
 		
         if ($(window).width() >= 800) {
@@ -325,7 +325,7 @@ $(document).ready(function () {
 
 
         console.log($(window).width());
-		*/
+
     }).trigger('resize');
 
     $("#logout-button").click(function(){
