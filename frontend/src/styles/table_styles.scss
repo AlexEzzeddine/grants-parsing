@@ -17,6 +17,7 @@ html, body {
 
 }
 
+
 .ui-widget input, .ui-widget select, .ui-widget textarea, .ui-widget button {
   font-family: Arial, sans-serif;
   font-size: 10px;
@@ -371,6 +372,11 @@ html, body {
   width: 310px;
 }
 
+@media only screen and (min-width: 1511px) and (min-width: 1920px) {
+  #jqGrid_undefined {
+    width: 293px;
+  }
+}
 @media only screen and (min-width: 1511px) and (max-width: 1650px) {
   .buttonStyles {
     width: 190px;
