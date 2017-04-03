@@ -16,11 +16,13 @@ LOG_LEVEL="INFO"
 SPIDER_MODULES = ['databoard.spiders']
 NEWSPIDER_MODULE = 'databoard.spiders'
 
-CONN_STRING="mongodb://root:test12345@ec2-54-91-141-246.compute-1.amazonaws.com:27017"
-MONGODB_SERVER = "ec2-54-91-141-246.compute-1.amazonaws.com"
-MONGODB_PORT = 27017
+#mongodb://root:root@ds149030.mlab.com:49030/alex?3t.uriVersion=2&3t.connectionMode=direct&3t.databases=alex&readPreference=primary&3t.connection.name=mlab
+
+CONN_STRING="mongodb://root:root@ds149040.mlab.com:49040/databoard?3t.uriVersion=2&3t.connectionMode=direct&3t.databases=databoard&readPreference=primary&3t.connection.name=mlab"
+MONGODB_SERVER = "ds149040.mlab.com"
+MONGODB_PORT = 49040
 MONGODB_USER="root"
-MONGODB_PASSWORD="test12345"
+MONGODB_PASSWORD="root"
 MONGODB_DB = "databoard"
 MONGODB_COLLECTION = "grants"
 

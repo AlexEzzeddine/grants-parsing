@@ -20,11 +20,10 @@ login_manager = flask_login.LoginManager()
 login_manager.init_app(application)
 
 connect('databoard',
-        host='ec2-54-91-141-246.compute-1.amazonaws.com',
-        port=27017,
+        host='ds149040.mlab.com',
+        port=49040,
         username="root",
-        password="test12345",
-        authentication_source="admin")
+        password="root")
 
 
 class MyJSONEncoder(json.JSONEncoder):
@@ -109,10 +108,7 @@ def login():
     if check_password_hash(
             Users.objects(email=email).first().password,
             password):
-        return jsonify({"api_key":
-                        jwt.encode({"email": email,
-                                    "password": password},
-                                   application.secret_key).decode()})
+        return jsonify({"api_key": jwt.encode({"email": email, "password": password}, application.secret_key).decode()})
     return Response("Bad password", 401)
 
 
