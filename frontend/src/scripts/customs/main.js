@@ -54,7 +54,6 @@ $(document).ready(function () {
             {
                 label: 'Status',
                 name: 'Status',
-                width: 35,
                 formatter: statusStyles,
                 sortable: false,
                 search: false
@@ -62,7 +61,6 @@ $(document).ready(function () {
             {
                 label: 'Date',
                 name: 'publication_date',
-                width: 60,
                 formatter: dateStyles,
                 sortable: false,
                 search: false
@@ -70,7 +68,6 @@ $(document).ready(function () {
             {
                 label: 'Source',
                 name: 'domain',
-                width: 55,
                 formatter: typeStyles,
                 sortable: false,
                 stype: 'select',
@@ -82,14 +79,12 @@ $(document).ready(function () {
                 label: 'Title',
                 name: 'url',
                 formatter: linkStyles,
-                //width: 210,
                 sortable: false,
                 search: false
             },
             {
                 label: 'Content preview',
                 name: 'text',
-                //width: 580,
                 formatter: previewStyles,
                 sortable: false,
                 search: false
@@ -98,7 +93,6 @@ $(document).ready(function () {
             {
                 name: 'done',
                 jsonmap: 'flags.done',
-                //width: 580,
                 formatter: previewStyles,
                 sortable: false,
                 search: false,
@@ -107,7 +101,6 @@ $(document).ready(function () {
             {
                 name: 'unread',
                 jsonmap: 'flags.unread',
-                // width: 580,
                 formatter: previewStyles,
                 sortable: false,
                 search: false,
@@ -116,7 +109,6 @@ $(document).ready(function () {
             {
                 name: 'important',
                 jsonmap: 'flags.important',
-                // width: 580,
                 formatter: previewStyles,
                 sortable: false,
                 search: false,
@@ -125,7 +117,6 @@ $(document).ready(function () {
             {
                 name: 'skipped',
                 jsonmap: 'flags.skipped',
-                //width: 580,
                 formatter: previewStyles,
                 sortable: false,
                 search: false,
@@ -133,7 +124,6 @@ $(document).ready(function () {
             },
             {
                 name: 'title',
-                width: 0,
                 formatter: previewStyles,
                 sortable: false,
                 search: false,
@@ -141,7 +131,6 @@ $(document).ready(function () {
             },
             {
                 name: '_id',
-                width: 0,
                 sortable: false,
                 search: false,
                 hidden: true
@@ -149,14 +138,12 @@ $(document).ready(function () {
             {
                 label: 'Contacts',
                 name: 'contacts',
-                //width: 90,
                 formatter: contactsStyles,
                 sortable: false,
                 search: false
             },
             {
                 name: 'notes',
-                //width: 280,
                 formatter: contactsStyles,
                 sortable: false,
                 search: false,
@@ -164,7 +151,6 @@ $(document).ready(function () {
             },
             {
                 label: 'Actions',
-                width: 120,
                 formatter: actionsButtons,
                 sortable: false,
                 search: false
@@ -175,9 +161,7 @@ $(document).ready(function () {
         height: 750,
         hidegrid: false,
         rowheight: 20,
-        //autowidth: true,
-        //width : null,
-        //shrinkToFit : false,
+        width: null,
         page: 1,
         rowNum: pageSize,
         toppager: true,
@@ -284,61 +268,20 @@ $(document).ready(function () {
     $("#jqGrid_toppager_center").hide();
 
     $(window).bind('resize', function () {
-
-
         $("#jqGrid").setGridHeight($(window).height() - 200);
-		
-        if ($(window).width() >= 800) {
-            $("#jqGrid").setGridWidth($(window).width());
-        }
-        if ($(window).width() <= 1200) {
-            $("#jqGrid").hideCol("domain");
-            // $('.previewStyles').css('text-align', 'center');
-        }
-        if ($(window).width() > 1200) {
-            $("#jqGrid").showCol("domain");
-        }
-
         if ($(window).width() <= 1200) {
             $("#jqGrid").hideCol("domain");
         }
         if ($(window).width() > 1200) {
             $("#jqGrid").showCol("domain");
         }
-        if ($(window).width() < 950) {
-            $(".previewStyles").addClass("previewStyles_S").removeClass("previewStyles_M");
-            $(".linkStyles").addClass("linkStyles_S").removeClass("linkStyles_M");
-            $(".contactsStyles").addClass("contactsStyles_S").removeClass("contactsStyles_M");
-            // $(".buttonStyles").addClass("buttonStyles_S").removeClass("buttonStyles_M");
-        }
-        if ($(window).width() < 1500 && $(window).width() > 950) {
-            $(".previewStyles").addClass("previewStyles_M").removeClass("previewStyles_S");
-            $(".linkStyles").addClass("linkStyles_M").removeClass("linkStyles_S");
-            $(".contactsStyles").addClass("contactsStyles_M").removeClass("contactsStyles_S");
-            //$(".buttonStyles").addClass("buttonStyles_S").removeClass("buttonStyles_M");
-        }
-        if ($(window).width() > 1580) {
-            $(".previewStyles").removeClass("previewStyles_S").removeClass("previewStyles_M");
-            $(".linkStyles").removeClass("linkStyles_S").removeClass("linkStyles_M");
-            $(".contactsStyles").removeClass("contactsStyles_S").removeClass("contactsStyles_M");
-            //$(".buttonStyles").removeClass("buttonStyles_S").removeClass("buttonStyles_M");
-        }
-
-
-        $("#jqGrid").columnWidth("domain");
-
-
-        console.log($(window).width());
-
     }).trigger('resize');
 
     $("#logout-button").click(function(){
         localStorage.clear();
         window.location.href = '/login.html';
     });
-
 });
-
 
 function highlightTopButtons(e) {
     var filterButtons = ["all-button", "unread-button", "important-button", "skipped-button", "done-button", "modified-button"];
