@@ -176,7 +176,7 @@ $(document).ready(function () {
         hidegrid: false,
         rowheight: 20,
         //autowidth: true,
-        width: null,
+        //width : null,
         //shrinkToFit : false,
         page: 1,
         rowNum: pageSize,
@@ -286,10 +286,10 @@ $(document).ready(function () {
     $(window).bind('resize', function () {
 
 
-        //$("#jqGrid").setGridHeight($(window).height() - 200);
+        $("#jqGrid").setGridHeight($(window).height() - 200);
 		
         if ($(window).width() >= 800) {
-            //  $("#jqGrid").setGridWidth($(window).width());
+            $("#jqGrid").setGridWidth($(window).width());
         }
         if ($(window).width() <= 1200) {
             $("#jqGrid").hideCol("domain");
