@@ -371,7 +371,6 @@ html, body {
 #jqGrid_undefined {
   width: 310px;
 }
-
 @media only screen and (min-width: 1511px) and (min-width: 1920px) {
   #jqGrid_undefined {
     width: 293px;
@@ -411,7 +410,7 @@ html, body {
   }
 }
 
-@media only screen and (max-width: 1510px) and (min-width: 1380px) {
+@media only screen and (max-width: 1510px) and (min-width: 1251px) {
   .buttonStyles {
     width: 190px;
     button {
@@ -453,49 +452,7 @@ html, body {
   }
 }
 
-@media only screen and (max-width: 1379px) and (min-width: 1251px) {
-  .previewStyles {
-    height: 37px;
-    width: 100%;
-    white-space: normal;
-    font-weight: normal;
-    text-align: center;
-  }
-  .buttonStyles {
-    width: 190px;
-    button {
-      width: 90px
-    }
-  }
-  .linkStyles {
-    width: 100px;
-  }
-  .contactsStyles {
-    width: 100%;
-  }
-  #jqGrid_Status {
-    width: 43px;
-  }
-  #jqGrid_publication_date {
-    width: 75px;
-  }
-  #jqGrid_domain {
-    width: 93px;
-  }
-  #jqGrid_url {
-    width: 157px;
 
-  }
-  #jqGrid_text {
-    width: auto;
-  }
-  #jqGrid_contacts {
-    width: 175px;
-  }
-  #jqGrid_undefined {
-    width: 200px;
-  }
-}
 
 //medium size
 @media only screen and (max-width: 1250px) and (min-width: 1100px) {
