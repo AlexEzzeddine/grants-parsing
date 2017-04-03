@@ -1,5 +1,6 @@
 html, body {
   width: 100%;
+  min-width: 960px;
   height: 100%;
   overflow-x: hidden;
 }
@@ -272,8 +273,7 @@ html, body {
 
 }
 
-//normal size
-
+//norma
 
 .dateStyles {
   height: 35px;
@@ -324,7 +324,7 @@ html, body {
   display: flex;
   font-style: italic;
   font-size: 12px;
-  // width: 330px;
+  width: 270px;
   padding: 5px;
   overflow: hidden;
   font-weight: normal;
@@ -342,12 +342,66 @@ html, body {
   flex-wrap: wrap;
 }
 
+#jqGrid_Status {
+  width: 43px;
+}
+
+#jqGrid_publication_date {
+  width: 75px;
+}
+
+#jqGrid_domain {
+  width: 93px;
+}
+
+#jqGrid_url {
+  width: auto;
+
+}
+
+#jqGrid_text {
+  width: 613px;
+}
+
+#jqGrid_contacts {
+  width: 273px;
+}
+
+#jqGrid_undefined {
+  width: 310px;
+}
+
 @media only screen and (min-width: 1511px) and (max-width: 1650px) {
   .buttonStyles {
     width: 190px;
     button {
       width: 90px
     }
+  }
+  .contactsStyles {
+    width: 240px;
+  }
+  #jqGrid_Status {
+    width: 43px;
+  }
+  #jqGrid_publication_date {
+    width: 75px;
+  }
+  #jqGrid_domain {
+    width: 93px;
+  }
+  #jqGrid_url {
+    width: auto;
+
+  }
+  #jqGrid_text {
+    width: 613px;
+  }
+  #jqGrid_contacts {
+    width: 243px;
+  }
+  #jqGrid_undefined {
+    width: 200px;
   }
 }
 
@@ -365,7 +419,32 @@ html, body {
     font-weight: normal;
     text-align: center;
   }
+  .contactsStyles {
+    width: 240px;
+  }
 
+  #jqGrid_Status {
+    width: 43px;
+  }
+  #jqGrid_publication_date {
+    width: 75px;
+  }
+  #jqGrid_domain {
+    width: 93px;
+  }
+  #jqGrid_url {
+    width: auto;
+
+  }
+  #jqGrid_text {
+    width: 453px;
+  }
+  #jqGrid_contacts {
+    width: 243px;
+  }
+  #jqGrid_undefined {
+    width: 200px;
+  }
 }
 
 @media only screen and (max-width: 1379px) and (min-width: 1251px) {
@@ -387,6 +466,28 @@ html, body {
   }
   .contactsStyles {
     width: 100%;
+  }
+  #jqGrid_Status {
+    width: 43px;
+  }
+  #jqGrid_publication_date {
+    width: 75px;
+  }
+  #jqGrid_domain {
+    width: 93px;
+  }
+  #jqGrid_url {
+    width: 157px;
+
+  }
+  #jqGrid_text {
+    width: auto;
+  }
+  #jqGrid_contacts {
+    width: 175px;
+  }
+  #jqGrid_undefined {
+    width: 200px;
   }
 }
 
@@ -415,9 +516,30 @@ html, body {
   }
   .contactsStyles {
     height: 37px;
-    width: 100%;
+    width: 190px;
   }
+  #jqGrid_Status {
+    width: 43px;
+  }
+  #jqGrid_publication_date {
+    width: 75px;
+  }
+  #jqGrid_domain {
+    width: 93px;
+  }
+  #jqGrid_url {
+    width: auto;
 
+  }
+  #jqGrid_text {
+    width: 353px;
+  }
+  #jqGrid_contacts {
+    width: 193px;
+  }
+  #jqGrid_undefined {
+    width: 200px;
+  }
 
 }
 
@@ -450,6 +572,29 @@ html, body {
   }
   .contactsStyles {
     height: 37px;
+    width: 180px;
+  }
+  #jqGrid_Status {
+    width: 43px;
+  }
+  #jqGrid_publication_date {
+    width: 75px;
+  }
+  #jqGrid_domain {
+    width: 93px;
+  }
+  #jqGrid_url {
+    width: 157px;
+
+  }
+  #jqGrid_text {
+    width: auto;
+  }
+  #jqGrid_contacts {
+    width: 183px;
+  }
+  #jqGrid_undefined {
+    width: 110px;
   }
 }
 
@@ -652,4 +797,8 @@ html, body {
 
 #jqgh_jqGrid_Status, #jqgh_jqGrid_publication_date, #jqgh_jqGrid_domain, #jqgh_jqGrid_url, #jqgh_jqGrid_text, #jqgh_jqGrid_contacts, #jqgh_jqGrid_undefined {
   cursor: default;
+}
+
+table.ui-jqgrid-htable.ui-common-table {
+  width: 100%;
 }
