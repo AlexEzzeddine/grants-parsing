@@ -251,6 +251,7 @@ html, body {
   background: #fff8f8;
   border-radius: 18px;
   color: #3f51b5;
+  width: 30px;
 
 }
 
@@ -326,6 +327,20 @@ html, body {
   //background-color: #003eff;
 }
 
+.buttonStyles {
+  width: 300px;
+  min-height: 35px;
+  // max-height: 45px;
+  margin-left: 10px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+
+
 //small size
 .previewStyles_S {
   height: 90px;
@@ -360,6 +375,18 @@ html, body {
   font-size: 12px;
   font-weight: normal;
   text-align: center;
+}
+
+.buttonStyles_S {
+  width: 100px;
+  min-height: 35px;
+  // max-height: 45px;
+  margin-left: 10px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
 }
 
 //medium size
@@ -398,10 +425,8 @@ html, body {
   text-align: center;
 }
 
-
-
-.buttonStyles {
-  width: auto;
+.buttonStyles_M {
+  width: 100px;
   min-height: 35px;
   // max-height: 45px;
   margin-left: 10px;

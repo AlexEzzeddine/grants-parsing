@@ -175,7 +175,8 @@ $(document).ready(function () {
         height: 750,
         hidegrid: false,
         rowheight: 20,
-        //width : null,
+        //autowidth: true,
+        width: null,
         //shrinkToFit : false,
         page: 1,
         rowNum: pageSize,
@@ -285,10 +286,10 @@ $(document).ready(function () {
     $(window).bind('resize', function () {
 
 
-        $("#jqGrid").setGridHeight($(window).height() - 200);
+        //$("#jqGrid").setGridHeight($(window).height() - 200);
 		
         if ($(window).width() >= 800) {
-            $("#jqGrid").setGridWidth($(window).width());
+            //  $("#jqGrid").setGridWidth($(window).width());
         }
         if ($(window).width() <= 1200) {
             $("#jqGrid").hideCol("domain");
@@ -308,16 +309,19 @@ $(document).ready(function () {
             $(".previewStyles").addClass("previewStyles_S").removeClass("previewStyles_M");
             $(".linkStyles").addClass("linkStyles_S").removeClass("linkStyles_M");
             $(".contactsStyles").addClass("contactsStyles_S").removeClass("contactsStyles_M");
+            // $(".buttonStyles").addClass("buttonStyles_S").removeClass("buttonStyles_M");
         }
         if ($(window).width() < 1500 && $(window).width() > 950) {
             $(".previewStyles").addClass("previewStyles_M").removeClass("previewStyles_S");
             $(".linkStyles").addClass("linkStyles_M").removeClass("linkStyles_S");
             $(".contactsStyles").addClass("contactsStyles_M").removeClass("contactsStyles_S");
+            //$(".buttonStyles").addClass("buttonStyles_S").removeClass("buttonStyles_M");
         }
         if ($(window).width() > 1580) {
             $(".previewStyles").removeClass("previewStyles_S").removeClass("previewStyles_M");
             $(".linkStyles").removeClass("linkStyles_S").removeClass("linkStyles_M");
             $(".contactsStyles").removeClass("contactsStyles_S").removeClass("contactsStyles_M");
+            //$(".buttonStyles").removeClass("buttonStyles_S").removeClass("buttonStyles_M");
         }
 
 
