@@ -529,7 +529,7 @@ div.tablediv > .table-bordered {
     display: none;
     border: 1px solid #ddd; /*default*/
     font-size: 14px;
-    background-color: #d9edf7;
+    background-color: black;
 }
 
 .ui-jqgrid .jqgrid-overlay {

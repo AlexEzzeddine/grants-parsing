@@ -360,6 +360,7 @@ function actionsButtons(cellValue, options, rowObject) {
 }
 
 function displayItem(e) {
+    $(".ui-jqgrid .loading").css('background-color', 'transparent');
     e.removeClass('unread');
     var id = $(e).attr('id'),
         data = $("#jqGrid").getRowData(id);
@@ -484,6 +485,7 @@ var setGridItemStatus = function (grant_id, statusName, rowId) {
 };
 
 function closeAlert() {
+    $(".ui-jqgrid .loading").css('background-color', 'rgba(0,0,0,0.27)');
     $('#alertContent').animate({
         scrollTop: $('html').offset().top
     });
