@@ -189,16 +189,23 @@ $(document).ready(function () {
                 }
                 if (($(rowData.skipped).text()) == "true") {
                     $("#" + rowId+" .skp").addClass('sideButtonPressed');
+                    $("#" + rowId + " .skp").css('cursor', 'default');
+                    $("#" + rowId + " .skp").attr('disabled', true);
                 }
                 if (($(rowData.important).text()) == "true") {
                     $("#" + rowId+" .imp").addClass('sideButtonPressed');
+                    $("#" + rowId + " .imp").css('cursor', 'default');
+                    $("#" + rowId + " .imp").attr('disabled', true);
                 }
                 if (($(rowData.done).text()) == "true") {
                     $("#" + rowId+" .dn").addClass('sideButtonPressed');
+                    $("#" + rowId + " .dn").css('cursor', 'default');
+                    $("#" + rowId + " .dn").attr('disabled', true);
                 }
             }
         }
     });
+
 
     grid.jqGrid('filterToolbar', {
         autosearch: true,
@@ -430,12 +437,10 @@ function updateNote() {
 
 
 function skipItem(e) {
-
     e.removeClass('unread');
     e.addClass('buttonPressedSkip');
     var id = $(e).attr('id'),
         data = $("#jqGrid").getRowData(id);
-
     setGridItemStatus(data._id, 'skipped', id);
 }
 
