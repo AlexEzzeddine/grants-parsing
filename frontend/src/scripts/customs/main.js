@@ -72,7 +72,11 @@ $(document).ready(function () {
                 sortable: false,
                 stype: 'select',
                 searchoptions: {
-                    value: domains
+                    value: domains,
+                    clearSearch: false,
+                    dataInit: function (elem) {
+                        $(elem).width('100%');
+                    }
                 }
             },
             {
