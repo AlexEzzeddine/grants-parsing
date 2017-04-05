@@ -123,14 +123,18 @@ def get_all():
     if domain and domain != "All":
         filters.update({"domain": domain})
     flags = json.loads(request.args.get("flags", "[]"))
+
     filters.update({
         "flags." + flag: True for flag in flags
     })
+
     page = int(request.args.get('page', 1))
     rows = int(request.args.get('rows', 16))
-    data = Grants.objects(__raw__=filters).skip(
-        (page - 1) * rows).limit(rows)
+
+    data = Grants.objects(__raw__=filters).order_by('-publication_date').skip((page - 1) * rows).limit(rows)
+
     count = Grants.objects(__raw__=filters).count()
+
     return jsonify({
         "Count": count,
         "Pages": ceil(count / rows),
