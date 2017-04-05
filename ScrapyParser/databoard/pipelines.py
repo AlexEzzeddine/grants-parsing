@@ -64,6 +64,7 @@ class MongoDBPipeline(object):
             if not document:
                 spider.logger.info("Inserting new document")
                 item['flags'] = self.EMPTY_FLAGS
+                item['flags']['unread'] = True
                 item["notes"] = ""
                 item['publication_date'] = datetime.now()
                 self.collection.insert(dict(item))
