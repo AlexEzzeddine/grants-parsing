@@ -1,18 +1,17 @@
-from bson import ObjectId
 from math import ceil
-from datetime import datetime
-from flask import json
-from flask import Flask
-import jwt
+
 import flask_login
-from flask import request, Response, redirect, url_for, \
-    jsonify
+import jwt
+from flask import Flask
+from flask import json
+from flask import request, Response, jsonify
 from flask_cors import CORS
 from mongoengine import *
-from werkzeug.security import generate_password_hash, \
-    check_password_hash
+from werkzeug.security import check_password_hash
 
 # EB looks for an 'application' callable by default.
+from models import MyJSONEncoder, Grants, User, Users
+
 application = Flask(__name__)
 application.secret_key = "dsfakadfa2938ghf4b293t34gk3g023hggv"
 CORS(application)
@@ -24,41 +23,6 @@ connect('databoard',
         port=49040,
         username="root",
         password="root")
-
-
-class MyJSONEncoder(json.JSONEncoder):
-    def default(self, o):
-        if isinstance(o, datetime):
-            return o.strftime("%d.%m.%Y")
-        if isinstance(o, ObjectId):
-            return str(o)
-        return json.JSONEncoder.default(self, o)
-
-
-class Grants(DynamicDocument):
-    _id = ObjectIdField()
-    url = StringField()
-    title = StringField()
-    text = StringField()
-    contacts = StringField()
-    domain = StringField()
-    notes = StringField()
-    publication_date = DateTimeField()
-    flags = DictField()
-    meta = {'strict': False}
-
-
-class User(flask_login.UserMixin):
-    pass
-
-
-class Users(Document):
-    email = StringField()
-    password = StringField()
-
-
-class User(flask_login.UserMixin):
-    pass
 
 
 @login_manager.user_loader
@@ -92,15 +56,8 @@ def request_loader(request):
 @application.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'GET':
-        return '''
-            <form action='login' method='POST'>
-            <input type='text' name='email' id='email' placeholder='email'>
-            </input>
-            <input type='password' name='pw' id='pw' placeholder='password'>
-            </input>
-            <input type='submit' name='submit'></input>
-            </form>
-            '''
+        return None
+
     email = request.form['email']
     password = request.form['password']
     if not Users.objects(email=email).first():
