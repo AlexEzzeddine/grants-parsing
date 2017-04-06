@@ -780,6 +780,19 @@ table.ui-jqgrid-htable.ui-common-table {
   background-color: rgba(0, 0, 0, 0.27);
 }
 
+#gsh_jqGrid_domain {
+  height: 25px;
+  width: 93px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  div {
+    height: inherit;
+    width: inherit;
+  }
+}
+
+//loading animation styles
 .cssload-box-loading {
   width: 49px;
   height: 49px;

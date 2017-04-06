@@ -251,7 +251,7 @@ $(document).ready(function () {
     });
 
     grid.jqGrid('navButtonAdd', '#' + grid[0].id + '_toppager_left', {
-        caption: "<div class='add_record_button' id='skipped-button'><i class='fa fa-exclamation-circle fa-lg' aria-hidden='true'></i>SKIPPED</div>",
+        caption: "<div class='add_record_button' id='skipped-button'><i class='fa fa-ban' aria-hidden='true'></i>SKIPPED</div>",
         buttonicon: 'none',
         onClickButton: function () {
             grid.setGridParam({url: grantsRoute, postData: {flags: '["skipped"]'}, page: 1}).trigger('reloadGrid');
