@@ -4,7 +4,7 @@ from scrapy.exceptions import CloseSpider
 from databoard.items import GrantItem
 
 
-class GurtSpider(scrapy.Spider):
+class ProstirSpider(scrapy.Spider):
     name = "prostirSpider"
     allowed_domains = ["prostir.ua"]
     start_urls = ["http://www.prostir.ua/category/grants/"]
@@ -29,6 +29,12 @@ class GurtSpider(scrapy.Spider):
         item['url'] = response.url
         item['title'] = response.css(
             ".article h1:first-of-type::text").extract_first()
-        item['text'] = ''.join(response.css(".article_text *::text").extract())
+        temp_text = ''.join(response.css(".article_text *::text").extract())
+        without_start_symbols = temp_text.replace('\r\n\r\n            \r\n            ', '')
+        without_end_symbols = without_start_symbols.replace('\n            \r\n                        \r\n            \r\n                \r\n         '
+                          '                           \r\n            \r\n            \r\n                jQuery('
+                          'function () {\r\n                    jQuery(".article_text .wpuf_customs").hide();\r\n     '
+                          '           });\r\n            \r\n        ', '')
+        item['text'] = without_end_symbols
         item['contacts'] = ""
         yield item
