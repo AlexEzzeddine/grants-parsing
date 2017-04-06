@@ -276,12 +276,6 @@ $(document).ready(function () {
             highlightTopButtons('modified-button');
         }
     });
-    $('#jqGrid').setGridParam({
-        onPaging: function () {
-
-            console.log('vsdfbvgsf');
-        }
-    });
 
     $("#jqGrid_toppager_center").hide();
 
@@ -369,15 +363,10 @@ function contactsStyles(v) {
 
 
 function styleLoading() {
-    $(".ui-jqgrid .loading").html('<div class="cssload-thecube">' +
-        '<div class="cssload-cube cssload-c1"></div>' +
-        '<div class="cssload-cube cssload-c2"></div>' +
-        '<div class="cssload-cube cssload-c4"></div>' +
-        '<div class="cssload-cube cssload-c3"></div>' +
+    $(".ui-jqgrid .loading").html('<div class="cssload-box-loading">' +
         '</div>');
 }
 
-$('#first_jqGridPager').click(styleLoading());
 
 function actionsButtons(cellValue, options, rowObject) {
 
