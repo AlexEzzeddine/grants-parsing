@@ -32,9 +32,9 @@ function displayLastUpdatedDate() {
 
 
 $(document).ready(function () {
+    $.jgrid.defaults.loadtext = '';
     getDomains();
     displayLastUpdatedDate();
-
     var grid = $("#jqGrid");
     grid.jqGrid({
         url: grantsRoute,
@@ -276,6 +276,13 @@ $(document).ready(function () {
             highlightTopButtons('modified-button');
         }
     });
+    $('#jqGrid').setGridParam({
+        onPaging: function () {
+
+            console.log('vsdfbvgsf');
+        }
+    });
+
     $("#jqGrid_toppager_center").hide();
 
     $(window).bind('resize', function () {
@@ -292,6 +299,7 @@ $(document).ready(function () {
         localStorage.clear();
         window.location.href = '/login.html';
     });
+    styleLoading();
 });
 
 function highlightTopButtons(e) {
@@ -360,6 +368,17 @@ function contactsStyles(v) {
 }
 
 
+function styleLoading() {
+    $(".ui-jqgrid .loading").html('<div class="cssload-thecube">' +
+        '<div class="cssload-cube cssload-c1"></div>' +
+        '<div class="cssload-cube cssload-c2"></div>' +
+        '<div class="cssload-cube cssload-c4"></div>' +
+        '<div class="cssload-cube cssload-c3"></div>' +
+        '</div>');
+}
+
+$('#first_jqGridPager').click(styleLoading());
+
 function actionsButtons(cellValue, options, rowObject) {
 
     return "<div class='buttonStyles'>" +
@@ -400,6 +419,7 @@ function donE() {
     innerButtonFlagChanger("done");
 }
 function innerButtonFlagChanger(flag) {
+
     var id = $("#myId").val();
     $.ajax({
         "url": host + "/grants/" + id,
@@ -427,6 +447,7 @@ function updateNote() {
         },
         success: function () {
             $("#jqGrid").trigger('reloadGrid');
+            styleLoading();
         },
         error: function (e) {
             console.error(e);
@@ -463,6 +484,8 @@ function doneItem(e) {
 
 
 var setGridItemStatus = function (grant_id, statusName, rowId) {
+
+    console.log('i am here');
     if (!grant_id) return;
 
     var statusValue = "true";
@@ -486,6 +509,7 @@ var setGridItemStatus = function (grant_id, statusName, rowId) {
                 $('tr#' + rowId + ' .statusStyles i').attr('class', newClass);
             }
             $("#jqGrid").trigger('reloadGrid');
+            styleLoading();
         },
         error: function (e) {
             console.error(e);
@@ -494,6 +518,7 @@ var setGridItemStatus = function (grant_id, statusName, rowId) {
 };
 
 function closeAlert() {
+    styleLoading();
     $(".ui-jqgrid .loading").css('background-color', 'rgba(0,0,0,0.27)');
     $('#alertContent').animate({
         scrollTop: $('html').offset().top
@@ -505,3 +530,5 @@ window.onclick = function(event) {
         closeAlert();
     }
 }
+
+

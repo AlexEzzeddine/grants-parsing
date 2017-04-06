@@ -5,18 +5,14 @@ html, body {
   overflow-x: hidden;
 }
 
-
 .ui-widget {
   font-family: Arial, sans-serif;
   font-size: 14px;
-
 }
 
 .ui-widget .ui-widget {
   font-size: 14px;
-
 }
-
 
 .ui-widget input, .ui-widget select, .ui-widget textarea, .ui-widget button {
   font-family: Arial, sans-serif;
@@ -410,7 +406,7 @@ html, body {
   }
 }
 
-@media only screen and (max-width: 1510px) and (min-width: 1251px) {
+@media only screen and (max-width: 1510px) and (min-width: 1321px) {
   .buttonStyles {
     width: 190px;
     button {
@@ -425,6 +421,7 @@ html, body {
     text-align: center;
   }
   .contactsStyles {
+    height: 37px;
     width: 240px;
   }
 
@@ -452,10 +449,8 @@ html, body {
   }
 }
 
-
-
 //medium size
-@media only screen and (max-width: 1250px) and (min-width: 1100px) {
+@media only screen and (max-width: 1320px) and (min-width: 1100px) {
   .previewStyles {
     height: 37px;
     width: 350px;
@@ -503,7 +498,6 @@ html, body {
   #jqGrid_undefined {
     width: 200px;
   }
-
 }
 
 //small size
@@ -511,7 +505,10 @@ html, body {
 @media only screen and (max-width: 1099px) {
   .previewStyles {
     height: 55px;
-    width: auto;
+    white-space: normal;
+    font-weight: normal;
+    text-align: center;
+    width: 300px;
   }
   .buttonStyles {
     width: 100px;
@@ -522,17 +519,10 @@ html, body {
 
   .linkStyles {
     height: 37px;
-    width: 300px;
-
+    width: 157px;
   }
 
-  .previewStyles {
-    height: 90px;
-    white-space: normal;
-    font-weight: normal;
-    text-align: center;
 
-  }
   .contactsStyles {
     height: 37px;
     width: 180px;
@@ -547,11 +537,11 @@ html, body {
     width: 93px;
   }
   #jqGrid_url {
-    width: 157px;
+    width: auto;
 
   }
   #jqGrid_text {
-    width: auto;
+    width: 300px;
   }
   #jqGrid_contacts {
     width: 183px;
@@ -586,7 +576,7 @@ html, body {
   min-width: 800px;
   width: 800px;
   height: 90%;
-  min-height: 680px;
+  min-height: 700px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -602,7 +592,8 @@ html, body {
     align-items: center;
     justify-content: center;
     font-size: 18px;
-    margin-top: 30px;
+    margin-top: 45px;
+    margin-bottom: 10px;
     margin-left: 10%;
     width: 80%;
     height: 50px;
@@ -723,6 +714,7 @@ html, body {
 
 .sideButtonPressed{
   background-color: #d4d4d4 !important;
+  box-shadow: none;
 }
 
 .header {
@@ -767,6 +759,8 @@ table.ui-jqgrid-htable.ui-common-table {
 }
 
 .ui-jqgrid .loading {
+  align-items: center;
+  justify-content: center;
   position: absolute;
   top: 0;
   left: 0;
@@ -782,8 +776,9 @@ table.ui-jqgrid-htable.ui-common-table {
   border: none;
   font-size: 34px;
   color: #3f51b5;
-  padding-top: 20%;
+  padding-top: 18%;
   background-color: rgba(0, 0, 0, 0.27);
+
 }
 
 #gsh_jqGrid_domain {
@@ -795,5 +790,192 @@ table.ui-jqgrid-htable.ui-common-table {
   div {
     height: inherit;
     width: inherit;
+  }
+}
+
+.cssload-thecube {
+  width: 71px;
+  height: 71px;
+  margin: 0 auto;
+  margin-top: 47px;
+  position: relative;
+  transform: rotateZ(45deg);
+  -o-transform: rotateZ(45deg);
+  -ms-transform: rotateZ(45deg);
+  -webkit-transform: rotateZ(45deg);
+  -moz-transform: rotateZ(45deg);
+}
+
+.cssload-thecube .cssload-cube {
+  position: relative;
+  transform: rotateZ(45deg);
+  -o-transform: rotateZ(45deg);
+  -ms-transform: rotateZ(45deg);
+  -webkit-transform: rotateZ(45deg);
+  -moz-transform: rotateZ(45deg);
+}
+
+.cssload-thecube .cssload-cube {
+  float: left;
+  width: 50%;
+  height: 50%;
+  position: relative;
+  transform: scale(1.1);
+  -o-transform: scale(1.1);
+  -ms-transform: scale(1.1);
+  -webkit-transform: scale(1.1);
+  -moz-transform: scale(1.1);
+}
+
+.cssload-thecube .cssload-cube:before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgb(63, 81, 181);
+  animation: cssload-fold-thecube 2.16s infinite linear both;
+  -o-animation: cssload-fold-thecube 2.16s infinite linear both;
+  -ms-animation: cssload-fold-thecube 2.16s infinite linear both;
+  -webkit-animation: cssload-fold-thecube 2.16s infinite linear both;
+  -moz-animation: cssload-fold-thecube 2.16s infinite linear both;
+  transform-origin: 100% 100%;
+  -o-transform-origin: 100% 100%;
+  -ms-transform-origin: 100% 100%;
+  -webkit-transform-origin: 100% 100%;
+  -moz-transform-origin: 100% 100%;
+}
+
+.cssload-thecube .cssload-c2 {
+  transform: scale(1.1) rotateZ(90deg);
+  -o-transform: scale(1.1) rotateZ(90deg);
+  -ms-transform: scale(1.1) rotateZ(90deg);
+  -webkit-transform: scale(1.1) rotateZ(90deg);
+  -moz-transform: scale(1.1) rotateZ(90deg);
+}
+
+.cssload-thecube .cssload-c3 {
+  transform: scale(1.1) rotateZ(180deg);
+  -o-transform: scale(1.1) rotateZ(180deg);
+  -ms-transform: scale(1.1) rotateZ(180deg);
+  -webkit-transform: scale(1.1) rotateZ(180deg);
+  -moz-transform: scale(1.1) rotateZ(180deg);
+}
+
+.cssload-thecube .cssload-c4 {
+  transform: scale(1.1) rotateZ(270deg);
+  -o-transform: scale(1.1) rotateZ(270deg);
+  -ms-transform: scale(1.1) rotateZ(270deg);
+  -webkit-transform: scale(1.1) rotateZ(270deg);
+  -moz-transform: scale(1.1) rotateZ(270deg);
+}
+
+.cssload-thecube .cssload-c2:before {
+  animation-delay: 0.265s;
+  -o-animation-delay: 0.265s;
+  -ms-animation-delay: 0.265s;
+  -webkit-animation-delay: 0.265s;
+  -moz-animation-delay: 0.265s;
+}
+
+.cssload-thecube .cssload-c3:before {
+  animation-delay: 0.54s;
+  -o-animation-delay: 0.54s;
+  -ms-animation-delay: 0.54s;
+  -webkit-animation-delay: 0.54s;
+  -moz-animation-delay: 0.54s;
+}
+
+.cssload-thecube .cssload-c4:before {
+  animation-delay: 0.805s;
+  -o-animation-delay: 0.805s;
+  -ms-animation-delay: 0.805s;
+  -webkit-animation-delay: 0.805s;
+  -moz-animation-delay: 0.805s;
+}
+
+@keyframes cssload-fold-thecube {
+  0%, 10% {
+    transform: perspective(133px) rotateX(-180deg);
+    opacity: 0;
+  }
+  25%,
+  75% {
+    transform: perspective(133px) rotateX(0deg);
+    opacity: 1;
+  }
+  90%,
+  100% {
+    transform: perspective(133px) rotateY(180deg);
+    opacity: 0;
+  }
+}
+
+@-o-keyframes cssload-fold-thecube {
+  0%, 10% {
+    -o-transform: perspective(133px) rotateX(-180deg);
+    opacity: 0;
+  }
+  25%,
+  75% {
+    -o-transform: perspective(133px) rotateX(0deg);
+    opacity: 1;
+  }
+  90%,
+  100% {
+    -o-transform: perspective(133px) rotateY(180deg);
+    opacity: 0;
+  }
+}
+
+@-ms-keyframes cssload-fold-thecube {
+  0%, 10% {
+    -ms-transform: perspective(133px) rotateX(-180deg);
+    opacity: 0;
+  }
+  25%,
+  75% {
+    -ms-transform: perspective(133px) rotateX(0deg);
+    opacity: 1;
+  }
+  90%,
+  100% {
+    -ms-transform: perspective(133px) rotateY(180deg);
+    opacity: 0;
+  }
+}
+
+@-webkit-keyframes cssload-fold-thecube {
+  0%, 10% {
+    -webkit-transform: perspective(133px) rotateX(-180deg);
+    opacity: 0;
+  }
+  25%,
+  75% {
+    -webkit-transform: perspective(133px) rotateX(0deg);
+    opacity: 1;
+  }
+  90%,
+  100% {
+    -webkit-transform: perspective(133px) rotateY(180deg);
+    opacity: 0;
+  }
+}
+
+@-moz-keyframes cssload-fold-thecube {
+  0%, 10% {
+    -moz-transform: perspective(133px) rotateX(-180deg);
+    opacity: 0;
+  }
+  25%,
+  75% {
+    -moz-transform: perspective(133px) rotateX(0deg);
+    opacity: 1;
+  }
+  90%,
+  100% {
+    -moz-transform: perspective(133px) rotateY(180deg);
+    opacity: 0;
   }
 }
