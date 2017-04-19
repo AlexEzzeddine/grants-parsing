@@ -76,7 +76,8 @@ gulp.task('styles-libs:prod', function () {
 gulp.task('js-custom:dev', function () {
     return concat_multi({
         'main.js': ["src/scripts/customs/config.dev.js", 'src/scripts/customs/main.js'],
-        'login.js': ["src/scripts/customs/config.dev.js", 'src/scripts/customs/login.js']
+        'login.js': ["src/scripts/customs/config.dev.js", 'src/scripts/customs/login.js'],
+        'registration.js': ["src/scripts/customs/config.dev.js", 'src/scripts/customs/registration.js']
     })
     .pipe(gulp.dest('dist/scripts/'))
     .pipe(livereload());
@@ -85,7 +86,8 @@ gulp.task('js-custom:dev', function () {
 gulp.task('js-custom:prod', function () {
     return concat_multi({
         'main.js': ["src/scripts/customs/config.prod.js", 'src/scripts/customs/main.js'],
-        'login.js': ["src/scripts/customs/config.prod.js", 'src/scripts/customs/login.js']
+        'login.js': ["src/scripts/customs/config.prod.js", 'src/scripts/customs/login.js'],
+        'registration.js': ["src/scripts/customs/config.prod.js", 'src/scripts/customs/registration.js']
     })
     .pipe(jsmin())
     .pipe(gulp.dest('dist/scripts/'))

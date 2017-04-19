@@ -7,7 +7,7 @@ from flask import json
 from flask import request, Response, jsonify
 from flask_cors import CORS
 from mongoengine import *
-from werkzeug.security import check_password_hash
+from werkzeug.security import check_password_hash, generate_password_hash
 
 # EB looks for an 'application' callable by default.
 from models import MyJSONEncoder, Grants, User, Users
@@ -67,6 +67,20 @@ def login():
             password):
         return jsonify({"api_key": jwt.encode({"email": email, "password": password}, application.secret_key).decode()})
     return Response("Bad password", 401)
+
+
+@application.route('/registration', methods=['GET', 'POST'])
+def registration():
+    if request.method == 'GET':
+        return None
+
+    email = request.form['email']
+    password = request.form['password']
+    if Users.objects(email=email).first():
+        return Response("User with this email already exists", 409)
+    password_enc = generate_password_hash(password)
+    new_user = Users(email=email, password=password_enc).save()
+    return ''
 
 
 @application.route('/grants')
