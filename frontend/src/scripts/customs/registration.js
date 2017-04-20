@@ -4,22 +4,39 @@ $(document).ready(function () {
     var confirm_password = document.getElementById("registration-password-confirm");
     var submit_btn = document.getElementById("btn-registration");
     var badPassError = document.getElementById("pass-not-match-error");
+    var emptyFieldError = document.getElementById("empty-field-error");
 
+    var isEmailFieldValid = false;
+    var isPasswordFieldValid = false;
 
-    var isValid = false;
+    function validateEmail() {
+        if (email.value === null || email.value === "" || email.value.indexOf(' ') >= 0) {
+            emptyFieldError.style.display = 'block';
+            isEmailFieldValid = false;
+        } else {
+            emptyFieldError.style.display = 'none';
+            isEmailFieldValid = true;
+        }
+    }
 
     function validatePassword() {
-        if (password.value !== confirm_password.value) {
-            badPassError.style.display = 'block'
-            isValid = false;
+        if (password.value === null || password.value === "" || password.value.indexOf(' ') >= 0) {
+            emptyFieldError.style.display = 'block';
+            isPasswordFieldValid = false;
         } else {
-            isValid = true;
-            badPassError.style.display = 'none'
+            emptyFieldError.style.display = 'none';
+            if (password.value !== confirm_password.value) {
+                badPassError.style.display = 'block';
+                isPasswordFieldValid = false;
+            } else {
+                isPasswordFieldValid = true;
+                badPassError.style.display = 'none'
+            }
         }
     }
 
     function submit() {
-        if (isValid === true){
+        if (isEmailFieldValid === true && isPasswordFieldValid === true) {
             $.ajax({
                 "url": host + "/registration",
                 "method": "POST",
@@ -42,6 +59,7 @@ $(document).ready(function () {
     }
 
     submit_btn.onclick = submit;
+    email.onkeyup = validateEmail;
     password.onchange = validatePassword;
     confirm_password.onkeyup = validatePassword;
 });
