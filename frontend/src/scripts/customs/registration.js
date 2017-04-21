@@ -5,6 +5,7 @@ $(document).ready(function () {
     var submit_btn = document.getElementById("btn-registration");
     var badPassError = document.getElementById("pass-not-match-error");
     var emptyFieldError = document.getElementById("empty-field-error");
+    var registrationSuccess = document.getElementById("registration-success");
 
     var isEmailFieldValid = false;
     var isPasswordFieldValid = false;
@@ -51,7 +52,9 @@ $(document).ready(function () {
                     }
                 },
                 success: function (data) {
-                    window.location.href = "./index.html";
+                    $("#user-exist-error").hide();
+                    registrationSuccess.style.display = 'block';
+                    setTimeout('window.location.href = "./login.html"', 5000);
                 }
             });
         }
